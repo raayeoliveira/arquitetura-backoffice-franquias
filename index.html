@@ -1,0 +1,1373 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Arquitetura BackOffice Franquias · Seazone</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+ color-scheme:dark;
+ --bg:#080E32;--paper:#0F1742;
+ --ink:#EEF1FB;--ink2:#B4BBD9;--ink3:#8189B0;
+ --line:#232E6B;--soft:#18225A;
+ --blue:#4D85FF;--bluebg:#1A2B6B;
+ --teal:oklch(78% .1 195);--tealbg:oklch(30% .05 195);
+ --rust:oklch(76% .13 45);--rustbg:oklch(31% .06 45);
+ --red:oklch(74% .15 28);--redbg:oklch(30% .07 28);
+ --amber:oklch(82% .12 75);--amberbg:oklch(31% .06 80);
+ --green:oklch(78% .12 155);--greenbg:oklch(29% .05 155);
+ --violet:oklch(76% .13 300);--violetbg:oklch(30% .07 300);
+ --navy:#060B28;--navybg:#18225A;--coral:oklch(70% .17 32);
+ --hero-fg:oklch(94% .01 260);--hero-muted:oklch(72% .02 260);--hero-line:oklch(35% .04 260);
+ --sans:"Bricolage Grotesque",system-ui,sans-serif;--serif:Literata,Georgia,serif;--mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.5 var(--sans)}
+.code{font-family:var(--mono);font-size:11.5px;font-variant-numeric:tabular-nums}
+
+.hero{background:var(--navy);color:var(--hero-fg);padding-block:24px 36px;padding-inline:24px}
+.hero-inner{max-width:1500px;margin:0 auto}
+.masthead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--hero-line);margin-bottom:24px;padding-bottom:12px}
+.wordmark{font:700 14px/1 var(--sans);letter-spacing:.14em;color:var(--ink);display:flex;align-items:center;gap:12px;text-transform:uppercase;flex-wrap:wrap}
+.wordmark span:not(.sz-logo):not(.sz-house){color:var(--hero-muted);font-weight:500;letter-spacing:.12em}
+.sz-logo{display:inline-flex;align-items:center;gap:2px;font:700 30px/1 var(--sans);letter-spacing:-.04em;text-transform:none;color:currentColor}
+.sz-house{display:inline-block;width:.75em;height:.85em;flex-shrink:0}
+.sz-house svg{width:100%;height:100%;display:block}
+.mast-date{font:500 13px/1 var(--sans);color:var(--hero-muted);letter-spacing:.06em;text-transform:uppercase}
+.eyebrow{font:700 12px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--coral);display:block}
+h1{font:700 clamp(28px,4vw,44px)/1.06 var(--sans);letter-spacing:-.01em;margin:10px 0 14px;color:var(--ink);text-wrap:balance;max-width:28ch}
+.lede{font:400 17px/1.55 var(--serif);max-width:72ch;color:var(--hero-fg);margin:0}
+.sub{font:700 13px/1.3 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--coral);margin:16px 0 0}
+
+.tabs{display:flex;gap:6px;margin-top:22px;flex-wrap:wrap}
+.tab{font:700 13px/1 var(--sans);letter-spacing:.04em;color:var(--hero-fg);background:transparent;border:1px solid var(--hero-line);border-radius:999px;padding:10px 16px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.tab:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+
+.wrap{max-width:1500px;margin:0 auto;padding-block:24px 56px;padding-inline:24px;display:flex;flex-direction:column;gap:18px}
+.panel{background:var(--paper);border-radius:10px;padding:12px 16px;box-shadow:0 2px 12px oklch(20% .05 260 / .06),0 1px 3px oklch(20% .05 260 / .04)}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px 28px;font-size:13px;color:var(--ink2)}
+.summary .g{display:flex;flex-direction:column;gap:8px;min-width:0}
+.summary .gl{font:700 11px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding-bottom:7px;border-bottom:1px solid var(--line)}
+.summary .rows{display:flex;flex-direction:column;gap:6px}
+.summary .r{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:22px}
+.summary .r .k{display:flex;align-items:center;gap:6px;min-width:0}
+.summary .r b{font-variant-numeric:tabular-nums;color:var(--ink);font-size:15px}
+.summary .r b small{font-weight:500;color:var(--ink3);font-size:12px}
+.hint{font-size:12.5px;color:var(--ink3);margin:0}
+
+.scroll{overflow-x:auto;padding-bottom:8px}
+.flow{min-width:1440px;display:flex;flex-direction:column;gap:18px}
+.blk{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:6px 2px 0;border-top:2px solid var(--ink);margin-top:6px}
+.blk .bn{font:700 13px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);padding-top:10px}
+.blk .bo{font:400 13px/1.45 var(--serif);color:var(--ink2);max-width:110ch}
+.trail{display:flex;flex-direction:column;gap:10px;border-radius:12px;padding:14px;background:#0F1742;border:1px solid var(--line)}
+.trail-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.trail-h .tn{font:700 16px/1.2 var(--sans);color:var(--c)}
+.trail-h .tk{font:700 11px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink);background:var(--c);padding:4px 7px;border-radius:4px}
+.trail-h .to{font:400 13px/1.4 var(--serif);color:var(--ink2);flex:1 1 400px}
+.main{display:grid;align-items:start}
+.main.free{gap:14px}
+.col{display:flex;flex-direction:column;align-items:stretch}
+.fin{--c:var(--blue);--cs:var(--bluebg)} .fin2{--c:var(--teal);--cs:var(--tealbg)} .fin3{--c:var(--rust);--cs:var(--rustbg)} .fin4{--c:var(--amber);--cs:var(--amberbg)} .ges{--c:var(--ink2);--cs:var(--navybg)} .sup{--c:var(--ink2);--cs:var(--soft)}
+.head{background:var(--c);color:var(--ink);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;text-align:left;border:0;font:inherit;cursor:pointer}
+.head .v{font:700 11px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;opacity:.8;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.head .n{font:700 15px/1.2 var(--sans)}
+.head .o{font:400 12px/1.4 var(--serif);opacity:.92}
+.head .e{font-size:11.5px;line-height:1.35;background:oklch(100% 0 0 / .14);border-radius:6px;padding:5px 7px;margin-top:auto}
+.join{height:44px;display:flex;align-items:center;justify-content:center;color:var(--ink3);font:700 18px/1 var(--sans)}
+.join svg{width:100%;height:14px;overflow:visible}
+.join line{stroke:var(--ink3);stroke-width:1.6}
+.join path{fill:var(--ink3)}
+.down{height:16px;display:flex;justify-content:center}
+.down svg{width:10px;height:16px}
+.down line{stroke:var(--c);stroke-width:1.6}
+.down path{fill:var(--c)}
+.gap{height:10px}
+
+.box{background:var(--paper);border:1.5px solid var(--c);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:5px;text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.box.nw{border-style:dashed}
+.box:hover,.box:focus-visible,.box[aria-expanded="true"],.head:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+.box .t{font-weight:700;line-height:1.3;display:flex;gap:6px;align-items:baseline}
+.box .t .code{color:var(--c);flex:0 0 auto}
+.box .o{font:400 12px/1.4 var(--serif);color:var(--ink2)}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+
+.mode,.ia,.ex,.imp,.chk,.trn,.fase,.new,.st{font:700 10px/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;display:inline-flex;align-items:center;height:20px;padding:0 6px;border:1px solid transparent;border-radius:4px;white-space:nowrap}
+.mode.auto{color:var(--green);background:var(--greenbg)}
+.mode.misto{color:var(--amber);background:var(--amberbg)}
+.mode.manual{color:var(--red);background:var(--redbg)}
+.ia{color:var(--violet);background:var(--paper);border:1px solid var(--violet)}
+.ia.i0{color:var(--ink3);border-color:var(--line)}
+.ia.i2{color:var(--ink);background:var(--violet)}
+.trn{color:var(--violet);background:var(--violetbg);border:1px dashed var(--violet)}
+.ex{color:var(--ink2);background:var(--soft)}
+.imp{color:var(--coral);background:var(--paper);border:1px dashed var(--coral)}
+.chk{color:var(--amber);background:var(--paper);border:1px solid var(--amber)}
+.fase{color:var(--bg);background:var(--ink2)}
+.new{color:var(--ink);background:var(--coral)}
+
+.value{background:var(--navy);color:var(--hero-fg);border-radius:10px;padding:12px;font-size:12.5px;display:flex;flex-direction:column;gap:6px;text-align:center}
+.value b{font:700 13px/1.2 var(--sans);color:var(--coral)}
+.value span{color:var(--hero-fg)}
+.value .meta{font-weight:700;color:var(--ink);background:oklch(100% 0 0 / .12);border-radius:6px;padding:4px}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;color:var(--ink2);align-items:center}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+#pop{position:fixed;z-index:20;width:min(380px,calc(100vw - 32px));max-height:min(70vh,560px);overflow:auto;background:var(--paper);border:1.5px solid var(--navy);border-radius:10px;box-shadow:0 12px 32px oklch(20% .05 260 / .22);padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+#pop[hidden]{display:none}
+#pop .ph{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+#pop h3{margin:0;font:700 16px/1.25 var(--sans);text-wrap:balance}
+#pop h3 .code{color:var(--blue);margin-right:6px}
+#pop .x{border:0;background:var(--soft);border-radius:6px;font:700 14px/1 var(--sans);padding:6px 8px;cursor:pointer;color:var(--ink2)}
+#pop .sec{display:flex;flex-direction:column;gap:3px}
+#pop .sl{font:700 10.5px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+#pop p{margin:0;font:400 13px/1.5 var(--serif)}
+#pop ul{margin:0;padding-left:18px;font:400 13px/1.5 var(--serif)}
+#pop .aud{background:var(--amberbg);border-radius:6px;padding:7px 9px}
+#pop .aud .sl{color:var(--amber)}
+#pop .opp{background:var(--bluebg);border-radius:6px;padding:7px 9px}
+#pop .opp .sl{color:var(--blue)}
+#pop .impb{background:oklch(30% .07 28);border-radius:6px;padding:7px 9px}
+#pop .impb .sl{color:var(--coral)}
+#pop .chkb{border:1px dashed var(--amber);border-radius:6px;padding:7px 9px}
+#pop .chkb .sl{color:var(--amber)}
+#pop .planb{border:1px solid var(--ink);border-radius:6px;padding:7px 9px}
+#pop .planb .sl{color:var(--ink)}
+#pop .tools{display:flex;flex-wrap:wrap;gap:4px}
+.tool{font-size:11px;line-height:1.2;padding:3px 8px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--ink2);text-decoration:none}
+
+.pfhead{display:flex;flex-direction:column;gap:14px}
+.pf-h{display:flex;justify-content:space-between;align-items:flex-end;gap:8px 24px;flex-wrap:wrap}
+.pf-h .tn{font:700 18px/1.2 var(--sans);color:var(--violet);display:block}
+.pf-h .to{font:400 13px/1.5 var(--serif);color:var(--ink2);max-width:80ch;margin:4px 0 0}
+.pf-h .types{display:flex;flex-wrap:wrap;gap:6px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{border-radius:8px;background:var(--soft);padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.kpi b{font:700 26px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink)}
+.kpi b small{font-size:14px;font-weight:500;color:var(--ink3)}
+.kpi span{font-size:12px;color:var(--ink2);line-height:1.3}
+.kpi.k-ar{background:var(--greenbg)} .kpi.k-ar b{color:var(--green)}
+.kpi.k-trn{background:var(--violetbg)} .kpi.k-trn b{color:var(--violet)}
+.kpi.k-dem{background:var(--bluebg)} .kpi.k-dem b{color:var(--blue)}
+.tblwrap{overflow-x:auto;background:var(--paper);border-radius:10px;box-shadow:0 2px 12px oklch(20% .05 260 / .06),0 1px 3px oklch(20% .05 260 / .04)}
+table.pf{width:100%;min-width:1000px;border-collapse:collapse;font-size:13px}
+table.pf th{font:700 10.5px/1.2 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:12px 14px;border-bottom:2px solid var(--ink);white-space:nowrap}
+table.pf td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+table.pf tbody tr:not(.grp):hover td{background:#0F1742}
+table.pf td.n{width:19%}
+table.pf td.n .nm{font-weight:700;line-height:1.3;display:block}
+table.pf td.n .code{color:var(--violet);margin-right:6px}
+table.pf td.n .tp{margin-top:6px}
+table.pf td.o{font:400 13px/1.5 var(--serif);color:var(--ink2);width:28%}
+table.pf td.f{font-size:12px;color:var(--ink3);width:14%}
+table.pf td.ar{width:12%;color:var(--ink);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+table.pf td.st-c{width:9%;white-space:nowrap;text-align:right}
+table.pf th:last-child{text-align:right}
+table.pf tr.grp td{background:var(--violetbg);padding:9px 14px}
+table.pf tr.grp .gn{font:700 11px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--violet)}
+table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
+.tp{font:700 10px/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:4px;color:var(--violet);background:var(--violetbg)}
+.st.ar{color:var(--green);background:var(--greenbg)} .st.val{color:var(--amber);background:var(--amberbg)} .st.trn{color:var(--violet);background:var(--violetbg)} .st.dem{color:var(--blue);background:var(--bluebg)} .st.des{color:var(--ink3);background:var(--soft)}
+
+.instfoot{margin-top:32px;padding-top:20px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px}
+.instfoot .wm{font:700 14px/1.4 var(--sans);letter-spacing:.14em;color:var(--blue);text-transform:uppercase}
+.instfoot .wm .sz-logo{color:var(--ink);font-size:22px}
+.instfoot .wm>span:not(.sz-logo){display:block;color:var(--ink2);font-weight:500;letter-spacing:.08em;font-size:12px;margin-top:4px}
+.instfoot .who{font-size:13px;color:var(--ink3);text-align:right;line-height:1.6}
+.instfoot .who b{color:var(--ink);font-weight:700;font-size:14px;display:block}
+[role="tabpanel"][hidden]{display:none}
+@media (max-width:640px){.wrap,.hero{padding-inline:16px} .instfoot .who{text-align:left}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style id="sz-tema">body,body *{font-family:"Figtree",system-ui,"Segoe UI",sans-serif!important}code,pre,kbd,samp,code *,pre *{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important}</style>
+</head>
+<body>
+
+<section class="hero">
+ <div class="hero-inner">
+  <div class="masthead">
+   <div class="wordmark"><span class="sz-logo" role="img" aria-label="Seazone">sea<span class="sz-house"><svg viewBox="0 0 22 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="0" width="2.5" height="8" rx=".8" fill="#ff6b5c"/><path d="M1 11 L11 2 L21 11 L21 22 Q21 23 20 23 L2 23 Q1 23 1 22 Z" fill="#ff6b5c"/></svg></span>zone</span><span>· Franquias · BackOffice</span></div>
+   <span class="mast-date">v1.0 · 26/10/2026</span>
+  </div>
+  <span class="eyebrow">Arquitetura de processos</span>
+  <h1>BackOffice Franquias</h1>
+  <p class="lede">Cuidar da experiência do hóspede, do custo do imóvel e da saúde da franquia — para que o imóvel esteja sempre pronto, cobrado pelo preço certo, com o padrão respeitado e a franquia operando dentro da nota. Quatro áreas, uma só gestão.</p>
+  <p class="sub">Qualidade · Fornecedores &amp; Compras · Administrativo e Financeiro · Manutenção</p>
+  <div class="tabs" role="tablist" aria-label="Áreas">
+   <button class="tab" role="tab" id="t-qu" aria-controls="p-qu" aria-selected="true" type="button">Qualidade · Vic</button>
+   <button class="tab" role="tab" id="t-fo" aria-controls="p-fo" aria-selected="false" type="button">Fornecedores &amp; Compras · Henry</button>
+   <button class="tab" role="tab" id="t-af" aria-controls="p-af" aria-selected="false" type="button">Administrativo e Financeiro · David</button>
+   <button class="tab" role="tab" id="t-mn" aria-controls="p-mn" aria-selected="false" type="button">Manutenção · Vinicius</button>
+   <button class="tab" role="tab" id="t-pf" aria-controls="p-pf" aria-selected="false" type="button">Portfólio consolidado</button>
+  </div>
+ </div>
+</section>
+
+<div class="wrap">
+ <section id="p-qu" role="tabpanel" aria-labelledby="t-qu" style="display:flex;flex-direction:column;gap:18px"><div class="panel summary" data-area="qu"></div><p class="hint">Passe o mouse ou clique em qualquer processo para ver objetivo, entrega, como funciona, auditoria, interface, automação planejada e ferramentas. Caixa tracejada = processo novo nesta versão.</p><div class="scroll"><div class="flow" data-area="qu"></div></div></section>
+ <section id="p-fo" role="tabpanel" aria-labelledby="t-fo" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="fo"></div><p class="hint">Arquitetura de Fornecedores &amp; Compras (Henry · rascunho v2.1 · 16/10/2026).</p><div class="scroll"><div class="flow" data-area="fo"></div></div></section>
+ <section id="p-af" role="tabpanel" aria-labelledby="t-af" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="af"></div><p class="hint">Arquitetura de Administrativo e Financeiro (David · rascunho v2 · 23/10/2026).</p><div class="scroll"><div class="flow" data-area="af"></div></div></section>
+ <section id="p-mn" role="tabpanel" aria-labelledby="t-mn" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="mn"></div><p class="hint">Arquitetura de Manutenção (Vinicius · rascunho v9 · 26/10/2026).</p><div class="scroll"><div class="flow" data-area="mn"></div></div></section>
+ <section id="p-pf" role="tabpanel" aria-labelledby="t-pf" hidden style="flex-direction:column;gap:18px">
+  <div class="panel pfhead">
+   <div class="pf-h"><div><span class="tn">Portfólio consolidado · agentes, extensões e automações das 4 áreas</span><p class="to">Tudo o que já roda sozinho ou é rodado pelo time, nas quatro áreas do BackOffice Franquias. Agrupado por área.</p></div><div class="types" id="pftypes"></div></div>
+   <div class="kpis" id="pfsum"></div>
+  </div>
+  <div class="tblwrap"><table class="pf"><thead><tr><th>Agente ou automação</th><th>O que faz</th><th>Quando roda</th><th>Área</th><th>Status</th></tr></thead><tbody id="pftb"></tbody></table></div>
+ </section>
+
+ <div class="legend">
+  <span><span class="mode auto">Automático</span> roda sozinho</span>
+  <span><span class="mode misto">Misto</span> roda sozinho e passa por auditoria antes de valer</span>
+  <span><span class="mode manual">Manual</span> feito pelo time ou pelo fornecedor</span>
+ </div>
+ <div class="legend">
+  <span><span class="ia i0">Sem IA</span> regra fixa ou trabalho humano</span>
+  <span><span class="ia i1">IA assiste</span> a IA sugere ou analisa, a pessoa decide</span>
+  <span><span class="ia i2">IA executa</span> a IA ou o agente faz sozinho</span>
+  <span><span class="trn">IA em treinamento</span> a IA já responde, ainda aprendendo com o time</span>
+ </div>
+ <div class="legend">
+  <span><span class="ex">Sistema</span> automação com regra fixa</span>
+  <span><span class="ex">Agente</span> agente de IA</span>
+  <span><span class="ex">Pessoa</span> gerente, coordenador, analista ou fornecedor</span>
+  <span><span class="chk">Validar</span> ponto deduzido ou novo, falta confirmar</span>
+ </div>
+
+ <footer class="instfoot">
+  <div class="wm"><span class="sz-logo" role="img" aria-label="Seazone">sea<span class="sz-house"><svg viewBox="0 0 22 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="0" width="2.5" height="8" rx=".8" fill="#ff6b5c"/><path d="M1 11 L11 2 L21 11 L21 22 Q21 23 20 23 L2 23 Q1 23 1 22 Z" fill="#ff6b5c"/></svg></span>zone</span><span>Franquias · BackOffice</span></div>
+  <div class="who"><b>Rayanne Oliveira · gerente do setor</b>rayanne.oliveira@seazone.com.br<br>Consolidado das arquiteturas de Vic, Henry, David e Vinicius · 26/10/2026</div>
+ </footer>
+</div>
+
+<div id="pop" role="dialog" aria-modal="false" hidden></div>
+
+<script>
+const T = {
+  stays:{n:"Stays"}, nekt:{n:"Nekt · data lake"}, apps:{n:"Apps Script"}, sapron:{n:"Sapron"},
+  sia:{n:"SIA · WhatsApp"}, olimpo:{n:"Olimpo"}, loja:{n:"Loja Seazone"}, kanban:{n:"Loja · kanban de pedidos"},
+  jornada:{n:"Jornada Completa Enxoval"}, hub:{n:"Hub de Serviços"}, calc:{n:"Calculadora de Taxa de Limpeza 2026"},
+  slack:{n:"Slack"}, gmail:{n:"Gmail"}, meet:{n:"Google Meet"}, drive:{n:"Google Drive"}, sheets:{n:"Google Sheets"},
+  claude:{n:"Claude Code"}, github:{n:"GitHub"}, taskdex:{n:"Taskdex", u:"https://taskdex.seazone.dev"},
+  kpi:{n:"KPI System", u:"https://kpi-system.seazone.dev"},
+  lov_c:{n:"Lovable de comentários"}, lov_o:{n:"Lovable de ocorrências e multas"},
+  central_atv:{n:"Sapron · Central de Atividades"}, central_man:{n:"Sapron · Central de Manutenção"},
+  central_desp:{n:"Sapron · Central de Despesas"}, central_uti:{n:"Central da UTI"},
+  airbnb:{n:"Airbnb · Central de Resoluções"}, newbyte:{n:"Newbyte"}, now:{n:"Portal NOW Seguros"},
+  host:{n:"Seazone Host"}, scorepulse:{n:"ScorePulse"}, suporte:{n:"Suporte Unificado"},
+  stop:{n:"App de Stop de Crescimento"}, pipe14:{n:"Pipefy · Pipe 14 Manutenção"},
+  portal:{n:"Portal da Franquia"}, gbp:{n:"Google Business Profile"}, ra:{n:"Reclame Aqui"},
+  easy:{n:"EasyCover"}, metabase:{n:"Metabase"}, mgo:{n:"MGO · Manual Gerente de Operações"},
+  derek:{n:"Robô Derek"}, contrato:{n:"Clicksign · contratos"}, pipe60:{n:"Pipedrive funil 60"},
+  pipe61:{n:"Pipedrive funil 61"}, receita:{n:"Base CNPJ · Receita"}, google:{n:"Google e Maps"},
+  insta:{n:"Instagram"}, appfoto:{n:"App de fotógrafos"}, copiloto:{n:"Copiloto da SIA"}, ml:{n:"Mercado Livre"}
+};
+const MODE = {auto:"Automático", misto:"Misto", manual:"Manual"};
+const IA = ["Sem IA","IA assiste","IA executa"];
+const EX = {sistema:"Sistema", agente:"Agente", pessoa:"Pessoa"};
+const AREA = {qu:"Qualidade", fo:"Fornecedores & Compras", af:"Administrativo e Financeiro", mn:"Manutenção"};
+
+/* dados por área preenchidos abaixo */
+const DATA = {qu:[], fo:[], af:[], mn:[]};
+const AUTOS = [];
+</script>
+<script id="data-qu">
+DATA.qu = [
+ {n:"Processos finalísticos", o:"Entregam o resultado da Qualidade para quem usa: hóspede, proprietário, franquia e marca.", trails:[
+  {cls:"fin", k:"Trilha 1", n:"Avaliações", seq:true,
+   o:"Cuidar da nota nas OTAs: ouvir e responder o hóspede, contestar o que é indevido e recuperar o imóvel que caiu.",
+   val:["Avaliação respondida","Hóspede bem atendido","Nota acima de 4,80","Proprietário retido"],
+   mps:[
+    {id:"MP1", v:"Responder", n:"Responder as avaliações",
+     o:"Ouvir toda avaliação, responder e transformar reclamação em ação.", e:"Toda avaliação captada, classificada, respondida e encaminhada.",
+     val:"Hóspede bem atendido", opp:"A publicação das respostas ainda é manual. Automatizar a publicação na Stays é o maior ganho de tempo deste processo.",
+     p:[
+      {id:"1.1", t:"Captar das OTAs, do site e do Google", m:"auto", ia:0, ex:"sistema", who:"Qualidade (Victoria)",
+       o:"Reunir num só lugar as avaliações de todos os canais.", e:"Avaliações do dia na planilha e no Lovable de comentários.",
+       how:["OTAs e site: Nekt → Apps Script diário na planilha.","Google Business Profile → Apps Script."],
+       tools:["lov_c","nekt","apps","gbp"]},
+      {id:"1.2", t:"Classificar tema e gravidade", m:"auto", ia:2, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Saber do que o hóspede reclamou e quão grave é.", e:"Cada avaliação com o problema citado e a gravidade (leve, média ou grave).",
+       how:["A IA classifica o problema citado e a gravidade de cada avaliação."],
+       aud:"Auditoria por amostragem das classificações da IA.", tools:["lov_c","claude"]},
+      {id:"1.3", t:"Responder ao hóspede", m:"misto", ia:2, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Responder toda avaliação com o tom da Seazone.", e:"Avaliação respondida na plataforma de origem.",
+       how:["A IA redige a resposta e aprende com as respostas editadas.","A automação libera a reserva na Stays e eu publico.","Google: publicação à mão."],
+       aud:"Auditoria do texto antes de publicar.", tools:["lov_c","stays","gbp"]},
+      {id:"1.4", t:"Encaminhar o que exige ação", m:"auto", ia:2, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Garantir que nenhum problema citado pelo hóspede fique sem dono.", e:"Chamado de manutenção ou ocorrência aberto.",
+       how:["Manutenção → Central de Manutenção do Sapron.","Falha da franquia → ocorrência (5.1).","Caso crítico → UTI (Adm/Fin)."],
+       chk:"A triagem do dia ainda está em validação.", tools:["lov_c","central_man"]}
+     ]},
+    {id:"MP2", v:"Defender a nota", n:"Contestações no Airbnb",
+     o:"Tirar do ar a avaliação que fere as regras da plataforma.", e:"Contestações enviadas todo dia pela skill do Bill e resultado no placar.",
+     val:"Nota acima de 4,80", opp:"Medir quantos pontos de nota a contestação devolve por franquia e usar isso no PDI das franquias críticas (3.1).",
+     p:[
+      {id:"2.1", t:"Selecionar as avaliações contestáveis", m:"auto", ia:2, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Achar entre as avaliações novas as que a plataforma costuma aceitar contestar.", e:"Fila do dia separada por faixa de risco.",
+       how:["A skill puxa as avaliações novas do Airbnb abaixo de 5.","A IA classifica pela régua: sem letras, não se hospedou, sem conteúdo."],
+       tools:["airbnb","nekt","claude"]},
+      {id:"2.2", t:"Redigir e enviar a contestação", m:"misto", ia:2, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Enviar o pedido no padrão que já deu aceite.", e:"Contestações do dia enviadas, até 25.",
+       how:["A IA redige no modelo de texto que deu aceite.","O envio respeita o teto diário e o intervalo entre pedidos."],
+       aud:"Faixa nova ou item de risco alto só vai com o meu ok.", tools:["airbnb","claude"]},
+      {id:"2.3", t:"Acompanhar o resultado", m:"auto", ia:2, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Saber o que foi aceito e calibrar a régua.", e:"Placar por faixa e relatório do dia.",
+       how:["A skill lê a resposta de cada pedido aberto.","O placar e o relatório do dia são atualizados sozinhos."],
+       tools:["airbnb","lov_c"]}
+     ]},
+    {id:"MP3", v:"Desenvolver", n:"Recuperar franquias e grandes contas",
+     o:"Recuperar as franquias críticas, acompanhar de perto as grandes e reconhecer quem entrega bem.", e:"Franquias críticas com plano em andamento, grandes franquias com reunião mensal e elogios enviados.",
+     val:"Nota acima de 4,80", opp:"Mostrar, por franquia, quantos imóveis saíram de baixo de 4,80 depois do PDI.",
+     p:[
+      {id:"3.1", t:"Franquias críticas de nota", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Tirar da zona crítica as franquias que mais puxam a nota para baixo.", e:"Lista de franquias críticas com PDI em andamento e acionamento da UTI quando bate critério.",
+       how:["Relatório do Airbnb a cada 15 dias, analisado com o Claude.","Os temas que mais aparecem viram o PDI.","Na alta temporada, vira força-tarefa com monitor de avaliações."],
+       chk:"Definir o formato do PDI e o ponto exato em que a Qualidade aciona a UTI/Pré-UTI (Isabella e David).", tools:["airbnb","host","lov_c","claude"]},
+      {id:"3.2", t:"Grandes franquias (Grande e Master)", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)", nw:true,
+       o:"Acompanhar de perto as franquias de porte Grande e Master.", e:"Reunião mensal de 30 minutos com cada grande franquia, com o resultado dela na mão.",
+       how:["Processo novo, a pedido da Ray.","A rotina é criada pela Qualidade.","Resultado da reunião vem do mesmo monitoramento da trilha 4."],
+       chk:"Definir a lista de franquias Grande e Master e a pauta fixa da reunião.", tools:["meet","host","lov_o","lov_c","claude"]},
+      {id:"3.3", t:"Envio de elogios", m:"manual", ia:0, ex:"pessoa", who:"Qualidade analisa · Rosi publica",
+       o:"Valorizar a franquia que entregou uma boa experiência.", e:"Elogio enviado.",
+       how:["Elogios de várias áreas são analisados.","Os cards voltam para a Rosi, que faz a postagem."],
+       chk:"A Ray pediu para tirar do indicativo. Confirmar se é só o nome ou se o KPI de elogios (2424) sai do setor.", tools:["lov_o"]}
+     ]}
+   ]},
+  {cls:"fin2", k:"Trilha 2", n:"Reputação externa", seq:true,
+   o:"Como a marca Seazone é vista fora das OTAs: Reclame Aqui, Google Business Profile, mídia e redes sociais.",
+   val:["Reclamação resolvida","Nota da marca 7,0 → 8,0","Marca bem vista fora das OTAs"],
+   mps:[
+    {id:"MP4", v:"Reclame Aqui", n:"Resolver, subir a nota e fazer a página vender",
+     o:"1º sub-processo da reputação externa. Agora que pagamos pela página, ela precisa devolver resultado.", e:"Toda reclamação resolvida e avaliada, plano mensal da nota e retorno da página medido.",
+     val:"Nota da marca de 7,0 para 8,0", opp:"A nota do Reclame Aqui é operação: perdemos em solução (67,1% resolvidas), não em velocidade (100% respondidas em 2 dias e 14 horas).",
+     p:[
+      {id:"4.1", t:"Gestão de reclamações", m:"misto", ia:2, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Resolver a reclamação de verdade, não só responder.", e:"Reclamação respondida, resolvida com a área responsável e avaliada pelo consumidor.",
+       how:["Captação: e-mail do RA vira card no Lovable de comentários.","Responder: a IA redige, eu audito e publico.","Resolver: levar o caso à área responsável.","Pedir avaliação depois de resolvido."],
+       aud:"Auditoria do texto antes de publicar.", tools:["lov_c","gmail","ra"]},
+      {id:"4.2", t:"Nota da marca e plano de ação", m:"misto", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Fazer a nota da Seazone subir, não só acompanhar se ela cai.", e:"Alerta mensal da nota e um plano de ação do mês.",
+       how:["Script mensal (dia 20) manda o alerta para o Slack.","A aba Simulação da planilha diz quantas avaliações sobem a nota em 0,1."],
+       chk:"O plano de ação da nota ainda não existe. Confirmar com a Ray o formato.", tools:["apps","slack","ra"]},
+      {id:"4.3", t:"Página da marca: venda e captação", m:"misto", ia:0, ex:"pessoa", who:"Qualidade (Victoria)", nw:true,
+       o:"Usar a página paga como vitrine para vender estadia e captar investidor.", e:"Vitrine atualizada e o retorno da página medido todo mês.",
+       how:["A vitrine está pronta e o Reclame Aqui ainda precisa testar o XML.","O contato privado depende de definir a ferramenta de atendimento."],
+       chk:"Definir como medir o retorno e quem recebe o contato de investidor.", tools:["ra","slack"]}
+     ]},
+    {id:"MP15", v:"Outros canais", n:"Google, mídia e redes sociais",
+     o:"Acompanhar o que se fala da Seazone fora do Reclame Aqui e das OTAs.", e:"Avaliações e menções acompanhadas, com o caso grave encaminhado.",
+     val:"Marca bem vista fora das OTAs", opp:"Juntar os quatro canais num só termômetro de reputação externa.",
+     p:[
+      {id:"15.1", t:"Google Business Profile", m:"misto", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Cuidar da nota e das avaliações da Seazone no Google.", e:"Avaliações do Google respondidas e nota acompanhada.",
+       how:["Captar as avaliações (Apps Script, processo 1.1).","Responder à mão (processo 1.3).","Acompanhar a nota no Google todo mês."],
+       tools:["gbp","apps"]},
+      {id:"15.2", t:"Mídia e imprensa", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)", nw:true,
+       o:"Saber quando a Seazone aparece em notícia, principalmente em caso negativo.", e:"Menção negativa encaminhada a quem responde pela marca.",
+       how:["Processo novo."], chk:"Confirmar com a Ray quem é dono de mídia (Marketing?).", tools:["claude"]},
+      {id:"15.3", t:"Redes sociais", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)", nw:true,
+       o:"Pegar reclamação de hóspede ou proprietário que aparece nas redes.", e:"Reclamação encaminhada como ocorrência, manutenção ou caso.",
+       how:["Processo novo."], chk:"Confirmar com a Ray quem é dono das redes.", tools:["claude"]}
+     ]}
+   ]},
+  {cls:"fin3", k:"Trilha 3", n:"Fiscalização", seq:true,
+   o:"Transformar toda falha da franquia em ocorrência com prova, tratada com direito de defesa, e cobrar quem reincide.",
+   val:["Falha registrada com prova","Franquia responsabilizada","Franquia melhor"],
+   mps:[
+    {id:"MP5", v:"Tratar", n:"Captar, triar, julgar e aplicar ocorrências",
+     o:"Captar a falha, dar à franquia o direito de defesa e decidir com critério.", e:"Ocorrência aplicada ou justificada, sem duplicata e no código certo da régua v2.",
+     val:"Falha registrada com prova", opp:"A cobrança da defesa e o encerramento ainda são manuais. Lembrete automático e encerramento pelo bot liberariam mais tempo.",
+     p:[
+      {id:"5.1", t:"Receber ocorrências das outras áreas", m:"misto", ia:2, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Captar as falhas que outras áreas já enxergam.", e:"Ocorrência criada a partir de cada fonte.",
+       how:["Fontes: consultores, realocação e cancelamento, check-in, danos, CS Proprietários, comentários e Implantação.","A Lovable de ocorrências analisa cada caso."],
+       aud:"Auditoria das análises feitas pela IA.", imp:{d:"recebe", t:"Cards de Implantação chegam com o chamado da Central de Atividades."},
+       tools:["lov_o","central_atv"]},
+      {id:"5.3", t:"Triar evidência e duplicatas", m:"misto", ia:1, ex:"sistema", who:"Qualidade (Victoria)",
+       o:"Só seguir com ocorrência que tem prova, não é repetida e está no código certo.", e:"Card aprovado para tratativa ou descartado.",
+       how:["O sistema sinaliza o card com problema.","A skill de panorama lista a coluna Nova Ocorrência.","Nos cards de Implantação, a skill do Sapron dá o veredito."],
+       aud:"Auditoria dos cards sinalizados.", tools:["lov_o","claude"]},
+      {id:"5.4", t:"Notificar a franquia", m:"auto", ia:0, ex:"sistema", who:"Qualidade (Victoria)",
+       o:"Avisar a franquia com a evidência e o prazo de resposta.", e:"Chamado aberto com prazo de 48 h e card em Primeiro Contato.",
+       how:["A Lovable abre o chamado na Central de Atividades, com as evidências, e move o card."],
+       tools:["lov_o","central_atv"]},
+      {id:"5.6", t:"Julgar a defesa", m:"misto", ia:1, ex:"agente", who:"Qualidade (Victoria)",
+       o:"Decidir se a justificativa é válida ou se a ocorrência pontua.", e:"Decisão registrada no card.",
+       how:["O bot lê a resposta no chat da Central de Atividades.","Ele sugere Com pontuação ou Justificativa válida.","Eu aprovo ou descarto a sugestão."],
+       aud:"Toda sugestão do bot passa pelo botão aprovar/descartar antes de mover o card.", tools:["central_atv","lov_o"]},
+      {id:"5.7", t:"Encerrar e aplicar a ocorrência", m:"manual", ia:0, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Fechar o ciclo e alimentar o acúmulo de pontos.", e:"Ocorrência aplicada e card em Finalizados.",
+       how:["Finalização manual na Lovable de ocorrências."], tools:["central_atv","lov_o"]}
+     ]},
+    {id:"MP6", v:"Responsabilizar", n:"Identificar, validar, comunicar e descontar multas",
+     o:"Cobrar a franquia que reincide, com regra clara e prova.", e:"Multa validada, comunicada e descontada, ou cancelada com motivo.",
+     val:"Franquia responsabilizada", opp:"A identificação já é automática; o comunicado e o lançamento do desconto ainda são manuais.",
+     p:[
+      {id:"6.1", t:"Identificar as multas", m:"auto", ia:0, ex:"sistema", who:"Qualidade (Victoria)",
+       o:"Saber quem chegou ao limite de pontos.", e:"Multa identificada automaticamente.",
+       how:["Janela de 90 dias, limite por porte da franquia e reincidência."], tools:["lov_o"]},
+      {id:"6.3", t:"Validar a multa", m:"manual", ia:0, ex:"pessoa", who:"Iara, Carol ou Fernando",
+       o:"Confirmar que a multa é justa antes de cobrar.", e:"Multa aprovada ou revista.",
+       how:["O alerta sai sozinho no #alerta-multas-franquias a cada 15 min, com as marcações."],
+       tools:["slack","lov_o"]},
+      {id:"6.4", t:"Comunicar a multa à franquia", m:"manual", ia:0, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Formalizar a cobrança com o motivo e as evidências.", e:"Comunicado e chamado enviados.",
+       how:["Comunicado e chamado na Central de Atividades, mais e-mail."], tools:["central_atv","gmail"]},
+      {id:"6.5", t:"Descontar ou cancelar a multa", m:"manual", ia:0, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Fechar a multa no financeiro.", e:"Desconto lançado ou cancelamento com motivo.",
+       how:["Desconto lançado à mão na Central de Despesas.","Cancelar exige motivo."],
+       chk:"Confirmar quem lança o desconto na Central de Despesas.", tools:["central_desp","lov_o"]},
+      {id:"6.6", t:"Detratores e stop de crescimento", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)", nw:true,
+       o:"Ligar a nota da franquia à consequência: quem passa do gatilho de detratores para de crescer.", e:"Taxa de detratores apurada no fechamento do trimestre.",
+       how:["Hoje a apuração é manual.","O PDA com Iara e Fernando define o que acontece em 8% e em 15%."],
+       chk:"Fechar o PDA: o que cada gatilho dispara e quem aplica o stop de crescimento.", tools:["nekt","claude"]}
+     ]}
+   ]},
+  {cls:"fin4", k:"Trilha 4", n:"Monitoramento de qualidade", seq:false,
+   o:"O radar da operação: ler o dado, interpretar e avisar antes que o problema apareça. Quase todo automático.",
+   mps:[
+    {id:"MP8", v:"Monitorar", n:"Boletim diário e radar semanal",
+     o:"Mostrar todo dia o volume e toda semana o que ele quer dizer, sem só despejar números.", e:"Boletim diário e radar semanal com a explicação de cada desvio.",
+     opp:"Combinar com cada área uma faixa de volume esperado.",
+     p:[
+      {id:"8.1", t:"Boletim diário de qualidade", m:"auto", ia:0, ex:"sistema", who:"Qualidade (Victoria)", nw:true,
+       o:"O grupo de Qualidade saber o dia sem precisar perguntar.", e:"Mensagem diária no grupo de Qualidade e Fiscalização.",
+       how:["Ocorrências recebidas e aplicadas no dia.","Multas identificadas.","Franquias em iminência de multa."],
+       chk:"Em desenho: a rotina é criada pela Qualidade e agendada pela Ray.", tools:["lov_o","slack"]},
+      {id:"8.3", t:"Radar semanal (quinta-feira)", m:"misto", ia:2, ex:"agente", who:"Qualidade (Victoria)", nw:true,
+       o:"Interpretar a semana e dizer o porquê de cada desvio.", e:"Radar da semana no grupo, com a justificativa de cada ponto.",
+       how:["Áreas que não mandaram ocorrência, e por quê.","Franquias e regiões em que a nota está caindo.","Temas que mais aparecem (ex.: limpeza)."],
+       aud:"Eu reviso a justificativa antes de publicar.", chk:"Em desenho.", tools:["lov_o","lov_c","slack","claude"]}
+     ]},
+    {id:"MP9", v:"Evoluir", n:"Criar e ajustar parâmetros da régua",
+     o:"Manter a régua cobrindo o que a operação faz hoje.", e:"Parâmetro novo ou ajustado sempre que o radar mostra um buraco.",
+     opp:"Registrar cada parâmetro novo com a data e a fonte para medir quanto ele passou a captar.",
+     p:[
+      {id:"9.1", t:"Criar parâmetros para falhas de comportamento", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Transformar o que é subjetivo em número.", e:"Nova categoria de ocorrência proposta.",
+       how:["Uma rotina mede o comportamento. A medida vira o parâmetro da ocorrência."], tools:["lov_o","claude"]},
+      {id:"9.3", t:"Ajustar o parâmetro pelo que a caça trava", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Corrigir a régua quando o mesmo caso trava sem parâmetro.", e:"Parâmetro ajustado.",
+       how:["Ex.: a caça travou cinco casos sem parâmetro → ajustar."], tools:["lov_o","claude"]}
+     ]}
+   ]}
+ ]},
+ {n:"Processos de suporte e gestão", o:"Mantêm a Qualidade de pé: atendimento à franquia, ferramentas, padrão, medição e demandas.", trails:[
+  {cls:"sup", k:"Trilha 5", n:"Suporte", seq:false,
+   o:"Atender a franquia nas dúvidas de qualidade e manter as Lovables e integrações funcionando.",
+   mps:[
+    {id:"MP13", v:"Atender", n:"Atender as franquias", nw:true,
+     o:"Toda dúvida ou chamado de qualidade respondido no prazo.", e:"Chamado respondido ou fila sem chamado vencido.",
+     p:[
+      {id:"13.1", t:"Responder chamados de qualidade", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)", nw:true,
+       o:"Tirar as dúvidas da franquia sobre ocorrências, multas e avaliações.", e:"Chamado respondido.",
+       how:["Chamados e dúvidas pela Central de Atividades e pelo Slack."],
+       chk:"Processo de suporte apontado como faltando pela Ray.", tools:["central_atv","slack"]},
+      {id:"13.2", t:"Fechar chamados parados", m:"manual", ia:0, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Nenhum chamado esperar mais de 5 dias.", e:"Fila sem chamado vencido.",
+       how:["Cobrança da franquia e encerramento do que não vai virar nada."], tools:["central_atv"]}
+     ]},
+    {id:"MP14", v:"Ferramentas", n:"Manter sistemas e integrações",
+     o:"Sistemas e integrações funcionando sem interrupção.", e:"Correções e melhorias publicadas; integrações sem falha.",
+     p:[
+      {id:"14.1", t:"Manter os sistemas", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Lovables de ocorrências e de comentários no ar e corretas.", e:"Correções e melhorias publicadas.",
+       how:["Ajustes feitos com o Claude e a Lovable."], tools:["lov_o","lov_c","claude"]},
+      {id:"14.2", t:"Manter as integrações", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Dados fluindo entre Nekt, Stays, Sapron, Slack e Apps Script.", e:"Integrações sem falha.",
+       how:["Monitoramento e correção das integrações."], tools:["nekt","stays","central_atv","slack","apps"]}
+     ]}
+   ]},
+  {cls:"ges", k:"Trilha 6", n:"Gestão", seq:false,
+   o:"Padrão, medição e demandas da Qualidade.",
+   mps:[
+    {id:"MP10", v:"Padrão", n:"Manter o padrão",
+     o:"Regras claras e iguais para todas as franquias.", e:"Regras publicadas e sem contradição.",
+     p:[
+      {id:"10.1", t:"Atualizar a régua de ocorrências e multas", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Manter códigos, pontos e valores coerentes.", e:"Régua publicada e sem contradição.",
+       how:["Mudanças na régua v2 discutidas e aplicadas na Lovable."], tools:["lov_o","claude"]},
+      {id:"10.3", t:"Comunicar as regras às franquias", m:"manual", ia:0, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Nenhuma franquia ser cobrada por regra que não conhecia.", e:"Comunicado registrado.",
+       how:["Comunicados e documentos de mudança."], tools:["slack"]},
+      {id:"10.4", t:"Auditar a consistência dos julgamentos", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Casos iguais terem a mesma decisão.", e:"Divergências corrigidas.",
+       how:["Revisão periódica de ocorrências e multas com apoio do Claude."], tools:["lov_o","lov_c","claude"]}
+     ]},
+    {id:"MP11", v:"Medir", n:"Medir resultados",
+     o:"Saber se a qualidade está melhorando e onde agir.", e:"Painel atualizado.",
+     p:[
+      {id:"11.1", t:"KPIs de qualidade das franquias", m:"auto", ia:0, ex:"sistema", who:"Qualidade (Victoria)",
+       o:"Acompanhar ocorrências, pontos e multas por franquia.", e:"Painel atualizado.",
+       how:["Painéis da Lovable.","Lançamento diário no kpi-system (setor 10) pela skill /kpi-qualidade."],
+       tools:["lov_o","claude","kpi"]},
+      {id:"11.4", t:"Termômetro semanal da área", m:"misto", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Mostrar toda semana à liderança o resultado e a saúde dos processos das quatro trilhas.", e:"Termômetro da semana publicado.",
+       how:["Resultado e saúde dos processos, com faixas de cor."],
+       chk:"Faixas de cor aguardando aprovação.", tools:["nekt","lov_o","lov_c","claude"]}
+     ]},
+    {id:"MP12", v:"Demandas", n:"Gerir demandas",
+     o:"Toda demanda recebida tem dono, prazo e entrega.", e:"Tarefa criada, priorizada, entregue e validada.",
+     p:[
+      {id:"12.1", t:"Registrar a demanda", m:"manual", ia:0, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Nenhum pedido ficar perdido no Slack ou na conversa.", e:"Tarefa criada com destinatário e prazo.",
+       how:["Pedidos pelo Slack ou em reunião viram tarefa no Taskdex."], tools:["taskdex","slack"]},
+      {id:"12.3", t:"Executar e entregar", m:"manual", ia:1, ex:"pessoa", who:"Qualidade (Victoria)",
+       o:"Entregar a demanda pronta para uso.", e:"Entrega feita e tarefa em Validação.",
+       how:["Execução com apoio do Claude quando cabe."], tools:["taskdex","claude"]}
+     ]}
+   ]}
+ ]}
+];
+</script>
+<script id="data-fo">
+DATA.fo = [
+ {n:"Processos finalísticos", o:"Entregam o resultado da área para quem usa: franquia, proprietário e os times da Seazone.", trails:[
+  {cls:"fin", k:"Trilha 1", n:"Fornecedores prestadores de serviço", seq:true,
+   o:"Fotógrafos, lavanderias e demais prestadores do Hub. Sem exclusividade: prospectados por cidade, cada tipo com sua régua.",
+   val:["Cidade coberta","Imóvel ativado com fotos no padrão","Taxa de limpeza com preço real"],
+   mps:[
+    {id:"MP1", v:"Prospectar", n:"Prospectar prestadores",
+     o:"Encontrar e abordar prestadores nas cidades onde a Seazone atua e ainda não tem cobertura.", e:"Prestador em negociação ou card em Perda com motivo.",
+     val:"Cidade coberta", opp:"A analista só pede a prospecção e o resto roda; vira operadora dos agentes.",
+     p:[
+      {id:"1.1", t:"Identificar cidades sem prestador", m:"misto", ia:2, ex:"agente", who:"Coordenador",
+       o:"Saber antes da ativação quais cidades não têm lavanderia ou fotógrafo.", e:"Card da cidade no funil 61.",
+       how:["Skill cruza imóveis (Sapron) com polígonos, Hub e base de fotógrafos.","Fotógrafo: cidade sai da lista só com 2 homologados."],
+       aud:"Coordenador valida cada card.", imp:{d:"recebe", t:"Imóvel novo em onboarding dispara a prospecção."}, tools:["sapron","hub","pipe61","claude"]},
+      {id:"1.2", t:"Pesquisar prestadores na cidade", m:"misto", ia:2, ex:"agente", who:"Analista",
+       o:"Levantar todos os candidatos da praça.", e:"Lista com contato.",
+       how:["Lavanderia: Receita (CNAE 9601), Google e Maps.","Fotógrafo: Receita, Instagram e Google, até 30 leads por rodada."],
+       aud:"Analista revisa antes de subir os cards.", tools:["receita","google","insta","claude"]},
+      {id:"1.4", t:"Fazer a cadência de contato", m:"auto", ia:2, ex:"agente", who:"Agente de cadência",
+       o:"Abordar todo prestador no prazo.", e:"Prestador respondeu ou card em Perda Sem retorno.",
+       how:["Agente no Olimpo, dias úteis, 11h/15h/17h.","1 msg por dia útil por número (regra SIA 24h)."],
+       tools:["olimpo","sia","pipe60"]},
+      {id:"1.5", t:"Negociar e qualificar", m:"manual", ia:1, trn:true, ex:"pessoa", who:"Analista",
+       o:"Conduzir conversa até sim ou não.", e:"Prestador aprovado ou Perda com motivo.",
+       how:["Analista pela SIA com Copiloto em treinamento."], tools:["sia","copiloto","pipe60"]}
+     ]},
+    {id:"MP2", v:"Homologar", n:"Homologar lavanderias",
+     o:"Indicar só lavanderias no padrão e com preço que cabe na taxa.", e:"Lavanderia homologada, no Hub e com preço na calculadora.",
+     val:"Taxa de limpeza com preço real",
+     p:[
+      {id:"2.1", t:"Conferir os critérios", m:"manual", ia:1, trn:true, ex:"pessoa", who:"Analista",
+       o:"Só homologar quem atende ao padrão Seazone.", e:"Lavanderia aprovada ou Perda.",
+       how:["Não autoatendimento; cobra por peça; calandra ou ferro profissional; teto da tabela; volume mínimo."],
+       tools:["sia","copiloto","pipe60"]},
+      {id:"2.3", t:"Levar o preço para a taxa de limpeza", m:"auto", ia:0, ex:"sistema", who:"Sistema",
+       o:"Calcular a taxa com preço real.", e:"Preço na aba Tabela Lavanderia da calculadora.",
+       how:["Calculadora lê o Hub.","Com +1 lavanderia na cidade, vale o maior preço."], tools:["hub","calc"]}
+     ]},
+    {id:"MP3", v:"Contratar", n:"Homologar e contratar fotógrafos",
+     o:"Ter fotógrafo homologado para o time de fotografia acionar em toda cidade.", e:"Fotógrafo com contrato, cadastrado e treinado.",
+     val:"Imóvel ativado com fotos no padrão",
+     p:[
+      {id:"3.1", t:"Validar equipamento e preço", m:"manual", ia:1, trn:true, ex:"pessoa", who:"Analista",
+       o:"Só seguir com quem tem o equipamento e cabe na tabela.", e:"Fotógrafo aprovado para contrato.",
+       how:["DSLR ou mirrorless, grande-angular 10-24mm, tripé e Lightroom."], tools:["sia","copiloto","pipe60"]},
+      {id:"3.2", t:"Fazer o contrato", m:"manual", ia:0, ex:"pessoa", who:"Coordenador",
+       o:"Formalizar prestação de serviço.", e:"Contrato assinado.",
+       how:["Seazone paga o fotógrafo por serviço."], tools:["contrato"]},
+      {id:"3.4", t:"Treinar e repassar ao time de fotografia", m:"manual", ia:0, ex:"pessoa", who:"Time de fotografia",
+       o:"Fotógrafo pronto para fotografar no padrão.", e:"Treinamento feito; disponível para seleção.",
+       how:["Após treinamento, time de fotografia é dono."],
+       imp:{d:"envia", t:"Fotógrafo disponível para fotos dos imóveis em implantação."}, tools:["appfoto","meet"]}
+     ]},
+    {id:"MP4", v:"Homologar", n:"Outros prestadores do Hub",
+     o:"Atender franquias que precisam de outros serviços (ex.: limpeza).", e:"Prestador no Hub.",
+     val:"Cidade coberta", nw:true,
+     p:[
+      {id:"4.1", t:"Receber a necessidade", m:"manual", ia:0, ex:"pessoa", who:"Coordenador", nw:true,
+       o:"Saber qual serviço falta e onde.", e:"Tipo e cidade definidos.",
+       how:["Pedido das franquias pelo Hub ou pela liderança."], tools:["hub","taskdex"]},
+      {id:"4.2", t:"Prospectar e validar o básico", m:"misto", ia:2, ex:"agente", who:"Analista", nw:true,
+       o:"Só cadastrar quem presta o serviço na região.", e:"Prestador aprovado.",
+       how:["Mesmo fluxo do MP1."], chk:"Definir a régua mínima por tipo de serviço.", tools:["sia","copiloto","pipe60"]}
+     ]}
+   ]},
+  {cls:"fin2", k:"Trilha 2", n:"Fornecedores homologados", seq:true,
+   o:"Parceiros com contrato: Matinali, RM, Somar, Harus, AB Card e EasyCover.",
+   val:["Parceiro com contrato e no padrão","Relação com histórico","Manter ou distratar com dados"],
+   mps:[
+    {id:"MP5", v:"Homologar", n:"Homologar fornecedores",
+     o:"Trazer fornecedores com contrato e no padrão.", e:"Fornecedor contratado, cadastrado e treinado.",
+     val:"Parceiro com contrato e no padrão",
+     p:[
+      {id:"5.1", t:"Receber a demanda", m:"manual", ia:0, ex:"pessoa", who:"Coordenador",
+       o:"Buscar só o que a operação ou direção definiu.", e:"Demanda registrada.", how:["Vem da direção ou operação."], tools:["taskdex","slack"]},
+      {id:"5.4", t:"Cadastrar onde precisa", m:"manual", ia:0, ex:"pessoa", who:"Coordenador",
+       o:"Colocar o fornecedor na ferramenta certa.", e:"Fornecedor e produtos na Loja ou Jornada.",
+       how:["Loja: produtos por perfil e forma de pagamento.","Jornada: enxoval.","EasyCover e internos não entram na Loja."], tools:["loja","jornada"]}
+     ]},
+    {id:"MP6", v:"Relacionar", n:"Relacionamento com fornecedores",
+     o:"Manter cada parceiro alinhado, antecipar problemas, guardar o histórico.", e:"Reunião feita, prontuário atualizado e score em dia.",
+     val:"Relação com histórico", opp:"Com score, melhores parceiros viram diamante no evento, dão palestra, recebem oportunidades.",
+     p:[
+      {id:"6.2", t:"Preparar a pauta", m:"misto", ia:2, ex:"agente", who:"Coordenador",
+       o:"Chegar na reunião com dados.", e:"Pauta em apresentação.",
+       how:["Skill junta pedidos, atrasos, entregas, vendas do mês."], tools:["kanban","jornada","claude"]},
+      {id:"6.5", t:"Monitorar a saúde do fornecedor", m:"manual", ia:0, ex:"pessoa", who:"Coordenador", nw:true,
+       o:"Saber quem entrega, quem dá trabalho, quem veste a camisa.", e:"Score de cada fornecedor.",
+       how:["Critérios: entrega no prazo, qualidade, demandas, alinhamento."],
+       chk:"Definir critérios e peso.", tools:["loja","jornada","drive"]}
+     ]}
+   ]},
+  {cls:"fin3", k:"Trilha 3", n:"Compras", seq:true,
+   o:"A venda acontecendo: campanhas, pedidos da Loja e da Jornada, fechamento mensal.",
+   val:["Venda fomentada","Pedido pago e entregue no prazo","Comissão recebida"],
+   mps:[
+    {id:"MP7", v:"Fomentar", n:"Campanhas de venda", nw:true,
+     o:"Fazer a Loja vender mais.", e:"Campanha criada e divulgada.", val:"Venda fomentada",
+     p:[
+      {id:"7.2", t:"Criar a campanha com IA", m:"misto", ia:2, ex:"agente", who:"Coordenador",
+       o:"Campanha pronta rápido e no padrão.", e:"Texto e imagem do produto.",
+       how:["IA cria texto, imagem, chamada."], aud:"Revisão do coordenador antes de divulgar.", tools:["loja","claude"]},
+      {id:"7.3", t:"Divulgar às franquias", m:"manual", ia:0, ex:"pessoa", who:"Coordenador",
+       o:"Chegar a todas.", e:"Campanha enviada.", how:["Slack e SIA."], tools:["slack","sia"]}
+     ]},
+    {id:"MP8", v:"Vender", n:"Vender pela Loja",
+     o:"Levar todo pedido da Loja até a entrega.", e:"Pedido pago, enviado e entregue.",
+     val:"Pedido pago e entregue no prazo",
+     p:[
+      {id:"8.1", t:"Receber o pedido", m:"auto", ia:0, ex:"sistema", who:"Sistema",
+       o:"Cliente comprar só o que pode.", e:"Pedido no kanban ou cliente no ML.",
+       how:["Perfis veem só produtos liberados.","Indicação vai pro Mercado Livre."],
+       imp:{d:"recebe", t:"Agente de indicação cria listas a partir das inconformidades da Implantação."}, tools:["loja","ml","olimpo"]},
+      {id:"8.3", t:"Cobrar o cliente", m:"auto", ia:0, ex:"sistema", who:"Fornecedor + Loja + SIA",
+       o:"Cobrança no prazo.", e:"Cliente avisado no dia 0, 4º e 7º dia.",
+       how:["Loja manda via SIA 2x/dia."], tools:["kanban","sia"]},
+      {id:"8.4", t:"Cancelar o pedido não pago", m:"manual", ia:0, ex:"pessoa", who:"Analista", nw:true,
+       o:"Não deixar pedido parado.", e:"Pedido cancelado no 7º dia.",
+       how:["Regra nova (Ray 15/10): agente cancela às 20h de Brasília do 7º dia."], tools:["kanban","sia"]}
+     ]},
+    {id:"MP9", v:"Comprar", n:"Pedidos da Jornada Enxoval",
+     o:"Enxoval chegar pago, no prazo, sem pedido esquecido.", e:"Pedido pago, enviado, entregue.",
+     val:"Pedido pago e entregue no prazo",
+     p:[
+      {id:"9.1", t:"Receber o pedido da Implantação", m:"misto", ia:2, ex:"agente", who:"Agente da Implantação",
+       o:"Cada imóvel pedir o enxoval certo.", e:"Pedido na Jornada.",
+       how:["Agente da Implantação ou manual."], imp:{d:"recebe", t:"Pedidos feitos pela Implantação."}, tools:["jornada"]},
+      {id:"9.2", t:"Identificar o link expirado", m:"auto", ia:0, ex:"agente", who:"Agente de análise de pagamento",
+       o:"Link vencido não espera pagamento que não vem.", e:"Card em Link expirado.",
+       how:["Agente lê links da Rede, 8h-19h, hora em hora."], tools:["jornada","olimpo"]},
+      {id:"9.4", t:"Cancelar o pedido não pago", m:"auto", ia:0, ex:"agente", who:"Agente de cancelamento",
+       o:"Pedido não pago não ficar parado.", e:"Pedido cancelado pela regra.",
+       how:["Rodada diária no Olimpo.","Nunca cancela pedido pago."], tools:["jornada","olimpo"]}
+     ]},
+    {id:"MP10", v:"Fechar", n:"Fechar o mês",
+     o:"Receber comissão certa de cada fornecedor e pagar EasyCover certo.", e:"NF e boleto emitidos; EasyCover paga.",
+     val:"Comissão recebida",
+     p:[
+      {id:"10.1", t:"Calcular a comissão", m:"misto", ia:2, ex:"agente", who:"Coordenador",
+       o:"Saber quanto cada fornecedor deve.", e:"Planilha e relatório de divergências.",
+       how:["IA soma vendas de todos os artefatos."], aud:"Coordenador confere total e divergências.",
+       imp:{d:"recebe", t:"Vendas de enxoval vêm da Implantação."}, tools:["loja","jornada","sheets","drive","claude"]},
+      {id:"10.4", t:"Conferir o relatório da EasyCover", m:"misto", ia:2, ex:"agente", who:"Coordenador",
+       o:"Pagar só pelos imóveis realmente segurados.", e:"Relatório sem divergência.",
+       how:["IA confere com base, traz divergências (código, endereço)."], aud:"Coordenador analisa cada caso.", tools:["easy","sapron","claude"]}
+     ]}
+   ]}
+ ]},
+ {n:"Processos de suporte e gestão", o:"Mantêm a área funcionando: ferramentas, automações e auditoria. Mais a gestão da coordenação.", trails:[
+  {cls:"sup", k:"Trilha 4", n:"Ferramentas, automações e auditorias", seq:false,
+   o:"O trabalho que mantém a área de pé, incluindo o que roda sem ninguém ver.",
+   mps:[
+    {id:"MP11", v:"Ferramentas", n:"Manter as ferramentas",
+     o:"Loja, Hub, Jornada e consultas funcionando.", e:"Correções e melhorias publicadas.",
+     p:[
+      {id:"11.1", t:"Manter a Loja", m:"manual", ia:1, ex:"pessoa", who:"Coordenador",
+       o:"Kanban, mensagens e visão por fornecedor corretos.", e:"Ajustes publicados.", how:["Ajustes com Claude."], tools:["loja","kanban","claude"]},
+      {id:"11.3", t:"Manter a Jornada Enxoval", m:"manual", ia:1, ex:"pessoa", who:"Coordenador",
+       o:"Implantação pedir enxoval sem travar.", e:"Ajustes publicados.", how:["A gente gerencia e ajusta a ferramenta que a Implantação usa."],
+       imp:{d:"envia", t:"Implantação usa a Jornada."}, tools:["jornada","claude"]}
+     ]},
+    {id:"MP12", v:"Automação", n:"Desenvolver automações", nw:true,
+     o:"Transformar processo manual em agente, skill ou extensão.", e:"Automação no ar, documentada.",
+     p:[
+      {id:"12.2", t:"Construir e testar", m:"manual", ia:1, ex:"pessoa", who:"Coordenador", nw:true,
+       o:"Automação funcionando sem quebrar o que roda.", e:"Testada em staging.",
+       how:["Com Claude; teste em staging; testar até quebrar."], tools:["claude","github","olimpo"]}
+     ]},
+    {id:"MP13", v:"Auditoria", n:"Auditar as ferramentas da Implantação", nw:true,
+     o:"Pegar erro de uso das ferramentas que batem em Fornecedores.", e:"Alerta tratado.",
+     p:[
+      {id:"13.4", t:"Monitorar os agentes", m:"manual", ia:0, ex:"pessoa", who:"Coordenador", nw:true,
+       o:"Saber na hora quando um agente para.", e:"Agente fora do ar avisado.",
+       how:["Hoje é olhando a ferramenta quando algo parece estranho."], tools:["olimpo","slack"]}
+     ]}
+   ]},
+  {cls:"ges", k:"Trilha 5", n:"Gestão", seq:false,
+   o:"KPIs, demandas, equipe, padrão, patrocínio e estrutura dos eventos.",
+   mps:[
+    {id:"MP14", v:"Medir", n:"Medir os resultados",
+     o:"Saber se os fornecedores entregam e onde agir.", e:"KPIs lançados e relatórios do mês.",
+     p:[
+      {id:"14.1", t:"KPIs do setor", m:"misto", ia:0, ex:"sistema", who:"Coordenador",
+       o:"Acompanhar prazos, volume e comissão.", e:"KPIs lançados.",
+       how:["KPIs no KPI System, a partir do Suporte, Loja, app de fotógrafos e SIA."],
+       chk:"Confirmar lista de KPIs e metas.", tools:["kpi"]}
+     ]},
+    {id:"MP17", v:"Padrão", n:"Manter o padrão",
+     o:"Critérios, preços, contratos e documentação atualizados.", e:"Régua única e canvas iguais ao que roda.",
+     p:[
+      {id:"17.3", t:"Contratos e aditivos", m:"manual", ia:0, ex:"pessoa", who:"Coordenador",
+       o:"Condição combinada sempre no papel.", e:"Contrato ou aditivo assinado.", tools:["contrato"]}
+     ]},
+    {id:"MP18", v:"Patrocínio", n:"Patrocínio de eventos", nw:true,
+     o:"Fornecedor parceiro bancando parte do evento.", e:"Patrocínio contratado e pago.",
+     p:[
+      {id:"18.1", t:"Buscar patrocinadores", m:"manual", ia:0, ex:"pessoa", who:"Coordenador", nw:true,
+       o:"Reduzir o custo do evento com parceiros.", e:"Patrocinador interessado.",
+       how:["Só quando há evento; prioridade para melhores scores."], tools:["gmail","slack"]}
+     ]}
+   ]}
+ ]}
+];
+</script>
+<script id="data-af">
+DATA.af = [
+ {n:"Processos finalísticos", o:"Entregam o resultado do Adm/Fin: dano cobrado, proprietário reembolsado, custo certo, rede saudável.", trails:[
+  {cls:"fin", k:"Trilha 1", n:"Danos de hóspede", seq:true,
+   o:"Levar o dano do lançamento pela franquia até o valor recuperado e o proprietário reembolsado.",
+   val:["Dano lançado no prazo","Cobrança com prova","Valor recuperado","Proprietário reembolsado"],
+   mps:[
+    {id:"MP1", v:"Solicitar", n:"Lançamento pela franquia",
+     o:"Dano lançado com fotos, valor, orçamento ou NF e descrição no template.", e:"Dano cobrável dentro do prazo (D+13).",
+     val:"Dano cobrável dentro do prazo", opp:"Aviso automático de prazo na tela do Host e guia reduziriam os chamados.",
+     p:[
+      {id:"1.1", t:"Constatar e documentar o dano", m:"manual", ia:0, ex:"pessoa", who:"Franquia",
+       o:"Capturar prova no momento certo.", e:"Fotos e descrição no template.", how:["Franquia documenta."], tools:["host","sapron"]},
+      {id:"1.2", t:"Lançar no Sapron ou no Host", m:"manual", ia:0, ex:"pessoa", who:"Franquia",
+       o:"Dano cobrável dentro do prazo.", e:"Lançamento aberto.", how:["Prazo D+13."], tools:["sapron","host"]},
+      {id:"1.4", t:"Orientar a franquia no lançamento", m:"manual", ia:0, ex:"pessoa", who:"Analista de Danos",
+       o:"Reduzir dano perdido por erro de lançamento.", e:"Dúvida respondida.", how:["Via Newbyte, tag [Danos]."], tools:["newbyte"]}
+     ]},
+    {id:"MP2", v:"Validar", n:"Validar o dano",
+     o:"Dano validado, cancelado com motivo ou escalado como esdrúxulo.", e:"Cobrança com chance real de ganho.",
+     val:"Cobrança com chance real de ganho", opp:"É a única coluna 100% manual — próxima candidata a extensão ou IA assistindo.",
+     p:[
+      {id:"2.1", t:"Conferir evidências, NF e cotação", m:"misto", ia:1, ex:"pessoa", who:"Analista de Danos",
+       o:"Validar sem perder tempo.", e:"Validado ou pendência aberta.",
+       how:["Skill contestar-dano-airbnb em validação."], chk:"Em validação.", tools:["sapron","claude"]},
+      {id:"2.2", t:"Tratar dano esdrúxulo", m:"manual", ia:0, ex:"pessoa", who:"Analista de Danos",
+       o:"Casos com valor alto ou envolvendo terceiros.", e:"Encaminhado ao jurídico.",
+       how:["Terceiros, autoridades, advogado, valor > R$ 1.000."], tools:["sapron","slack"]}
+     ]},
+    {id:"MP3", v:"Cobrar", n:"Cobrar pelo Airbnb (AirCover)",
+     o:"Pedido enviado no prazo e acompanhado até pagamento ou recusa final.", e:"Valor recuperado sem falar com o hóspede.",
+     val:"Valor recuperado sem falar com o hóspede",
+     p:[
+      {id:"3.1", t:"Abrir o pedido no AirCover", m:"misto", ia:1, ex:"sistema", who:"Analista de Danos",
+       o:"Abrir pedido rapidamente.", e:"Pedido aberto.",
+       how:["Extensão AirCover Autofill preenche; analista revisa antes."], tools:["airbnb","sapron"]},
+      {id:"3.3", t:"Envolver o Airbnb depois de 24 h", m:"auto", ia:1, ex:"sistema", who:"Analista de Danos",
+       o:"Escalar quando hóspede não responde.", e:"Airbnb envolvido.",
+       how:["Extensão Acionar Airbnb escreve justificativa por tipo de item."], tools:["airbnb"]}
+     ]},
+    {id:"MP4", v:"Cobrar", n:"Cobrar pelo hóspede (Newbyte)",
+     o:"Dano em Cobrança Newbyte ou finalizado (pago ou sem sucesso).", e:"Valor recuperado da fonte primária.",
+     val:"Valor recuperado da fonte primária",
+     p:[
+      {id:"4.1", t:"Registrar a cobrança na Newbyte", m:"misto", ia:0, ex:"sistema", who:"Analista de Danos",
+       o:"3 tentativas padrão.", e:"Cobrança registrada.",
+       how:["Extensão Cobrança Newbyte."], tools:["newbyte"]},
+      {id:"4.5", t:"Escalar sem sucesso", m:"auto", ia:0, ex:"sistema", who:"Agente",
+       o:"Não deixar caso parado.", e:"Encaminhado para MP5 (Seguro) ou MP6 (Judicial).", how:["Extensão encaminha."], tools:["newbyte"]}
+     ]},
+    {id:"MP5", v:"Acionar", n:"Seguros (EasyCover, RC, NOW)",
+     o:"Sinistro enviado, protocolo no Sapron e valor recebido.", e:"Valor recuperado mesmo sem o hóspede pagar.",
+     val:"Valor recuperado mesmo sem o hóspede pagar",
+     p:[
+      {id:"5.1", t:"Decidir se vale acionar o EasyCover", m:"manual", ia:0, ex:"pessoa", who:"Analista de Danos",
+       o:"Só acionar o que vale.", e:"Decisão registrada.",
+       how:["Até 1 ano do ocorrido; franquia 10% mínimo."], tools:["easy"]},
+      {id:"5.2", t:"Abrir e enviar o sinistro no portal NOW", m:"auto", ia:0, ex:"sistema", who:"Extensão",
+       o:"Automação direta.", e:"Sinistro aberto.",
+       how:["Extensão Sinistro EasyCover preenche automaticamente."], tools:["now","sapron"]}
+     ]},
+    {id:"MP6", v:"Judicial", n:"Cobrança judicial (≥ R$ 250)",
+     o:"Dano em cobrança judicial com apoio do Olimpo.", e:"Judicial encaminhado.",
+     val:"Valor recuperado pela via judicial",
+     p:[
+      {id:"6.2", t:"Encaminhar para o Jurídico", m:"auto", ia:2, ex:"agente", who:"Agente A1 · Olimpo",
+       o:"Rotina diária.", e:"Card no Slack do Jurídico com evidências.",
+       how:["Posta card diário no Slack."], tools:["olimpo","slack"]}
+     ]},
+    {id:"MP7", v:"Finalizar", n:"Finalizar dano",
+     o:"Dano em Finalizado com status (Pago, Não-Pago, Judicial, Recusado).", e:"Fechamento da cadeia de cobrança.",
+     val:"Fechamento da cadeia de cobrança",
+     p:[
+      {id:"7.1", t:"Finalizar dano pago", m:"auto", ia:2, ex:"sistema", who:"Extensão Finalizar Dano",
+       o:"Reembolso do proprietário com comprovante.", e:"Dano Pago.",
+       how:["Extensão grava comprovante de reembolso."], tools:["sapron","host"]},
+      {id:"7.2", t:"Informar ao proprietário", m:"manual", ia:0, ex:"pessoa", who:"Analista de Danos",
+       o:"Comunicar o resultado.", e:"E-mail enviado.", how:["Via Seazone Host."], tools:["host","gmail"]}
+     ]}
+   ]},
+  {cls:"fin2", k:"Trilha 2", n:"Administrativo e Financeiro", seq:false,
+   o:"Cada imóvel com custo certo, cada franquia com repasse certo, rede só crescendo onde opera bem.",
+   mps:[
+    {id:"MP9", v:"Taxa", n:"Taxa de limpeza",
+     o:"Calcular, validar e comunicar a taxa de limpeza.", e:"Taxa aprovada e comunicada.",
+     p:[
+      {id:"9.1", t:"Receber pedido de taxa", m:"manual", ia:0, ex:"pessoa", who:"Analista Adm/Fin",
+       o:"Pedido pelo Suporte Unificado.", e:"Pedido registrado.", how:["Pela aba Avisos."], tools:["suporte"]},
+      {id:"9.2", t:"Calcular a taxa", m:"misto", ia:2, ex:"agente", who:"Skill analise-taxa-limpeza",
+       o:"Motor da Calculadora 2026.", e:"Taxa calculada.", how:["Skill roda a Calculadora."], tools:["calc","claude"]},
+      {id:"9.5", t:"Validar em onboarding", m:"misto", ia:1, ex:"agente", who:"Skill conferencia-onboarding-taxa",
+       o:"Confere contra régua viva.", e:"Validação OK ou pendência.", imp:{d:"recebe", t:"Imóvel novo em onboarding."}, tools:["suporte","claude"]}
+     ]},
+    {id:"MP10", v:"Comissão", n:"Comissões do Host",
+     o:"Auditar e fechar a comissão de cada franquia.", e:"Comissão certa.",
+     p:[
+      {id:"10.1", t:"Auditoria do fechamento", m:"misto", ia:1, ex:"pessoa", who:"Analista Adm/Fin",
+       o:"Cruzar Compilado, CRC e Sapron.", e:"Divergências tratadas.", how:["Mensal, após aviso de fechamento."], tools:["sapron","drive","sheets"]},
+      {id:"10.2", t:"Auditar comissão por franquia", m:"auto", ia:2, ex:"agente", who:"Skill auditoria-comissao-franquias",
+       o:"Semanal.", e:"Divergências flagged.", how:["Percentual e operação contra régua."], tools:["sapron","claude"]}
+     ]},
+    {id:"MP13", v:"Score", n:"Score de franquias",
+     o:"Nota mensal comparável por franquia.", e:"Score publicado.",
+     p:[
+      {id:"13.2", t:"Fechar o Score", m:"misto", ia:2, ex:"agente", who:"Skill fechar-score",
+       o:"Calcula critérios e grava até dia 14.", e:"Score fechado.", how:["Skill fecha; D-2 confere bases."], tools:["scorepulse","claude"]},
+      {id:"13.3", t:"Publicar no ScorePulse", m:"auto", ia:0, ex:"sistema", who:"ScorePulse",
+       o:"Score vivo após fechamento.", e:"Publicado.", how:["Depois do Score fechado."], tools:["scorepulse"]}
+     ]},
+    {id:"MP14", v:"Stop", n:"Stop de crescimento",
+     o:"Aplicar e remover o stop pela classificação do Score.", e:"Stop aplicado ou removido.",
+     p:[
+      {id:"14.1", t:"Aplicar stop automático", m:"auto", ia:2, ex:"sistema", who:"GitHub Actions · Agente A3",
+       o:"Diário 9h pela classificação do Score.", e:"Stop aplicado.", how:["Automático pela faixa."], tools:["stop","github"]},
+      {id:"14.4", t:"Detectar franquias sem imóvel", m:"auto", ia:0, ex:"sistema", who:"Bot franquias-sem-receber-imoveis",
+       o:"Segunda 9h; 60, 90, 180 dias.", e:"Alerta no Slack.", how:["Bot avisa."], tools:["slack","github"]}
+     ]},
+    {id:"MP16", v:"UTI", n:"UTI de franquias",
+     o:"Detectar críticos, triar e aplicar protocolo.", e:"Franquia em UTI com plano.",
+     p:[
+      {id:"16.1", t:"Detectar críticos", m:"auto", ia:2, ex:"agente", who:"Robô Derek · Coolify",
+       o:"11h e a cada 15 min.", e:"Pré-UTI aberta.", how:["Robô Derek."], chk:"Em staging; sem evidência auditada 15/10.", tools:["derek","central_uti"]},
+      {id:"16.4", t:"Aplicar protocolo", m:"manual", ia:1, ex:"pessoa", who:"Responsável por módulo",
+       o:"Vinicius (Avaliação), Victoria (Qualidade), Larissa (Manutenção), Vivianny (Contratos).", e:"Protocolo aplicado.", how:["Cada responsável roda o módulo."], tools:["central_uti"]}
+     ]},
+    {id:"MP19", v:"Distrato", n:"Distrato de franquias",
+     o:"Processar o distrato até a redistribuição do enxoval.", e:"Franquia distratada e enxoval redistribuído.",
+     p:[
+      {id:"19.1", t:"Receber pedido", m:"manual", ia:0, ex:"pessoa", who:"Comercial / Consultor Regional",
+       o:"Entrada do distrato.", e:"Pedido registrado.", how:["App de Distrato ou formulário."], tools:["suporte"]},
+      {id:"19.5", t:"Redistribuição de enxoval", m:"misto", ia:2, ex:"agente", who:"Skill redistribuicao-enxoval",
+       o:"Lista mínima de recompra.", e:"Redistribuição feita.", how:["Skill gera lista."], tools:["jornada","claude"]}
+     ]},
+    {id:"MP8", v:"Despesas", n:"Despesas duplicadas",
+     o:"Radar que detecta duplicatas por imóvel, categoria, valor.", e:"Grupos com valor em risco apontados.",
+     p:[
+      {id:"8.4", t:"Radar de despesas", m:"auto", ia:2, ex:"sistema", who:"Cron no PC do coordenador",
+       o:"Dias úteis 8h50.", e:"Grupos apontados com confiança.", how:["Agente A6."], tools:["sapron","slack"]}
+     ]}
+   ]}
+ ]},
+ {n:"Processos de suporte e gestão", o:"Padrão, medição, auditoria de ferramentas e rotina do coordenador.", trails:[
+  {cls:"sup", k:"Trilha 3", n:"Suporte", seq:false,
+   o:"Manter ferramentas, integrações, canais e automações.",
+   mps:[
+    {id:"MP23", v:"Ferramentas", n:"Ferramentas e integrações",
+     o:"Sistemas no ar e evoluindo com a demanda.", e:"Correções e melhorias publicadas.",
+     p:[
+      {id:"23.1", t:"Plano semanal", m:"misto", ia:2, ex:"agente", who:"Skill plano-semanal",
+       o:"Painel Taskdex + weekly + daily.", e:"Plano da semana.", how:["Skill plano-semanal roda na segunda."], tools:["taskdex","claude"]}
+     ]}
+   ]},
+  {cls:"ges", k:"Trilha 4", n:"Gestão", seq:false,
+   o:"Manter padrão, medir resultados, auditar processo, gerir demandas.",
+   mps:[
+    {id:"MP21", v:"Padrão", n:"Manter o padrão",
+     o:"Régua, regras e protocolos escritos e iguais para todas as franquias.", e:"Padrão publicado.",
+     p:[
+      {id:"21.3", t:"Régua da taxa de limpeza", m:"manual", ia:1, ex:"pessoa", who:"Analista Adm/Fin",
+       o:"Parâmetros vivos na Calculadora.", e:"Régua atualizada.", how:["Lavanderia, mão de obra, enxoval, cluster."], tools:["calc","claude"]},
+      {id:"21.9", t:"Régua e protocolos da Central UTI", m:"manual", ia:1, ex:"pessoa", who:"Carol (Dona da Central)",
+       o:"Critérios de entrada, triagem, passos, prazos.", e:"Protocolos publicados.",
+       chk:"Rascunho; donos: Vinicius, Victoria, Larissa, Vivianny.", tools:["central_uti"]}
+     ]},
+    {id:"MP22", v:"Medir", n:"Medir resultados",
+     o:"Saber se custo, repasse, recuperação de danos e qualidade da rede estão certos.", e:"KPIs lançados e dashboards atualizados.",
+     p:[
+      {id:"22.1", t:"KPIs diários Financeiro", m:"misto", ia:1, ex:"agente", who:"Skill kpis-franquias",
+       o:"26 KPIs: despesas, taxa, itens mínimos.", e:"KPIs lançados D-1.", how:["Conferência antes de gravar."], tools:["sapron","kpi"]},
+      {id:"22.4", t:"KPIs diários OPS", m:"misto", ia:1, ex:"agente", who:"Skill kpis-franquias",
+       o:"45 KPIs de score e stop.", e:"KPIs lançados D-1.", how:["Dias fora de meta recebem comentário."], tools:["scorepulse","kpi"]},
+      {id:"22.10", t:"Auditoria de processo das analistas", m:"misto", ia:2, ex:"agente", who:"Coordenador (David)",
+       o:"2 casos/dia/analista.", e:"21 KPIs de auditoria (setores 42/43).", how:["Skill auditar-processo."], chk:"KPI de causa externa em validação.", tools:["kpi","claude"]}
+     ]}
+   ]}
+ ]}
+];
+</script>
+<script id="data-mn">
+DATA.mn = [
+ {n:"Processos finalísticos", o:"Entregam o resultado da Manutenção: menos reserva cancelada, menos desconto e menos comentário negativo.", trails:[
+  {cls:"fin", k:"Trilha 1", n:"Manutenção urgente", seq:true,
+   o:"O que deixa o imóvel sem condição de uso ou põe o hóspede em risco: resolver em 24h (MGO), com imóvel bloqueado.",
+   val:["Hóspede em segurança","Imóvel liberado em 24 horas","Menos reserva cancelada"],
+   mps:[
+    {id:"MP1", v:"Abrir", n:"Abrir o urgente e bloquear o imóvel",
+     o:"Todo urgente com chamado aberto, prazo de 24h e imóvel fora de venda.", e:"Chamado aberto e calendário bloqueado.",
+     p:[
+      {id:"1.1", t:"Classificar como urgente", m:"auto", ia:2, ex:"agente", who:"Agente classificador",
+       o:"Separar urgente sem ler card por card.", e:"Card em Urgente.",
+       how:["Classificador dá nota 0-100 pela lista do MGO.","70+ ou gatilho duro (gás, choque, sem água, sem energia, hóspede sem acesso) = urgente."],
+       tools:["central_man","mgo","pipe14"]},
+      {id:"1.2", t:"Abrir o chamado com a franquia", m:"auto", ia:0, ex:"sistema", who:"Sistema",
+       o:"Franquia saber na hora com prazo escrito.", e:"Card aparece na aba Urgente do portal.",
+       how:["Mensagem já leva prazo."], chk:"Destaque visual no portal (vermelho, sirene) — pedido Ray 19/10.", tools:["central_atv","portal"]},
+      {id:"1.3", t:"Bloquear o imóvel", m:"manual", ia:0, ex:"pessoa", who:"Analista",
+       o:"Nenhum hóspede em imóvel sem condição.", e:"Imóvel fora de venda.", how:["Regra MGO."], tools:["suporte","mgo"]}
+     ]},
+    {id:"MP2", v:"Consertar", n:"Consertar e comprovar",
+     o:"Resolver o problema em 24h e deixar prova no card.", e:"Evidência no card dentro do prazo, ou trava ao proprietário.",
+     p:[
+      {id:"2.1", t:"Ver se depende do proprietário", m:"manual", ia:0, ex:"pessoa", who:"Franquia",
+       o:"Não travar urgente esperando autorização.", e:"Decisão sinalizada.",
+       how:[">R$300 ou sem autorização: vai para MP16 (adequação com proprietário)."], tools:["portal"]},
+      {id:"2.3", t:"Recobrar quem atrasou", m:"auto", ia:1, ex:"sistema", who:"Rotina de lembrete",
+       o:"Nenhum urgente esquecido.", e:"Lembrete enviado em 24h.",
+       how:["24h sem evidência: recobra franquia; card entra MP17 (Ocorrências)."],
+       chk:"Sapron ainda mede em 1 dia útil (PR #5367); MGO diz 24 horas.", tools:["central_man"]}
+     ]},
+    {id:"MP3", v:"Validar", n:"Validar e liberar o imóvel",
+     o:"Conferir conserto e devolver imóvel à venda no mesmo dia.", e:"Card concluído e calendário liberado.",
+     p:[
+      {id:"3.1", t:"Validar e auditar a evidência", m:"auto", ia:2, ex:"agente", who:"Validador + Antifraude + Auditor",
+       o:"Só fechar com prova de verdade.", e:"Parecer com decisão.",
+       how:["Validador lê prova; antifraude confere se foto é nova; auditor confere parecer."],
+       aud:"Auditor revisa parecer do validador.", tools:["central_man","claude"]},
+      {id:"3.3", t:"Liberar o imóvel", m:"manual", ia:0, ex:"pessoa", who:"Analista",
+       o:"Imóvel voltar a vender no mesmo dia.", e:"Imóvel liberado.", how:["Devolver à venda depois de baixar o card."],
+       chk:"Quem desbloqueia após baixa ainda não definido.", tools:["suporte"]}
+     ]}
+   ]},
+  {cls:"fin2", k:"Trilha 2", n:"Manutenção corretiva", seq:true,
+   o:"Conserto que não impede o uso do imóvel: resolver em 7 dias, com prova.",
+   val:["Conserto no prazo","Card fechado com prova","Menos desconto por manutenção"],
+   mps:[
+    {id:"MP4", v:"Abrir", n:"Abrir e programar",
+     o:"Todo conserto não urgente com chamado, prazo e data combinada.", e:"Chamado com prazo 7d ou card em Programada com data.",
+     p:[
+      {id:"4.1", t:"Classificar como não urgente", m:"auto", ia:2, ex:"agente", who:"Classificador",
+       o:"Separar corretiva do urgente.", e:"Card em Não urgente.", how:["Nota < 70."], tools:["central_man","pipe14"]},
+      {id:"4.3", t:"Programar com data e motivo", m:"manual", ia:0, ex:"pessoa", who:"Franquia",
+       o:"Prazo realista quando 7 dias não bastam.", e:"Data e motivo registrados.",
+       how:["Precisa +tempo → programa.","Depende proprietário → MP16."], chk:"Evidência em Programada fica parada.", tools:["portal"]}
+     ]},
+    {id:"MP5", v:"Consertar", n:"Consertar e cobrar",
+     o:"Conserto feito no prazo, com cobrança até chegar prova.", e:"Evidência ou despesa lançada.",
+     p:[
+      {id:"5.1", t:"Consertar e provar", m:"manual", ia:0, ex:"pessoa", who:"Franquia",
+       o:"Problema resolvido e provado.", e:"Evidência no card ou despesa.", how:["Foto, nota ou recibo."], tools:["portal","sapron"]},
+      {id:"5.2", t:"Cobrar quem atrasou", m:"auto", ia:0, ex:"sistema", who:"Rotina",
+       o:"Nenhum card vencido sem cobrança.", e:"Cobrança enviada.",
+       how:["Cobrança quarta 11h; lembretes D+7, D+14, D+21."], tools:["central_atv"]}
+     ]},
+    {id:"MP6", v:"Comprovar", n:"Comprovar o conserto",
+     o:"Fechar card só com prova, por evidência ou despesa.", e:"Card concluído, devolvido ou com sinal de fraude.",
+     p:[
+      {id:"6.1", t:"Fechar pela despesa", m:"auto", ia:2, ex:"agente", who:"Agente Despesa prova card",
+       o:"Fechar sem foto quando dinheiro prova.", e:"Card concluído por despesa.",
+       how:["Despesa mesmo imóvel+item até ~2 meses → concluído."],
+       chk:"Afrouxar regra para imóvel+item (Ray 19/10).", tools:["central_man","sapron"]},
+      {id:"6.2", t:"Validar e auditar a evidência", m:"auto", ia:2, ex:"agente", who:"Validador + antifraude + auditor",
+       o:"Só fechar com prova de verdade.", e:"Card concluído ou volta 5.1.",
+       aud:"Auditor revisa parecer.", tools:["central_man","claude"]}
+     ]}
+   ]},
+  {cls:"fin3", k:"Trilha 3", n:"Manutenção recorrente", seq:true,
+   o:"A preventiva: item certo, mês certo, só onde ainda não foi feita.",
+   val:["Item certo no mês certo","Preventiva feita e provada","Menos comentário negativo"],
+   mps:[
+    {id:"MP7", v:"Priorizar", n:"Priorizar o item do ciclo",
+     o:"Escolher com dados qual item entra no próximo ciclo.", e:"Item decidido com a Ray.",
+     p:[
+      {id:"7.2", t:"Cruzar com comentários e consultores", m:"misto", ia:2, ex:"pessoa", who:"Analista Manutenção",
+       o:"Medir impacto no hóspede.", e:"Dados por item e região.",
+       how:["Comentários, avaliações e apontamentos de consultores."], tools:["nekt","claude"]},
+      {id:"7.4", t:"Aprovar e registrar item", m:"manual", ia:0, ex:"pessoa", who:"Gerência (Ray)",
+       o:"Decisão registrada para o ciclo.", e:"Item registrado.", how:["Gerência aprova."], tools:["central_man"]}
+     ]},
+    {id:"MP8", v:"Preparar", n:"Preparar o ciclo",
+     o:"Base e rede prontas para executar o item.", e:"Imóveis elegíveis, prestadores e régua prontos.",
+     p:[
+      {id:"8.1", t:"Calcular imóveis elegíveis", m:"auto", ia:1, ex:"sistema", who:"Varredura recorrente",
+       o:"Só abrir card onde item ainda não foi feito.", e:"Lista de elegíveis.",
+       how:["Fora: já fez na janela, <6 meses operação, sem item."], tools:["central_man"]},
+      {id:"8.3", t:"Garantir 2 prestadores por cidade", m:"manual", ia:1, ex:"pessoa", who:"Analista",
+       o:"Franquia ter quem chamar.", e:"Prestadores prontos.", how:["Prospectar onde faltar."], tools:["hub"]}
+     ]},
+    {id:"MP9", v:"Abrir", n:"Comunicar e abrir o ciclo",
+     o:"Avisar franquia 1 semana antes, com dados, e abrir cards de uma vez.", e:"Franquias avisadas e cards abertos.",
+     p:[
+      {id:"9.1", t:"Enviar comunicado com dados", m:"manual", ia:1, ex:"pessoa", who:"Analista",
+       o:"Franquia saber por que e onde.", e:"Comunicado enviado.",
+       how:["Por que item entrou + lista imóveis.","Reforço quinta e alerta sábado."], tools:["slack","suporte"]},
+      {id:"9.3", t:"Abrir cards do ciclo", m:"auto", ia:0, ex:"sistema", who:"Varredura recorrente",
+       o:"1 card por imóvel elegível, de uma vez.", e:"Cards abertos.", how:["Prazo 15 dias úteis."], tools:["central_atv"]}
+     ]},
+    {id:"MP10", v:"Executar", n:"Executar e comprovar",
+     o:"Ter item feito e provado no prazo.", e:"Card concluído, encaminhado ou com exceção.",
+     opp:"Ciclo ar-condicionado: 627/1147 concluídos com evidência; 317 sem resposta (22/10).",
+     p:[
+      {id:"10.1", t:"Executar e anexar prova", m:"manual", ia:0, ex:"pessoa", who:"Franquia",
+       o:"Item feito e provado.", e:"Prova anexada.", how:["Foto, nota ou recibo."], tools:["portal"]},
+      {id:"10.3", t:"Validar e encaminhar pelo parecer", m:"auto", ia:2, ex:"agente", who:"Validador",
+       o:"Cada card no caminho certo.", e:"Parecer com decisão.",
+       how:["Completa → concluído; incompleta → volta 10.1; recusa → MP16."],
+       aud:"Auditor revisa parecer.", tools:["central_man","claude"]}
+     ]},
+    {id:"MP11", v:"Fechar", n:"Fechar o ciclo",
+     o:"Fechar ciclo, ajudar atrasados e aprender antes do próximo.", e:"Balanço, pendências com dono e ajustes.",
+     p:[
+      {id:"11.1", t:"Puxar balanço e separar por motivo", m:"misto", ia:2, ex:"pessoa", who:"Analista Manutenção",
+       o:"Saber o que faltou e por quê.", e:"Balanço por franquia.",
+       how:["Motivos: sem resposta, agendado sem prova, sem item, distrato, recusa proprietário."], tools:["central_man","claude"]},
+      {id:"11.3", t:"Conversar com franquia pendente", m:"manual", ia:1, ex:"pessoa", who:"Analista",
+       o:"Destravar quem ficou atrás.", e:"Plano combinado.",
+       how:["O que trava: proprietário, dinheiro ou prestador?"], tools:["meet"]}
+     ]}
+   ]}
+ ]},
+ {n:"Processos de suporte e gestão", o:"Mantêm a Manutenção de pé: ferramentas, agentes, auditoria, radar, proprietário, ocorrências, franquias críticas, KPIs, demandas e padrão.", trails:[
+  {cls:"sup", k:"Trilha 4", n:"Ferramentas, agentes e auditorias", seq:false,
+   o:"Trabalho que mantém a Central de pé, incluindo o que roda sem ninguém ver.",
+   mps:[
+    {id:"MP12", v:"Ferramentas", n:"Manter as ferramentas", nw:true,
+     o:"Central, portal franquia e integrações funcionando.", e:"Correções e melhorias publicadas.",
+     p:[
+      {id:"12.1", t:"Manter Central de Manutenção", m:"manual", ia:1, ex:"pessoa", who:"Analista Manutenção", nw:true,
+       o:"Abas, filtros, cards corretos.", e:"Ajustes publicados.", how:["Ajustes com Claude, PR Sapron, flag."], tools:["central_man","github","claude"]},
+      {id:"12.3", t:"Manter pontes com outras áreas", m:"misto", ia:1, ex:"pessoa", who:"Analista", nw:true,
+       o:"Pedido de outra área vira card sem retrabalho.", e:"Ponte publicada.",
+       how:["Ponte Suporte → Central.","Integração UTI."], tools:["suporte","central_uti"]}
+     ]},
+    {id:"MP13", v:"Automação", n:"Desenvolver agentes", nw:true,
+     o:"Transformar processo manual em agente, skill ou rotina.", e:"Agente no ar, documentado.",
+     p:[
+      {id:"13.2", t:"Construir e testar", m:"manual", ia:1, ex:"pessoa", who:"Analista Manutenção", nw:true,
+       o:"Agente funcionando sem quebrar o que roda.", e:"Em staging + sombra.",
+       how:["Com Claude; teste em staging + sombra antes de valer."], tools:["claude","github"]}
+     ]},
+    {id:"MP14", v:"Auditoria", n:"Auditar os agentes", nw:true,
+     o:"Saber toda semana se agentes rodando e decidindo certo.", e:"Agentes conferidos.",
+     p:[
+      {id:"14.1", t:"Conferir pulso dos agentes", m:"misto", ia:2, ex:"pessoa", who:"Analista Manutenção",
+       o:"Pegar agente parado.", e:"Heartbeat semanal.", how:["Página semanal de agentes."], tools:["central_man","claude"]},
+      {id:"14.2", t:"Auditar por amostra", m:"misto", ia:2, ex:"pessoa", who:"Analista Manutenção",
+       o:"Pegar agente decidindo errado.", e:"Amostra validada.", how:["Amostra na aba Agentes de IA."], tools:["central_man","claude"]}
+     ]}
+   ]},
+  {cls:"ges", k:"Trilha 5", n:"Gestão e rede", seq:false,
+   o:"Radar das entradas, proprietário, ocorrências, franquias críticas, KPIs e demandas.",
+   mps:[
+    {id:"MP15", v:"Controlar", n:"Controlar as entradas",
+     o:"Saber todo dia se áreas mandando o que deveriam.", e:"Desvio avisado ao dono.",
+     p:[
+      {id:"15.1", t:"Receber pedidos das áreas", m:"misto", ia:0, ex:"pessoa", who:"Analista Manutenção",
+       o:"Todo pedido vira card.", e:"Cards de origens diversas.",
+       how:["Danos, Suporte, comentários, consultores, UTI, Implantação, migração, limpeza, franquia."],
+       imp:{d:"recebe", t:"Implantação envia pedidos (0 envios registrados até agora)."}, tools:["central_man","suporte","central_uti"]},
+      {id:"15.3", t:"Comparar volume cada entrada", m:"auto", ia:1, ex:"agente", who:"Monitor",
+       o:"Perceber quando área para de mandar.", e:"Alerta no desvio.",
+       how:["Histórico 1 mês por origem.","Caiu >meta: avisa dono."], chk:"Meta de variação (Ray: 20%).", tools:["central_man"]}
+     ]},
+    {id:"MP16", v:"Adequar", n:"Adequar com o proprietário",
+     o:"Destravar conserto que depende de autorização ou pagamento.", e:"Decisão registrada e card de volta.",
+     p:[
+      {id:"16.3", t:"Abrir chamado CS e avisar franquia", m:"manual", ia:1, ex:"pessoa", who:"Analista",
+       o:"CS falar com proprietário com contexto.", e:"Chamado aberto.",
+       how:["Suporte → Proprietários → Manutenção e Adequação."], tools:["suporte","central_man"]},
+      {id:"16.5", t:"Fechar como contestado", m:"manual", ia:0, ex:"pessoa", who:"Analista",
+       o:"Recusa não pesa contra franquia.", e:"Card encerrado.",
+       how:["Recusa comprovada não conta."], chk:"Regra proposta 22/10.", tools:["central_man"]}
+     ]},
+    {id:"MP17", v:"Ocorrência", n:"Ocorrências de manutenção",
+     o:"Transformar desvio em ocorrência para a franquia, com Qualidade.", e:"Ocorrência registrada e refletida no score.",
+     p:[
+      {id:"17.1", t:"Achar card e montar ocorrência", m:"auto", ia:2, ex:"agente", who:"Agente ocorrência",
+       o:"Nenhum desvio passar sem registro.", e:"Ocorrência montada com link + seção MGO.",
+       how:["Urgente sem resposta 24h; manutenção de comentário negativo."], chk:"Em sombra desde 20/10.", tools:["central_man","mgo"]},
+      {id:"17.2", t:"Conferir e registrar", m:"manual", ia:0, ex:"pessoa", who:"Qualidade (Vick)",
+       o:"Só registrar ocorrência correta.", e:"Ocorrência registrada ou descartada.", how:["Incorreta → descarta."], tools:["lov_o"]}
+     ]},
+    {id:"MP18", v:"Recuperar", n:"Franquias críticas",
+     o:"Identificar franquia crítica e ajudar antes da UTI.", e:"Franquia fora da faixa ou levada à UTI.",
+     p:[
+      {id:"18.2", t:"Triar pelas faixas", m:"misto", ia:2, ex:"pessoa", who:"Analista Manutenção",
+       o:"Saber quem precisa ajuda agora.", e:"Lista por faixa.",
+       how:["5 sinais por franquia."], tools:["central_man","claude"]},
+      {id:"18.3", t:"Call e plano com a franquia", m:"manual", ia:1, ex:"pessoa", who:"Analista",
+       o:"Destravar com plano curto.", e:"Plano/Ação/Resultado da semana.",
+       how:["Call 15 min."], tools:["meet"]}
+     ]},
+    {id:"MP19", v:"Medir", n:"Medir os resultados", nw:true,
+     o:"Saber se manutenção entrega e onde agir.", e:"KPIs lançados e relatórios.",
+     p:[
+      {id:"19.1", t:"KPIs diários da Manutenção", m:"misto", ia:2, ex:"pessoa", who:"Skill kpis-manutencao", nw:true,
+       o:"Prazo, volume e evidência.", e:"11 KPIs lançados.",
+       how:["Skill calcula no Sapron, mostra conferência e lança."], chk:"Falta chave e IDs do KPI System.", tools:["sapron","kpi"]}
+     ]},
+    {id:"MP20", v:"Demandas", n:"Gerir demandas e tasks", nw:true,
+     o:"Toda demanda tem dono, prazo e entrega.", e:"Tasks atualizadas no Taskdex.",
+     p:[
+      {id:"20.1", t:"Registrar demanda", m:"manual", ia:0, ex:"pessoa", who:"Analista", nw:true,
+       o:"Nenhum pedido perdido.", e:"Task criada.", how:["Daily, Slack ou reunião → task."], tools:["taskdex","slack","meet"]}
+     ]},
+    {id:"MP21", v:"Padrão", n:"Manter o padrão", nw:true,
+     o:"Regras, prazos e documentação alinhados ao que roda.", e:"MGO, processos e réguas atualizados.",
+     p:[
+      {id:"21.1", t:"Manter manutenção no MGO", m:"manual", ia:0, ex:"pessoa", who:"Analista Manutenção", nw:true,
+       o:"Franquia ter regra escrita.", e:"MGO atualizado.", how:["Texto urgente enviado MGO p. 28."],
+       chk:"Conferir publicação da seção urgente.", tools:["mgo","suporte"]}
+     ]}
+   ]}
+ ]}
+];
+
+/* PORTFOLIO CONSOLIDADO - todas as áreas */
+AUTOS.push(
+  /* QUALIDADE */
+  {area:"qu", id:"Q-A1", n:"Captador de avaliações", tp:"Rotina", st:"ar", f:"Diário · Apps Script", o:"Puxa avaliações das OTAs, do site e do Google Business Profile para a planilha e o Lovable de comentários."},
+  {area:"qu", id:"Q-A2", n:"Classificador de tema e gravidade", tp:"Agente", st:"ar", f:"Diário · Lovable", o:"IA classifica tema e gravidade de cada avaliação (leve, média, grave)."},
+  {area:"qu", id:"Q-A3", n:"Redator de respostas", tp:"Agente", st:"ar", f:"Diário · Lovable", o:"IA redige a resposta ao hóspede no tom da Seazone, aprende com as respostas editadas."},
+  {area:"qu", id:"Q-A4", n:"Contestador de avaliações Airbnb (Bill)", tp:"Skill", st:"ar", f:"Diária · até 25 contestações", o:"Puxa avaliações abaixo de 5, classifica, redige e envia até 25 pedidos/dia."},
+  {area:"qu", id:"Q-A5", n:"Captador de ocorrências por fonte", tp:"Agente", st:"ar", f:"Contínuo · Lovable", o:"Lê cards das outras áreas e cria ocorrência quando a régua pede."},
+  {area:"qu", id:"Q-A6", n:"Robô de notificação de ocorrências", tp:"Rotina", st:"ar", f:"Contínuo", o:"Abre chamado na Central de Atividades com evidências; move card para Primeiro Contato."},
+  {area:"qu", id:"Q-A7", n:"Bot julgador de defesa", tp:"Agente", st:"val", f:"Após defesa da franquia", o:"Lê resposta no chat e sugere Com pontuação ou Justificativa válida (passa pelo aprovar/descartar)."},
+  {area:"qu", id:"Q-A8", n:"Identificador de multas", tp:"Agente", st:"ar", f:"Contínuo", o:"Aplica janela de 90 dias, limite por porte e reincidência; posta no #alerta-multas-franquias a cada 15 min."},
+  {area:"qu", id:"Q-A9", n:"Boletim diário de qualidade", tp:"Rotina", st:"des", f:"Diário", o:"Ocorrências recebidas e aplicadas, multas, iminência. Em desenho."},
+  {area:"qu", id:"Q-A10", n:"Radar semanal (quinta)", tp:"Agente", st:"des", f:"Semanal", o:"Interpretação da semana, áreas sem envio, franquias em queda, temas. Em desenho."},
+  {area:"qu", id:"Q-A11", n:"Skill /kpi-qualidade", tp:"Skill", st:"dem", f:"Diária · setor 10", o:"Lança KPIs de ocorrências, pontos e multas por franquia depois do ok."},
+  {area:"qu", id:"Q-A12", n:"Skill /kpi-comentario", tp:"Skill", st:"dem", f:"Diária · setor 15", o:"Lança KPIs de nota, volume e tempo de resposta."},
+  /* FORNECEDORES */
+  {area:"fo", id:"F-A1", n:"Agente de cadência Pipedrive → SIA", tp:"Agente", st:"ar", f:"Olimpo · 11h, 15h, 17h", o:"Manda o 1º, 2º e 3º contato pela SIA, anota no card e move sozinho."},
+  {area:"fo", id:"F-A2", n:"Mensagens de cobrança da Loja", tp:"Bot", st:"ar", f:"2x/dia · SIA", o:"Avisa no dia 0, 4º e 7º que o link/boleto espera pagamento."},
+  {area:"fo", id:"F-A3", n:"Agente de cancelamento da Loja", tp:"Agente", st:"ar", f:"Diário · 20h de Brasília no 7º dia", o:"Cancela pedido não pago no 7º dia, respeitando os 3 avisos."},
+  {area:"fo", id:"F-A4", n:"Agente de indicação de itens", tp:"Agente", st:"ar", f:"Olimpo · contínuo", o:"Cria listas de itens por imóvel a partir das inconformidades da Implantação."},
+  {area:"fo", id:"F-A5", n:"Agente de análise de pagamento (Jornada)", tp:"Agente", st:"ar", f:"Olimpo · 8h-19h, de hora em hora", o:"Lê links da Rede, confirma pago ou marca link expirado."},
+  {area:"fo", id:"F-A6", n:"Agente de cancelamento de enxoval", tp:"Agente", st:"ar", f:"Olimpo · diário", o:"Cancela pedido não pago pela regra; nunca cancela pedido pago."},
+  {area:"fo", id:"F-A7", n:"Bot de grandes operações", tp:"Bot", st:"ar", f:"GitHub Actions · 16h", o:"Avisa no Slack quando entram 10+ imóveis da mesma operação."},
+  {area:"fo", id:"F-A8", n:"Espelhos automáticos (Jornada/Calc)", tp:"Rotina", st:"ar", f:"Jornada de hora em hora · Calc 9h/16h", o:"Mantém a Jornada e a Calculadora atualizadas."},
+  {area:"fo", id:"F-E1", n:"Copiloto da SIA", tp:"Extensão", st:"trn", f:"Tela da SIA", o:"Sugere resposta das conversas com prestadores a partir dos critérios."},
+  {area:"fo", id:"F-S1", n:"Skill cidades-sem-fornecedor", tp:"Skill", st:"dem", f:"Toda sexta", o:"Acha cidades/polígonos sem prestador e abre card no funil 61."},
+  {area:"fo", id:"F-S2", n:"Skill prospeccao-lavanderia / fotografos", tp:"Skill", st:"dem", f:"Por cidade", o:"Pesquisa candidatos na Receita, Google, Maps e Instagram."},
+  {area:"fo", id:"F-S3", n:"Skill Pauta do fornecedor", tp:"Skill", st:"dem", f:"Antes de cada reunião", o:"Junta o mês do fornecedor e monta a pauta."},
+  {area:"fo", id:"F-S4", n:"Skill Conferência da EasyCover", tp:"Skill", st:"dem", f:"Mensal", o:"Bate o relatório da EasyCover com a nossa base."},
+  /* ADM/FIN */
+  {area:"af", id:"A-A1", n:"Agente Cobrança Judicial (A1 · Olimpo)", tp:"Agente", st:"val", f:"Diário 18h", o:"Lê danos em Judicial, posta card no Slack do Jurídico com evidências."},
+  {area:"af", id:"A-A2", n:"Rodada do Stop de Crescimento (A3)", tp:"Agente", st:"ar", f:"GitHub Actions · diário 9h", o:"Aplica e remove stop pela classificação do Score."},
+  {area:"af", id:"A-A3", n:"Bot franquias sem receber imóveis (A4)", tp:"Bot", st:"ar", f:"Segunda 9h", o:"Lista franquias sem imóvel novo em 60, 90, 180 dias fora de stop."},
+  {area:"af", id:"A-A4", n:"Robô Derek (A5 · Central UTI)", tp:"Agente", st:"val", f:"Coolify · 11h + 15 min", o:"Detecta críticos, triagem, abre Pré-UTI, acompanha metas."},
+  {area:"af", id:"A-A5", n:"Radar de despesas duplicadas (A6)", tp:"Agente", st:"ar", f:"Dias úteis 8h50", o:"Aponta grupos de despesas duplicadas com valor em risco."},
+  {area:"af", id:"A-A6", n:"Semente de lavanderias (A7 · Calc 2026)", tp:"Rotina", st:"ar", f:"GitHub Actions · diário", o:"Atualiza base de custo de lavanderia (régua taxa limpeza)."},
+  {area:"af", id:"A-E1", n:"AirCover Autofill (E1)", tp:"Extensão", st:"ar", f:"Chrome · por caso", o:"Preenche o pedido no AirCover a partir do Sapron."},
+  {area:"af", id:"A-E2", n:"Acionar Airbnb (E2)", tp:"Extensão", st:"ar", f:"Chrome · por caso", o:"Pede mediação Airbnb com justificativa por tipo."},
+  {area:"af", id:"A-E3", n:"Cobrança Newbyte (E3)", tp:"Extensão", st:"ar", f:"Chrome · diária", o:"Envia 3 tentativas ao hóspede, registra, finaliza, encaminha."},
+  {area:"af", id:"A-E4", n:"Finalizar Dano (E4)", tp:"Extensão", st:"ar", f:"Chrome · por caso", o:"Finaliza dano Airbnb; registra reembolso proprietário com comprovante."},
+  {area:"af", id:"A-E5", n:"Sinistro EasyCover (E5)", tp:"Extensão", st:"ar", f:"Chrome · por caso", o:"Abre e envia sinistro no portal NOW; grava protocolo no Sapron."},
+  {area:"af", id:"A-S1", n:"Skill kpis-franquias", tp:"Skill", st:"dem", f:"Diário antes das 9h", o:"Preenche, audita e comenta KPIs OPS, Danos e Financeiro."},
+  {area:"af", id:"A-S2", n:"Skill auditar-processo", tp:"Skill", st:"val", f:"Dias úteis 9h55", o:"Auditoria 2 casos/analista; 21 KPIs auditoria (setores 42, 43)."},
+  {area:"af", id:"A-S3", n:"Skill fechar-score", tp:"Skill", st:"dem", f:"Mensal até dia 14", o:"Confere bases, calcula critérios, grava Score."},
+  {area:"af", id:"A-S4", n:"Skill analise-taxa-limpeza", tp:"Skill", st:"dem", f:"Por pedido", o:"Roda Calculadora 2026, redige parecer de pedido de taxa."},
+  {area:"af", id:"A-S5", n:"Skill conferencia-onboarding-taxa", tp:"Skill", st:"dem", f:"Sob demanda", o:"Confere taxa de imóveis em onboarding contra régua viva."},
+  {area:"af", id:"A-S6", n:"Skill despesas-duplicadas", tp:"Skill", st:"ar", f:"Via radar", o:"Detecta duplicadas por imóvel, categoria, valor, anexo."},
+  {area:"af", id:"A-S7", n:"Skill auditoria-comissao-franquias", tp:"Skill", st:"ar", f:"Semanal", o:"Audita percentual e operação da comissão contra régua."},
+  {area:"af", id:"A-S8", n:"Skill redistribuicao-enxoval", tp:"Skill", st:"dem", f:"Por distrato com imóveis", o:"Redistribui enxoval migrados; lista recompra mínima."},
+  {area:"af", id:"A-S9", n:"Skill contestar-dano-airbnb", tp:"Skill", st:"val", f:"Rotina 8 etapas", o:"Cobra danos Seazone: triagem, AirCover, escalada."},
+  /* MANUTENÇÃO */
+  {area:"mn", id:"M-A1", n:"Classificador de urgência", tp:"Agente", st:"ar", f:"15 min", o:"Nota 0-100 pela lista MGO; 70+ ou gatilho duro = urgente."},
+  {area:"mn", id:"M-A2", n:"Triagem automática", tp:"Agente", st:"ar", f:"15 min", o:"Move card para Urgente/Não urgente conforme nota."},
+  {area:"mn", id:"M-A3", n:"Verificador de duplicata", tp:"Agente", st:"ar", f:"Na triagem", o:"Marca card repetido mesmo imóvel/problema."},
+  {area:"mn", id:"M-A4", n:"Validador de evidência", tp:"Agente", st:"ar", f:"Quando evidência chega", o:"Lê prova pela régua, diz se completa ou falta."},
+  {area:"mn", id:"M-A5", n:"Antifraude de evidência", tp:"Agente", st:"ar", f:"Quando evidência chega", o:"Confere se foto é nova ou reaproveitada."},
+  {area:"mn", id:"M-A6", n:"Auditor de evidência", tp:"Agente", st:"ar", f:"Depois do validador", o:"Confere parecer do validador."},
+  {area:"mn", id:"M-A7", n:"Agente Despesa prova card", tp:"Agente", st:"val", f:"Quando despesa lançada", o:"Fecha card quando despesa prova o conserto."},
+  {area:"mn", id:"M-A8", n:"Agente ocorrência urgente", tp:"Agente", st:"val", f:"Diária · sombra 20/10", o:"Acha urgente sem resposta 24h e monta ocorrência."},
+  {area:"mn", id:"M-A9", n:"Monitor de entradas", tp:"Agente", st:"des", f:"Semanal", o:"Compara volume de cada entrada com histórico 1 mês."},
+  {area:"mn", id:"M-A10", n:"Aviso CS Proprietários", tp:"Rotina", st:"des", f:"Quando trava sinalizada", o:"Abre chamado CS com contexto do card."},
+  {area:"mn", id:"M-R1", n:"Rotina de lembretes de atraso", tp:"Rotina", st:"ar", f:"24h urgente · D+7/14/21 corretiva", o:"Recobra franquia que não mandou prova."},
+  {area:"mn", id:"M-R2", n:"Cobrança semanal (quarta 11h)", tp:"Rotina", st:"ar", f:"Semanal", o:"Cobra franquias com cards vencidos."},
+  {area:"mn", id:"M-R3", n:"Varredura recorrente", tp:"Rotina", st:"ar", f:"1ª segunda útil do ciclo", o:"Abre cards do ciclo (1 por imóvel elegível)."},
+  {area:"mn", id:"M-R4", n:"Report do ciclo (sexta 9h)", tp:"Rotina", st:"ar", f:"Semanal durante ciclo", o:"Status dos cards do ciclo."},
+  {area:"mn", id:"M-S1", n:"Skill comentários × urgência", tp:"Skill", st:"dem", f:"Por ciclo", o:"Mede impacto no hóspede ao priorizar item do ciclo."},
+  {area:"mn", id:"M-S2", n:"Skill recuperacao-franquias", tp:"Skill", st:"dem", f:"Semanal", o:"Triagem de franquias críticas por faixa."},
+  {area:"mn", id:"M-S3", n:"Skill kpis-manutencao", tp:"Skill", st:"dem", f:"Diária", o:"11 KPIs calculados no Sapron, lançados no KPI System."},
+  {area:"mn", id:"M-S4", n:"Skill ponte-suporte-manutencao", tp:"Skill", st:"dem", f:"Por leva", o:"Vira pedido do Suporte em card da Central."},
+  {area:"mn", id:"M-S5", n:"Skill Heartbeat agentes", tp:"Skill", st:"dem", f:"Semanal", o:"Pulso dos agentes: pega agente parado."}
+);
+</script>
+<script>
+/* RENDERER (idêntico ao de Henry) */
+const REG = {};
+const ARROW_DOWN = `<div class="down"><svg viewBox="0 0 10 16" aria-hidden="true"><line x1="5" y1="0" x2="5" y2="10"/><path d="M1 9 L5 16 L9 9 Z"/></svg></div>`;
+const ARROW_RIGHT = `<div class="join"><svg viewBox="0 0 36 14" preserveAspectRatio="none" aria-hidden="true"><line x1="2" y1="7" x2="27" y2="7"/><path d="M26 2 L34 7 L26 12 Z"/></svg></div>`;
+const tags = p => `<span class="tags"><span class="mode ${p.m}">${MODE[p.m]}</span><span class="ia i${p.ia}">${IA[p.ia]}</span>${p.trn?`<span class="trn">IA em treinamento</span>`:""}<span class="ex">${EX[p.ex]}</span>${p.chk?`<span class="chk">Validar</span>`:""}</span>`;
+function box(p,tr,area){
+  const k = area+"-"+p.id;
+  REG[k] = {kind:"p", d:p, tr, area};
+  return `<button class="box${p.nw?" nw":""}" type="button" data-k="${k}" aria-expanded="false">
+    <span class="t"><span class="code">${p.id}</span><span>${p.t}</span></span>
+    <span class="o">${p.o}</span>${tags(p)}</button>`;
+}
+function col(mp,tr,area){
+  const k = area+"-"+mp.id;
+  REG[k] = {kind:"mp", d:mp, tr, area};
+  return `<div class="col"><button class="head" type="button" data-k="${k}" aria-expanded="false">
+    <span class="v">${mp.id} · ${mp.v}${mp.nw?` <span class="new">Novo</span>`:""}</span><span class="n">${mp.n}</span><span class="o">${mp.o}</span>
+    <span class="e"><b>Entrega:</b> ${mp.e}</span></button>
+    ${mp.p.map(p=>(tr.seq?ARROW_DOWN:`<div class="gap"></div>`)+box(p,tr,area)).join("")}</div>`;
+}
+const valueBox = v => `<div class="value"><b>Valor para a Seazone</b>${v.map((s,i)=>`<span class="${i===v.length-1?'meta':''}">${s}</span>`).join(`<span>↓</span>`)}</div>`;
+
+function renderArea(area){
+  const blocks = DATA[area];
+  if(!blocks || !blocks.length){
+    document.querySelector(`.flow[data-area="${area}"]`).innerHTML = `<p style="color:var(--ink3);padding:24px">Dados desta área ainda não carregados.</p>`;
+    return;
+  }
+  document.querySelector(`.flow[data-area="${area}"]`).innerHTML = blocks.map(b=>
+    `<div class="blk"><span class="bn">${b.n}</span><span class="bo">${b.o}</span></div>` +
+    b.trails.map(tr=>{
+      const main = tr.seq
+        ? `<div class="main" style="grid-template-columns:${tr.mps.map(()=>"1fr").join(" 36px ")} 36px 170px">${tr.mps.map(mp=>col(mp,tr,area)).join(ARROW_RIGHT)}${ARROW_RIGHT}${valueBox(tr.val||["Resultado da trilha"])}</div>`
+        : `<div class="main free" style="grid-template-columns:repeat(${tr.mps.length},1fr)">${tr.mps.map(mp=>col(mp,tr,area)).join("")}</div>`;
+      return `<section class="trail ${tr.cls}"><div class="trail-h"><span class="tk">${tr.k}</span><span class="tn">${tr.n}</span><span class="to">${tr.o}</span></div>${main}</section>`;
+    }).join("")
+  ).join("");
+
+  const all = blocks.flatMap(b=>b.trails.flatMap(t=>t.mps.flatMap(m=>m.p)));
+  const fin = blocks[0].trails.flatMap(t=>t.mps.flatMap(m=>m.p));
+  const cnt = (arr,f) => arr.filter(f).length;
+  const row = (k,v) => `<div class="r"><span class="k">${k}</span><b>${v}</b></div>`;
+  const grp = (l,rows) => `<div class="g"><span class="gl">${l}</span><div class="rows">${rows}</div></div>`;
+  document.querySelector(`.panel.summary[data-area="${area}"]`).innerHTML =
+    grp("Arquitetura", row("Finalísticos", fin.length) + row("Suporte e gestão", all.length-fin.length) + row("Novos nesta versão", cnt(all,p=>p.nw))) +
+    grp("Execução", ["auto","misto","manual"].map(k=>row(`<span class="mode ${k}">${MODE[k]}</span>`, cnt(all,p=>p.m===k))).join("")) +
+    grp("Uso de IA", [0,1,2].map(i=>row(`<span class="ia i${i}">${IA[i]}</span>`, cnt(all,p=>p.ia===i))).join("") + row(`<span class="trn">IA em treinamento</span>`, cnt(all,p=>p.trn))) +
+    grp("A validar", row(`<span class="chk">Pontos de validação</span>`, cnt(all,p=>p.chk)));
+  eqHeads();
+}
+
+/* popover */
+const pop = document.getElementById("pop");
+let cur = null, pinned = false, hideT = null, showT = null;
+const sec = (l,h,c="") => `<div class="sec ${c}"><span class="sl">${l}</span>${h}</div>`;
+const tool = k => { const t=T[k]; if(!t) return `<span class="tool">${k}</span>`; return t.u ? `<a class="tool" href="${t.u}" target="_blank" rel="noopener">${t.n} ↗</a>` : `<span class="tool">${t.n}</span>`; };
+function content(k){
+  const r = REG[k], d = r.d;
+  const head = `<div class="ph"><h3><span class="code">${d.id}</span>${d.t||d.n}</h3><button class="x" type="button" aria-label="Fechar">×</button></div>`;
+  if(r.kind==="mp") return head +
+    sec("Área",`<p>${AREA[r.area]}</p>`) +
+    sec("Objetivo",`<p>${d.o}</p>`) + sec("Entrega",`<p>${d.e}</p>`) +
+    (d.val && r.tr.val ? sec("Valor para a Seazone",`<p>Contribui para: <b>${d.val}</b> (${r.tr.val.join(" → ")}).</p>`) : "") +
+    (d.opp ? sec("Como entregar mais valor",`<p>${d.opp}</p>`,"opp") : "");
+  return head + tags(d) +
+    sec("Área",`<p>${AREA[r.area]}</p>`) +
+    sec("Responsável",`<p>${d.who}</p>`) +
+    sec("Objetivo",`<p>${d.o}</p>`) + sec("Entrega",`<p>${d.e}</p>`) +
+    sec("Como funciona", d.how && d.how.length>1 ? `<ul>${d.how.map(h=>`<li>${h}</li>`).join("")}</ul>` : (d.how?`<p>${d.how[0]}</p>`:"")) +
+    (d.aud ? sec("Auditoria",`<p>${d.aud}</p>`,"aud") : "") +
+    (d.imp ? sec(d.imp.d==="recebe"?"Interface: recebe":"Interface: entrega",`<p>${d.imp.t}</p>`,"impb") : "") +
+    (d.chk ? sec("A validar",`<p>${d.chk}</p>`,"chkb") : "") +
+    (d.tools ? sec("Ferramentas",`<div class="tools">${d.tools.map(tool).join("")}</div>`) : "");
+}
+function place(el){
+  const b = el.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight, vw = innerWidth, vh = innerHeight;
+  let x, y = b.top;
+  if(b.right + 10 + pw <= vw - 12) x = b.right + 10;
+  else if(b.left - pw - 10 >= 12) x = b.left - pw - 10;
+  else { x = Math.max(12, Math.min(b.left, vw - pw - 12)); y = b.bottom + 8; }
+  if(y + ph > vh - 12) y = Math.max(12, vh - ph - 12);
+  pop.style.left = x + "px"; pop.style.top = y + "px";
+}
+function openPop(el, pin){
+  clearTimeout(hideT);
+  if(cur && cur !== el) cur.setAttribute("aria-expanded","false");
+  cur = el; pinned = pin; el.setAttribute("aria-expanded","true");
+  pop.innerHTML = content(el.dataset.k); pop.hidden = false; place(el);
+  pop.querySelector(".x").onclick = closePop;
+}
+function closePop(){ pop.hidden = true; pinned = false; if(cur){cur.setAttribute("aria-expanded","false"); cur=null;} }
+function bindBoxes(root){
+  root.querySelectorAll("[data-k]").forEach(el=>{
+    if(el.dataset.bound) return;
+    el.dataset.bound = "1";
+    el.addEventListener("mouseenter",()=>{ if(pinned) return; clearTimeout(showT); showT=setTimeout(()=>openPop(el,false),120); });
+    el.addEventListener("mouseleave",()=>{ clearTimeout(showT); if(!pinned) hideT=setTimeout(closePop,180); });
+    el.addEventListener("click",e=>{ e.stopPropagation(); (cur===el && pinned) ? closePop() : openPop(el,true); });
+  });
+}
+pop.addEventListener("mouseenter",()=>clearTimeout(hideT));
+pop.addEventListener("mouseleave",()=>{ if(!pinned) hideT=setTimeout(closePop,180); });
+pop.addEventListener("click",e=>e.stopPropagation());
+document.addEventListener("click",()=>{ if(!pop.hidden) closePop(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !pop.hidden){ const c=cur; closePop(); c&&c.focus(); } });
+addEventListener("resize",()=>{ if(cur && !pop.hidden) place(cur); });
+addEventListener("scroll",()=>{ if(cur && !pop.hidden) place(cur); }, {passive:true});
+
+function eqHeads(){
+  document.querySelectorAll(".trail").forEach(t=>{
+    const hs=[...t.querySelectorAll(".head")]; hs.forEach(h=>h.style.minHeight="");
+    const m=Math.max(...hs.map(h=>h.offsetHeight)); if(m>0) hs.forEach(h=>h.style.minHeight=m+"px");
+  });
+}
+
+/* abas */
+const tabs = [...document.querySelectorAll(".tab")];
+function selectTab(t){
+  tabs.forEach(x=>{ const on = x===t; x.setAttribute("aria-selected", on); const p=document.getElementById(x.getAttribute("aria-controls")); p.hidden=!on; p.style.display = on?"flex":"none"; });
+  closePop(); eqHeads();
+  const area = t.id.replace("t-","");
+  if(["qu","fo","af","mn"].includes(area)) { renderArea(area); bindBoxes(document.querySelector(`.flow[data-area="${area}"]`)); }
+  if(area === "pf") renderPortfolio();
+}
+tabs.forEach(t=>t.addEventListener("click",()=>selectTab(t)));
+
+/* portfolio consolidado */
+const ST = {ar:"No ar", trn:"Em treinamento", val:"Em validação", dem:"Sob demanda", des:"Em desenho"};
+function renderPortfolio(){
+  if(!AUTOS.length) return;
+  const items = AUTOS;
+  const byArea = {};
+  items.forEach(a => { (byArea[a.area] = byArea[a.area]||[]).push(a); });
+  const cnt = (arr,f) => arr.filter(f).length;
+  const kpi = (v,l,c="") => `<div class="kpi ${c}"><b>${v}</b><span>${l}</span></div>`;
+  document.getElementById("pfsum").innerHTML =
+    kpi(items.length,"automações no setor") +
+    Object.keys(ST).filter(k=>cnt(items,a=>a.st===k)).map(k=>kpi(cnt(items,a=>a.st===k), ST[k].toLowerCase(), "k-"+k)).join("") +
+    Object.keys(AREA).map(a=>kpi(cnt(items,x=>x.area===a), AREA[a].toLowerCase())).join("");
+  document.getElementById("pftypes").innerHTML = [...new Set(items.map(a=>a.tp))].map(tp=>`<span class="ex">${tp} · ${cnt(items,a=>a.tp===tp)}</span>`).join("");
+  document.getElementById("pftb").innerHTML = Object.keys(AREA).map(ak=>{
+    const list = byArea[ak] || [];
+    if(!list.length) return "";
+    return `<tr class="grp"><td colspan="5"><span class="gn">${AREA[ak]}</span><span class="gc">${list.length} ${list.length>1?"automações":"automação"}</span></td></tr>` +
+      list.map(a=>`<tr>
+        <td class="n"><span class="nm"><span class="code">${a.id}</span>${a.n}</span><span class="tp">${a.tp}</span></td>
+        <td class="o">${a.o}</td>
+        <td class="f">${a.f}</td>
+        <td class="ar">${AREA[a.area]}</td>
+        <td class="st-c"><span class="st ${a.st}">${ST[a.st]}</span></td></tr>`).join("");
+  }).join("");
+}
+
+/* boot */
+window.addEventListener("DOMContentLoaded", () => {
+  renderArea("qu");
+  bindBoxes(document.querySelector(`.flow[data-area="qu"]`));
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(eqHeads);
+});
+</script>
+</body>
+</html>
