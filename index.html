@@ -1205,7 +1205,22 @@ AUTOS.push(
   {area:"mn", id:"M-S2", n:"Skill recuperacao-franquias", tp:"Skill", st:"dem", f:"Semanal", o:"Triagem de franquias críticas por faixa."},
   {area:"mn", id:"M-S3", n:"Skill kpis-manutencao", tp:"Skill", st:"dem", f:"Diária", o:"11 KPIs calculados no Sapron, lançados no KPI System."},
   {area:"mn", id:"M-S4", n:"Skill ponte-suporte-manutencao", tp:"Skill", st:"dem", f:"Por leva", o:"Vira pedido do Suporte em card da Central."},
-  {area:"mn", id:"M-S5", n:"Skill Heartbeat agentes", tp:"Skill", st:"dem", f:"Semanal", o:"Pulso dos agentes: pega agente parado."}
+  {area:"mn", id:"M-S5", n:"Skill Heartbeat agentes", tp:"Skill", st:"dem", f:"Semanal", o:"Pulso dos agentes: pega agente parado."},
+  /* QUALIDADE — skills do marketplace disponíveis */
+  {area:"qu", id:"Q-A13", n:"Skill alerta-multas-geradas", tp:"Skill", st:"dem", f:"Sob demanda", o:"Busca no kanban de Multas as franquias prestes a receber multa e alerta antes."},
+  {area:"qu", id:"Q-A14", n:"Skill alerta-origem-sem-ocorrencia", tp:"Skill", st:"dem", f:"Semanal", o:"Monitor de entrada de ocorrências por origem no kanban; detecta origens paradas."},
+  {area:"qu", id:"Q-A15", n:"Skill espelhar-ocorrencias-kanban", tp:"Skill", st:"dem", f:"Por leva", o:"Espelha chamados encerrados na Central de Atividades no kanban Qualidade/Fiscalização."},
+  {area:"qu", id:"Q-A16", n:"Skill farol-ocorrencias", tp:"Skill", st:"dem", f:"Semanal", o:"Gera e posta relatório executivo semanal no #farol-ocorrencias com dados da Central."},
+  {area:"qu", id:"Q-A17", n:"Skill subir-elogios", tp:"Skill", st:"dem", f:"Semanal", o:"Coleta elogios da semana no kanban Qualidade e posta no canal de referência."},
+  /* ADM/FIN — skills do marketplace disponíveis */
+  {area:"af", id:"A-S10", n:"Skill auditoria-despesas-ia", tp:"Skill", st:"dem", f:"Diário (amostra)", o:"Audita despesas aprovadas pela IA no Sapron; reduz custo de triagem errada."},
+  {area:"af", id:"A-S11", n:"Skill heartbeat-adm-fin", tp:"Skill", st:"dem", f:"Semanal · quinta", o:"Monta heartbeat Adm/Fin (Isabella) no formato padrão de equipe."},
+  {area:"af", id:"A-S12", n:"Skill suportes-adm-fin-franquias", tp:"Skill", st:"dem", f:"Diário", o:"Roda a fila de suportes Adm/Fin no Suporte Unificado (dona: Isabella Bino)."},
+  {area:"af", id:"A-S13", n:"Skill taxa-limpeza", tp:"Skill", st:"dem", f:"Por pedido", o:"Calcula e revisa a taxa de limpeza ao vivo pelo MCP (Sapron + Calculadora 2026)."},
+  {area:"af", id:"A-S14", n:"Skill warnings-calculadora", tp:"Skill", st:"dem", f:"Por leva", o:"Levanta warnings de cadastro da Calculadora de Taxa de Limpeza 2026 via MCP."},
+  {area:"af", id:"A-S15", n:"Skill consulta-danos", tp:"Skill", st:"dem", f:"Sob demanda", o:"Responde perguntas do dia a dia sobre danos de hóspede direto no Sapron (read-only)."},
+  {area:"af", id:"A-S16", n:"Skill franquia-sapron", tp:"Skill", st:"dem", f:"Sob demanda", o:"Responde perguntas pontuais sobre uma franquia (host) direto no banco do Sapron."},
+  {area:"af", id:"A-S17", n:"Skill relatorio-entrega", tp:"Skill", st:"dem", f:"Por entrega", o:"Fecha uma entrega em HTML + Slack + Notion + GitLab no padrão Isabella/Adm-Fin."}
 );
 </script>
 <script>
