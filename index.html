@@ -1220,7 +1220,38 @@ AUTOS.push(
   {area:"af", id:"A-S14", n:"Skill warnings-calculadora", tp:"Skill", st:"dem", f:"Por leva", o:"Levanta warnings de cadastro da Calculadora de Taxa de Limpeza 2026 via MCP."},
   {area:"af", id:"A-S15", n:"Skill consulta-danos", tp:"Skill", st:"dem", f:"Sob demanda", o:"Responde perguntas do dia a dia sobre danos de hóspede direto no Sapron (read-only)."},
   {area:"af", id:"A-S16", n:"Skill franquia-sapron", tp:"Skill", st:"dem", f:"Sob demanda", o:"Responde perguntas pontuais sobre uma franquia (host) direto no banco do Sapron."},
-  {area:"af", id:"A-S17", n:"Skill relatorio-entrega", tp:"Skill", st:"dem", f:"Por entrega", o:"Fecha uma entrega em HTML + Slack + Notion + GitLab no padrão Isabella/Adm-Fin."}
+  {area:"af", id:"A-S17", n:"Skill relatorio-entrega", tp:"Skill", st:"dem", f:"Por entrega", o:"Fecha uma entrega em HTML + Slack + Notion + GitLab no padrão Isabella/Adm-Fin."},
+  /* ADM/FIN — Fabíola Azevedo (Danos) */
+  {area:"af", id:"A-S18", n:"Skill atualizar-danos-abertos", tp:"Skill", st:"dem", f:"Sob demanda", o:"Atualiza planilha 'Danos em Aberto acima de R$ 1.000' no Sheets com dados do Sapron. (Fabíola)"},
+  {area:"af", id:"A-S19", n:"Skill cobrar-dano-newbyte", tp:"Skill", st:"dem", f:"Diário", o:"Rotina de cobrança ao hóspede de danos de reservas fora do Airbnb direto na Newbyte. (Fabíola)"},
+  {area:"af", id:"A-S20", n:"Skill kpis-adm-fin-franquias", tp:"Skill", st:"dem", f:"Diário", o:"Preenche, audita e comenta KPIs diários dos 3 setores do Backoffice. (Isabella + Fabíola)"},
+  {area:"af", id:"A-S21", n:"Skill suportes-danos-franquias", tp:"Skill", st:"dem", f:"Diário", o:"Roda a fila de suportes de Danos no Suporte Unificado (dona: Fabíola Azevedo)."},
+  /* ADM/FIN — Isabella Bino (Geral) */
+  {area:"af", id:"A-S22", n:"Skill cards-checkin-checkout", tp:"Skill", st:"dem", f:"Mensal", o:"Audita e recalcula critério 'Finalização de cards de check-in e checkout' dentro do prazo. (Isabella)"},
+  {area:"af", id:"A-S23", n:"Skill comparacao-taxas-divergentes", tp:"Skill", st:"dem", f:"Sob demanda", o:"Audita taxa de limpeza com dados ao vivo do Sapron; gera relatório de divergências. (Isabella)"},
+  {area:"af", id:"A-S24", n:"Skill monthly-franquias-adm-fin", tp:"Skill", st:"dem", f:"Mensal", o:"Preenche comentários dos gráficos da Monthly de Franquias no kpi-system. (Isabella)"},
+  {area:"af", id:"A-S25", n:"Skill reciclagem-franquias", tp:"Skill", st:"dem", f:"Mensal", o:"Gera relatório mensal de Reciclagem de Franquias com base no Score. (Isabella)"},
+  {area:"af", id:"A-S26", n:"Skill migracao-de-franquias", tp:"Skill", st:"dem", f:"Por lote", o:"Opera o quadro de migrações de franquia do Sapron em lote (abre, define franquia destino)."},
+  {area:"af", id:"A-S27", n:"Skill pauta-stop-crescimento-adm-fin", tp:"Skill", st:"dem", f:"Mensal", o:"Monta a pauta da revisão mensal do Stop de Crescimento (reunião sexta c/ Carol). (Isabella)"},
+  /* QUALIDADE — Victória Magri + triagem */
+  {area:"qu", id:"Q-A18", n:"Skill passagem-turno-pos", tp:"Skill", st:"dem", f:"Diário", o:"Aviso diário automático para analistas de Pós-Reserva publicado no Slack. (Victória)"},
+  {area:"qu", id:"Q-A19", n:"Skill chamado-atendimento-hospede", tp:"Skill", st:"dem", f:"Por card", o:"Pipeline para cards de origem 'Atendimento ao Hóspede' no kanban Qualidade/Fiscalização."},
+  {area:"qu", id:"Q-A20", n:"Skill chamado-gestor-regional", tp:"Skill", st:"dem", f:"Por card", o:"Pipeline para cards de origem 'Gestor Regional' na coluna Nova Ocorrência do kanban."},
+  {area:"qu", id:"Q-A21", n:"Skill duplicidade", tp:"Skill", st:"dem", f:"Por leva", o:"Detecta duplicidade de cards na coluna Nova Ocorrência do kanban Qualidade/Fiscalização."},
+  {area:"qu", id:"Q-A22", n:"Skill gestor-regional-triagem-envio", tp:"Skill", st:"dem", f:"Por leva", o:"Pipeline completo para cards de origem 'Gestor Regional' no kanban: triagem + envio."},
+  {area:"qu", id:"Q-A23", n:"Skill implantacao-retorno-franquia", tp:"Skill", st:"dem", f:"Por card", o:"Para ocorrências de origem 'Implantação': verifica na Central e devolve com parecer."},
+  {area:"qu", id:"Q-A24", n:"Skill triagem-comentarios-ocorrencias", tp:"Skill", st:"dem", f:"Por leva", o:"Triagem dos cards Nova Ocorrência com origem 'Comentários' (avaliações de hóspede)."},
+  {area:"qu", id:"Q-A25", n:"Skill avaliacoes-por-reserva", tp:"Skill", st:"dem", f:"Sob demanda", o:"Calcula a taxa real de avaliações por reserva das franquias Seazone. (Isabella)"},
+  {area:"qu", id:"Q-A26", n:"Skill compra-lojinha-ocorrencias", tp:"Skill", st:"dem", f:"Por card", o:"Para ocorrências do kanban que pedem COMPRA de item de marcenaria/utilidade via Loja."},
+  {area:"qu", id:"Q-A27", n:"Skill reclamacao-sem-retorno", tp:"Skill", st:"dem", f:"Sob demanda", o:"Verifica na Central quais chamados de ocorrência estão sem retorno ao cliente."},
+  /* FORNECEDORES — Henry Yudi */
+  {area:"fo", id:"F-S5", n:"Skill comissao-parceiros", tp:"Skill", st:"dem", f:"Mensal", o:"Calcula comissões Seazone do mês por fornecedor/parceiro combinando Sapron e KPI System. (Henry)"},
+  {area:"fo", id:"F-S6", n:"Skill criacao-poligono", tp:"Skill", st:"dem", f:"Por cidade", o:"Cria polígonos de prospecção de franquia no Sapron a partir de calor de imóveis. (Henry)"},
+  {area:"fo", id:"F-S7", n:"Skill hub-servicos-danos", tp:"Skill", st:"dem", f:"Sob demanda", o:"Levanta fornecedores que as franquias usaram em despesas de dano de hóspede. (Henry)"},
+  {area:"fo", id:"F-S8", n:"Skill prospeccao-prestadores", tp:"Skill", st:"dem", f:"Por cidade", o:"Pesquisa prestadores/empresas de uma categoria numa cidade (Receita, Google, Maps). (Henry)"},
+  {area:"fo", id:"F-S9", n:"Skill fornecedores-hub-servicos", tp:"Skill", st:"dem", f:"Sob demanda", o:"Levanta fornecedores usados pelas franquias nas despesas do Hub de Serviços."},
+  /* MANUTENÇÃO — Vinicius Satores */
+  {area:"mn", id:"M-S6", n:"Skill relatorio-manutencao-franquias", tp:"Skill", st:"dem", f:"Quinzenal", o:"Monta relatório quinzenal de casos de manutenção encaminhados pelo comitê às franquias. (Vinicius)"}
 );
 </script>
 <script>
