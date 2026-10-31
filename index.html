@@ -195,7 +195,7 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
 .cv-sup-item b{font:700 12px/1.3 var(--sans);color:var(--blue)}
 .cv-sup-item span{font:400 11.5px/1.4 var(--serif);color:var(--ink3)}
 
-.cv-chain{display:grid;grid-template-columns:1fr 16px 1fr 16px 1fr 16px 1fr 16px 1fr 16px 1fr;align-items:stretch;gap:0}
+.cv-chain{display:grid;grid-template-columns:1fr 16px 1fr 16px 1fr 16px 1fr 16px 1fr 16px 1fr 16px 1fr 16px 1fr 16px 1fr;align-items:stretch;gap:0}
 .cv-arrow{display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:12px}
 .cv-step{background:var(--soft);border-radius:8px;border-top:3px solid var(--c, var(--line));padding:12px 13px;display:flex;flex-direction:column;gap:6px}
 .cv-step-num{font:700 10px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--c, var(--ink3))}
@@ -207,9 +207,11 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
 .cv-step-fo{--c:var(--teal)}
 .cv-step-af1{--c:var(--blue)}
 .cv-step-mn{--c:var(--rust)}
+.cv-step-sup{--c:var(--amber)}
 .cv-step-qu{--c:var(--violet)}
 .cv-step-af2{--c:var(--blue)}
 .cv-step-rede{--c:var(--coral)}
+.cv-step-dist{--c:var(--ink3)}
 
 .cv-clients{display:grid;grid-template-columns:80px 1fr;gap:0;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
 .cv-client-label{background:var(--navy);color:var(--ink3);font:700 10px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);padding:12px 0}
@@ -231,7 +233,8 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
 .cv-dep-arrow{color:var(--ink3);font-size:11px}
 .cv-dep-to{font:700 11px/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
 .cv-dep-desc{width:100%;font:400 12px/1.45 var(--serif);color:var(--ink2)}
-@media(max-width:900px){.cv-chain{grid-template-columns:1fr;} .cv-arrow{transform:rotate(90deg)} .cv-support-items,.cv-client-items{grid-template-columns:1fr 1fr}}
+@media(max-width:1100px){.cv-chain{grid-template-columns:1fr 16px 1fr 16px 1fr;} }
+@media(max-width:700px){.cv-chain{grid-template-columns:1fr;} .cv-arrow{transform:rotate(90deg)} .cv-support-items,.cv-client-items{grid-template-columns:1fr 1fr}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style id="sz-tema">body,body *{font-family:"Figtree",system-ui,"Segoe UI",sans-serif!important}code,pre,kbd,samp,code *,pre *{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important}</style>
@@ -278,14 +281,22 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
    <div class="cv-chain">
     <div class="cv-step cv-step-fo">
      <div class="cv-step-num">Etapa 1</div>
+     <div class="cv-step-name">Rede de Prestadores</div>
+     <div class="cv-step-desc">Prospectar, homologar e manter a rede de lavanderias, fotógrafos e prestadores do Hub de Serviços. Sem rede ativa, os demais processos não têm fornecedor para acionar.</div>
+     <div class="cv-step-area">Fornecedores · Henry</div>
+     <div class="cv-step-out">Rede pronta para atender toda demanda</div>
+    </div>
+    <div class="cv-arrow">▶</div>
+    <div class="cv-step cv-step-fo">
+     <div class="cv-step-num">Etapa 2</div>
      <div class="cv-step-name">Entrada &amp; Implantação <span style="font-weight:400;opacity:.7">(Jornada de Enxoval)</span></div>
-     <div class="cv-step-desc">Franquia prospectada e contratada. Imóvel equipado com enxoval, fotografado e publicado nas OTAs com anúncio padrão.</div>
+     <div class="cv-step-desc">Franquia prospectada e contratada. Imóvel equipado com enxoval via Jornada, fotografado e publicado nas OTAs com anúncio padrão.</div>
      <div class="cv-step-area">Fornecedores · Henry</div>
      <div class="cv-step-out">Imóvel ativo e vendendo</div>
     </div>
     <div class="cv-arrow">▶</div>
     <div class="cv-step cv-step-af1">
-     <div class="cv-step-num">Etapa 2</div>
+     <div class="cv-step-num">Etapa 3</div>
      <div class="cv-step-name">Operação da Reserva <span style="font-weight:400;opacity:.7">(Danos)</span></div>
      <div class="cv-step-desc">Reserva confirmada, check-in e checkout garantidos. Danos identificados, fotografados e lançados no Sapron dentro de D+13.</div>
      <div class="cv-step-area">Adm/Fin · Fabíola</div>
@@ -293,23 +304,31 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
     </div>
     <div class="cv-arrow">▶</div>
     <div class="cv-step cv-step-mn">
-     <div class="cv-step-num">Etapa 3</div>
+     <div class="cv-step-num">Etapa 4</div>
      <div class="cv-step-name">Manutenção do Imóvel</div>
-     <div class="cv-step-desc">Urgentes resolvidos em 24h com imóvel bloqueado. Ciclo preventivo cumprido dentro do prazo. Evidência no card antes de fechar.</div>
+     <div class="cv-step-desc">Urgentes resolvidos em 24h com imóvel bloqueado. Corretiva programada e evidência no card. Ciclo recorrente (preventivo) executado e fechado dentro do prazo.</div>
      <div class="cv-step-area">Manutenção · Vinicius</div>
-     <div class="cv-step-out">Zero reserva cancelada por manutenção</div>
+     <div class="cv-step-out">Zero reserva cancelada · Ciclo cumprido</div>
+    </div>
+    <div class="cv-arrow">▶</div>
+    <div class="cv-step cv-step-sup">
+     <div class="cv-step-num">Etapa 5</div>
+     <div class="cv-step-name">Suporte às Franquias</div>
+     <div class="cv-step-desc">Atender dúvidas e solicitações das franquias no Suporte Unificado. Elo operacional diário entre franquia e BackOffice — ponto de entrada de demandas de todas as áreas.</div>
+     <div class="cv-step-area">Qualidade · Adm/Fin</div>
+     <div class="cv-step-out">Franquia respondida · Demanda encaminhada</div>
     </div>
     <div class="cv-arrow">▶</div>
     <div class="cv-step cv-step-qu">
-     <div class="cv-step-num">Etapa 4</div>
+     <div class="cv-step-num">Etapa 6</div>
      <div class="cv-step-name">Qualidade e Reputação</div>
-     <div class="cv-step-desc">Avaliação respondida com tom da Seazone. Contestação enviada diariamente no Airbnb. Ocorrência registrada e multa aplicada quando cabível.</div>
+     <div class="cv-step-desc">Avaliação respondida com tom da Seazone. Contestação enviada diariamente no Airbnb e Reclame Aqui. Ocorrência registrada e multa aplicada quando cabível.</div>
      <div class="cv-step-area">Qualidade · Victória</div>
      <div class="cv-step-out">Nota &gt; 4,80 · Ocorrências controladas</div>
     </div>
     <div class="cv-arrow">▶</div>
     <div class="cv-step cv-step-af2">
-     <div class="cv-step-num">Etapa 5</div>
+     <div class="cv-step-num">Etapa 7</div>
      <div class="cv-step-name">Resultado Financeiro</div>
      <div class="cv-step-desc">Taxa de limpeza calculada pela régua viva. Despesas auditadas. Dano recuperado via AirCover, Newbyte, EasyCover ou Judicial. Repasse correto ao proprietário.</div>
      <div class="cv-step-area">Adm/Fin · Isabella</div>
@@ -317,11 +336,19 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
     </div>
     <div class="cv-arrow">▶</div>
     <div class="cv-step cv-step-rede">
-     <div class="cv-step-num">Etapa 6</div>
+     <div class="cv-step-num">Etapa 8</div>
      <div class="cv-step-name">Saúde da Rede</div>
      <div class="cv-step-desc">Score mensal fechado, Stop aplicado quando critério atingido, UTI ativa para franquias em recuperação. Rede cresce sem churn não gerenciado.</div>
      <div class="cv-step-area">Adm/Fin · Isabella + Qualidade</div>
      <div class="cv-step-out">Rede crescendo · Churn controlado</div>
+    </div>
+    <div class="cv-arrow">▶</div>
+    <div class="cv-step cv-step-dist">
+     <div class="cv-step-num">Etapa 9</div>
+     <div class="cv-step-name">Distrato de Franquias</div>
+     <div class="cv-step-desc">Saída formalizada da franquia da rede. Redistribuição de imóveis e enxoval, encerramento de contratos, acertos financeiros e transferência de carteira.</div>
+     <div class="cv-step-area">Adm/Fin · Isabella</div>
+     <div class="cv-step-out">Saída sem pendência · Imóveis realocados</div>
     </div>
    </div>
    <div class="cv-clients">
