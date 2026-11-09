@@ -235,6 +235,67 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
 .cv-dep-desc{width:100%;font:400 12px/1.45 var(--serif);color:var(--ink2)}
 @media(max-width:1100px){.cv-chain{grid-template-columns:1fr 16px 1fr 16px 1fr;} }
 @media(max-width:700px){.cv-chain{grid-template-columns:1fr;} .cv-arrow{transform:rotate(90deg)} .cv-support-items,.cv-client-items{grid-template-columns:1fr 1fr}}
+
+/* ── Contribuições do time ───────────────────────────────────────────── */
+.ct-panel{display:flex;flex-direction:column;gap:18px;padding:18px 20px}
+.ct-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px 24px;flex-wrap:wrap}
+.ct-h .tn{font:700 18px/1.2 var(--sans);color:var(--violet);display:block}
+.ct-h .to{font:400 13px/1.5 var(--serif);color:var(--ink2);max-width:80ch;margin:4px 0 0}
+.btn{font:700 12px/1 var(--sans);letter-spacing:.04em;color:#fff;background:var(--blue);border:1px solid var(--blue);border-radius:999px;padding:10px 16px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{filter:brightness(1.1)}
+.btn:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+.btn.ghost{background:transparent;color:var(--blue);border-color:var(--line)}
+.ct-who{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 24px}
+.ct-wrow{border-top:1px solid var(--line);padding:10px 2px;display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap}
+.ct-wrow .wa{display:flex;flex-direction:column;gap:3px;min-width:0}
+.ct-wrow .wa b{font:700 12.5px/1.2 var(--sans);color:var(--ink)}
+.ct-wrow .wa span{font:400 12px/1.35 var(--serif);color:var(--ink3)}
+.ct-wrow a{font:700 11px/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--blue);text-decoration:none;white-space:nowrap}
+.ct-wrow a:hover{text-decoration:underline}
+.ct-filters{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;padding-top:4px}
+.ct-fg{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ct-fg>span:not(.fl){display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ct-fg .fl{font:700 10.5px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);margin-right:4px}
+.chip{font:700 11px/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer}
+.chip:hover{color:var(--ink);border-color:var(--ink3)}
+.chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.chip:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+table.ct{width:100%;min-width:1180px;border-collapse:collapse;font-size:13px}
+table.ct th{font:700 10.5px/1.2 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink);white-space:nowrap}
+table.ct td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.ct tbody tr:hover td{background:#0F1742}
+table.ct th:last-child{text-align:left}
+table.ct td.dt{width:92px;color:var(--ink3);font-size:12px;white-space:nowrap}
+table.ct td.qm{width:168px}
+table.ct td.ty{width:112px}
+table.ct td.ti{width:19%;font-weight:700;line-height:1.35}
+table.ct td.ds{width:32%;font:400 12.5px/1.5 var(--serif);color:var(--ink2)}
+table.ct td.fe{width:14%;font-size:11.5px;color:var(--ink3)}
+table.ct td.fe .tool{margin:0 4px 4px 0;display:inline-block}
+table.ct td.sk{width:126px}
+table.ct td.lk{width:104px;font-size:11.5px;color:var(--ink3)}
+table.ct td.lk a{color:var(--blue);text-decoration:none}
+table.ct td.lk a:hover{text-decoration:underline}
+.av{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:999px;background:var(--av,var(--soft));color:#08102F;font:700 10.5px/1 var(--sans);vertical-align:-7px;margin-right:8px}
+.ct-empty{padding:26px 22px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.ct-empty b{font:700 16px/1.2 var(--sans);color:var(--ink)}
+.ct-empty p{font:400 13.5px/1.55 var(--serif);color:var(--ink2);margin:0;max-width:70ch}
+.ct-warn{background:var(--amberbg);border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.5;color:var(--ink2)}
+.ct-warn b{color:var(--amber)}
+.ct-foot{display:flex;justify-content:space-between;gap:6px 24px;flex-wrap:wrap;font-size:12px;color:var(--ink3)}
+.ctdet{border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.ctdet>summary{cursor:pointer;padding:12px 16px;font:700 13px/1.2 var(--sans);color:var(--ink);display:flex;justify-content:space-between;gap:12px;align-items:baseline;list-style:none}
+.ctdet>summary::-webkit-details-marker{display:none}
+.ctdet>summary .n{font:700 10.5px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+.ctdet[open]>summary{border-bottom:1px solid var(--line)}
+.ctdet .body{padding:12px 16px}
+.ctdet .body .tblwrap{box-shadow:none}
+.cst{font:700 10px/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:4px;white-space:nowrap}
+.cst.pl{color:var(--blue);background:var(--bluebg)}
+.cst.an{color:var(--amber);background:var(--amberbg)}
+.cst.ro{color:var(--green);background:var(--greenbg)}
+.cst.va{color:var(--violet);background:var(--violetbg)}
+.cst.de{color:var(--ink3);background:var(--soft)}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style id="sz-tema">body,body *{font-family:"Figtree",system-ui,"Segoe UI",sans-serif!important}code,pre,kbd,samp,code *,pre *{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important}</style>
@@ -258,6 +319,7 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
    <button class="tab" role="tab" id="t-af" aria-controls="p-af" aria-selected="false" type="button">Administrativo e Financeiro · David</button>
    <button class="tab" role="tab" id="t-mn" aria-controls="p-mn" aria-selected="false" type="button">Manutenção · Vinicius</button>
    <button class="tab" role="tab" id="t-pf" aria-controls="p-pf" aria-selected="false" type="button">Portfólio consolidado</button>
+   <button class="tab" role="tab" id="t-ct" aria-controls="p-ct" aria-selected="false" type="button">Contribuições do time</button>
   </div>
  </div>
 </section>
@@ -374,16 +436,38 @@ table.pf tr.grp .gc{font-size:12px;color:var(--ink3);margin-left:8px}
   </div>
  </section>
 
- <section id="p-qu" role="tabpanel" aria-labelledby="t-qu" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="qu"></div><p class="hint">Passe o mouse ou clique em qualquer processo para ver objetivo, entrega, como funciona, auditoria, interface, automação planejada e ferramentas. Caixa tracejada = processo novo nesta versão.</p><div class="scroll"><div class="flow" data-area="qu"></div></div></section>
- <section id="p-fo" role="tabpanel" aria-labelledby="t-fo" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="fo"></div><p class="hint">Arquitetura de Fornecedores &amp; Compras (Henry · rascunho v2.1 · 16/10/2026).</p><div class="scroll"><div class="flow" data-area="fo"></div></div></section>
- <section id="p-af" role="tabpanel" aria-labelledby="t-af" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="af"></div><p class="hint">Arquitetura de Administrativo e Financeiro (David · rascunho v2 · 23/10/2026).</p><div class="scroll"><div class="flow" data-area="af"></div></div></section>
- <section id="p-mn" role="tabpanel" aria-labelledby="t-mn" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="mn"></div><p class="hint">Arquitetura de Manutenção (Vinicius · rascunho v9 · 26/10/2026).</p><div class="scroll"><div class="flow" data-area="mn"></div></div></section>
+ <section id="p-qu" role="tabpanel" aria-labelledby="t-qu" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="qu"></div><p class="hint">Passe o mouse ou clique em qualquer processo para ver objetivo, entrega, como funciona, auditoria, interface, automação planejada e ferramentas. Caixa tracejada = processo novo nesta versão.</p><div class="scroll"><div class="flow" data-area="qu"></div></div><details class="ctdet" data-ct-area="qu" open><summary>Contribuições desta área<span class="n" data-ct-count="qu"></span></summary><div class="body" data-ct-body="qu"></div></details></section>
+ <section id="p-fo" role="tabpanel" aria-labelledby="t-fo" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="fo"></div><p class="hint">Arquitetura de Fornecedores &amp; Compras (Henry · rascunho v2.1 · 16/10/2026).</p><div class="scroll"><div class="flow" data-area="fo"></div></div><details class="ctdet" data-ct-area="fo" open><summary>Contribuições desta área<span class="n" data-ct-count="fo"></span></summary><div class="body" data-ct-body="fo"></div></details></section>
+ <section id="p-af" role="tabpanel" aria-labelledby="t-af" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="af"></div><p class="hint">Arquitetura de Administrativo e Financeiro (David · rascunho v2 · 23/10/2026).</p><div class="scroll"><div class="flow" data-area="af"></div></div><details class="ctdet" data-ct-area="af" open><summary>Contribuições desta área<span class="n" data-ct-count="af"></span></summary><div class="body" data-ct-body="af"></div></details></section>
+ <section id="p-mn" role="tabpanel" aria-labelledby="t-mn" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="mn"></div><p class="hint">Arquitetura de Manutenção (Vinicius · rascunho v9 · 26/10/2026).</p><div class="scroll"><div class="flow" data-area="mn"></div></div><details class="ctdet" data-ct-area="mn" open><summary>Contribuições desta área<span class="n" data-ct-count="mn"></span></summary><div class="body" data-ct-body="mn"></div></details></section>
  <section id="p-pf" role="tabpanel" aria-labelledby="t-pf" hidden style="flex-direction:column;gap:18px">
   <div class="panel pfhead">
    <div class="pf-h"><div><span class="tn">Portfólio consolidado · agentes, extensões e automações das 4 áreas</span><p class="to">Tudo o que já roda sozinho ou é rodado pelo time, nas quatro áreas do BackOffice Franquias. Agrupado por área.</p></div><div class="types" id="pftypes"></div></div>
    <div class="kpis" id="pfsum"></div>
   </div>
   <div class="tblwrap"><table class="pf"><thead><tr><th>Agente ou automação</th><th>O que faz</th><th>Quando roda</th><th>Área</th><th>Status</th></tr></thead><tbody id="pftb"></tbody></table></div>
+ </section>
+
+ <section id="p-ct" role="tabpanel" aria-labelledby="t-ct" hidden style="flex-direction:column;gap:18px">
+  <div class="panel ct-panel">
+   <div class="ct-h">
+    <div>
+     <span class="tn" id="contribuicoes">Contribuições do time</span>
+     <p class="to">Cada pessoa do time registra aqui o que já gerou com o seu Claude — processo, automação, ferramenta, risco ou decisão. Quem escreve é quem conhece: a linha entra direto na planilha da área e aparece nesta página ao vivo.</p>
+    </div>
+    <a class="btn" href="https://docs.google.com/spreadsheets/d/1u0bAwa1gsrjrQgssIaxBW7eE1OEdaRoy4EOSaGdlkjo/edit" target="_blank" rel="noopener">Abrir a planilha</a>
+   </div>
+   <div class="ct-who" id="ct-who"></div>
+  </div>
+  <div class="panel ct-panel">
+   <div class="ct-filters">
+    <div class="ct-fg"><span class="fl">Área</span><span id="ct-f-area" role="group" aria-label="Filtro por área"></span></div>
+    <div class="ct-fg"><span class="fl">Tipo</span><span id="ct-f-tipo" role="group" aria-label="Filtro por tipo"></span></div>
+   </div>
+   <div id="ct-status"></div>
+   <div id="ct-table-wrap"><p class="hint">Carregando as contribuições da planilha…</p></div>
+   <div class="ct-foot"><span id="ct-updated"></span><span>Lê a planilha pública da equipe; a última atualização depende do cache do navegador (Ctrl+R para recarregar).</span></div>
+  </div>
  </section>
 
  <div class="legend">
@@ -1543,6 +1627,7 @@ function selectTab(t){
   const area = t.id.replace("t-","");
   if(["qu","fo","af","mn"].includes(area)) { renderArea(area); bindBoxes(document.querySelector(`.flow[data-area="${area}"]`)); }
   if(area === "pf") renderPortfolio();
+  if(area === "ct" && typeof ctRender === "function") ctRender();
 }
 tabs.forEach(t=>t.addEventListener("click",()=>selectTab(t)));
 
@@ -1577,6 +1662,311 @@ function renderPortfolio(){
 window.addEventListener("DOMContentLoaded", () => {
   /* cadeia de valor é a aba inicial — sem renderArea necessário */
   (document.fonts?document.fonts.ready:Promise.resolve()).then(eqHeads);
+});
+</script>
+<script>
+/* ── Contribuições do time ─────────────────────────────────────────────
+   Fonte de dados: planilha "Arquitetura de Processos BackOffice ·
+   Contribuições", uma aba por área. A leitura é pública (CSV).
+   Para trocar a fonte, mexa só em CT_FONTE.
+   ──────────────────────────────────────────────────────────────────── */
+const CT_FONTE = {
+  /* ID da planilha no Google Sheets (usado no link "Abrir a planilha"
+     e no modo fallback de leitura). */
+  planilhaId: "1u0bAwa1gsrjrQgssIaxBW7eE1OEdaRoy4EOSaGdlkjo",
+  /* ID do link publicado (Publicar na web → CSV).
+     TROQUE A LINHA ABAIXO pelo ID que vier no link
+     https://docs.google.com/spreadsheets/d/e/<ID_PUBLICADO>/pub?gid=0&single=true&output=csv */
+  idPublicado: "SUBSTITUIR_POR_ID_PUBLICADO",
+  /* Se o ID publicado não estiver preenchido, a página tenta o
+     endpoint gviz (planilha pública por link) como segunda opção. */
+  abas: {
+    qu: {gid:0,       sheet:"Qualidade",       label:"Qualidade",                    area:"Qualidade",                    editors:["Victoria Magri"]},
+    fo: {gid:788888014,sheet:"Fornecedores",    label:"Fornecedores",                area:"Fornecedores & Compras",       editors:["Henry Yudi Matsumoto","Wania Lageano"]},
+    mn: {gid:1754617507,sheet:"Manutencao",     label:"Manutenção",                  area:"Manutenção",                   editors:["Vinicius Satores"]},
+    af: {gid:16695588, sheet:"Adm e Financeiro",label:"Administrativo e Financeiro", area:"Administrativo e Financeiro", editors:["Isabella Bino","Fabiola Azevedo"]}
+  },
+  tipos:["Processo","Automação","Ferramenta","Risco","Decisão","Observação"],
+  status:{"Planejado":"pl","Em andamento":"an","Rodando":"ro","Validado":"va","Descartado":"de"}
+};
+
+const CT_AREA_KEYS = ["qu","fo","af","mn"];
+const CT_TAB = "ct";
+let CT_LINHAS = [];      /* todas as linhas, com .area */
+let CT_CARREGADO = false;
+let CT_FALHOU = false;
+let CT_ATUALIZADO = null;
+let CT_FILTRO_AREA = "";
+let CT_FILTRO_TIPO = "";
+
+const CT_FOLDS = {
+  data:["data"], quem:["quem"], tipo:["tipo"],
+  titulo:["titulo"], descricao:["descricao","o que e"],
+  ferramentas:["ferramentas"], status:["status"],
+  link:["link","evidencia"]
+};
+
+function ctEsc(s){
+  return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function ctNorm(s){
+  return String(s==null?"":s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim();
+}
+function ctIniciais(nome){
+  const p = String(nome||"").trim().split(/\s+/).filter(Boolean);
+  if(!p.length) return "?";
+  if(p.length===1) return p[0].slice(0,2).toUpperCase();
+  return (p[0][0]+p[p.length-1][0]).toUpperCase();
+}
+function ctCor(nome){
+  const cores = ["var(--blue)","var(--teal)","var(--rust)","var(--amber)","var(--green)","var(--violet)","var(--coral)"];
+  let h = 0;
+  for(const ch of String(nome||"")) h = (h*31 + ch.charCodeAt(0)) >>> 0;
+  return cores[h % cores.length];
+}
+function ctData(v){
+  const s = String(v==null?"":v).trim();
+  if(!s) return null;
+  let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if(m) return new Date(+m[3], +m[2]-1, +m[1]);
+  m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if(m) return new Date(+m[1], +m[2]-1, +m[3]);
+  const d = new Date(s);
+  return isNaN(d.getTime()) ? null : d;
+}
+function ctDataTxt(v){
+  const d = ctData(v);
+  if(!d) return String(v==null?"":v).trim();
+  return d.toLocaleDateString("pt-BR");
+}
+function ctLink(v){
+  const s = String(v==null?"":v).trim();
+  if(!s) return "";
+  const m = s.match(/https?:\/\/[^\s,;"')]+/);
+  if(!m) return ctEsc(s);
+  const url = m[0];
+  const resto = s.replace(url,"").trim();
+  return `<a href="${ctEsc(url)}" target="_blank" rel="noopener">abrir ↗</a>${resto?" "+ctEsc(resto):""}`;
+}
+
+/* parser de CSV: respeita aspas, vírgulas e quebras dentro do campo */
+function ctParseCSV(txt){
+  const rows = [];
+  let row = [], campo = "", dentro = false;
+  for(let i=0;i<txt.length;i++){
+    const c = txt[i];
+    if(dentro){
+      if(c === '"'){
+        if(txt[i+1] === '"'){ campo += '"'; i++; }
+        else dentro = false;
+      } else campo += c;
+    } else {
+      if(c === '"') dentro = true;
+      else if(c === ","){ row.push(campo); campo = ""; }
+      else if(c === "\n"){ row.push(campo); rows.push(row); row = []; campo = ""; }
+      else if(c === "\r"){ /* ignora */ }
+      else campo += c;
+    }
+  }
+  if(campo !== "" || row.length){ row.push(campo); rows.push(row); }
+  return rows;
+}
+
+function ctMapear(cabecalho, linha){
+  const cab = cabecalho.map(ctNorm);
+  const out = {};
+  for(const chave in CT_FOLDS){
+    let idx = -1;
+    for(const alvo of CT_FOLDS[chave]){
+      idx = cab.findIndex(h => h === alvo);
+      if(idx >= 0) break;
+      idx = cab.findIndex(h => h.includes(alvo));
+      if(idx >= 0) break;
+    }
+    out[chave] = idx >= 0 ? (linha[idx]||"").trim() : "";
+  }
+  return out;
+}
+
+function ctLinhasDoCSV(txt, areaKey){
+  const rows = ctParseCSV(txt).filter(r => r.some(c => String(c).trim() !== ""));
+  if(!rows.length) return [];
+  let head = rows[0], corpo = rows.slice(1);
+  const pareceCabecalho = head.some(c => ctNorm(c).includes("titulo")) || head.some(c => ctNorm(c)==="quem");
+  if(!pareceCabecalho){ corpo = rows; head = ["Data","Quem","Tipo","Título","O que é / descrição","Ferramentas","Status","Link / evidência"]; }
+  return corpo.map(l => {
+    const o = ctMapear(head, l);
+    if(!o.titulo && !o.descricao) return null;
+    o.area = areaKey;
+    o._d = ctData(o.data);
+    return o;
+  }).filter(Boolean);
+}
+
+/* leitura: tenta o link publicado e, se falhar, o endpoint gviz */
+function ctURLs(areaKey){
+  const a = CT_FONTE.abas[areaKey];
+  const urls = [];
+  const pub = String(CT_FONTE.idPublicado||"").trim();
+  if(pub && pub.indexOf("SUBSTITUIR") === -1){
+    const id = (pub.match(/\/d\/e\/([^/?#]+)/) || [])[1] || pub;
+    urls.push(`https://docs.google.com/spreadsheets/d/e/${id}/pub?gid=${a.gid}&single=true&output=csv`);
+  }
+  urls.push(`https://docs.google.com/spreadsheets/d/${CT_FONTE.planilhaId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(a.sheet)}`);
+  return urls;
+}
+
+async function ctBuscarArea(areaKey){
+  let ultimoErro = null;
+  for(const url of ctURLs(areaKey)){
+    try{
+      const r = await fetch(url, {redirect:"follow"});
+      if(!r.ok){ ultimoErro = new Error("HTTP "+r.status); continue; }
+      const txt = await r.text();
+      if(!txt || /^\s*<(!DOCTYPE|html)/i.test(txt)){ ultimoErro = new Error("resposta não-CSV"); continue; }
+      return {ok:true, linhas: ctLinhasDoCSV(txt, areaKey)};
+    }catch(e){ ultimoErro = e; }
+  }
+  return {ok:false, erro: ultimoErro};
+}
+
+async function ctCarregar(){
+  const res = await Promise.all(CT_AREA_KEYS.map(k => ctBuscarArea(k)));
+  const linhas = [];
+  let falhou = false;
+  res.forEach(r => { if(r.ok) linhas.push(...r.linhas); else falhou = true; });
+  CT_LINHAS = linhas;
+  CT_CARREGADO = true;
+  CT_FALHOU = falhou && !linhas.length;
+  CT_ATUALIZADO = new Date();
+  ctRender();
+}
+
+/* render das linhas — usado na aba geral e nos blocos por área */
+function ctOrdenar(linhas){
+  return linhas.slice().sort((a,b) => {
+    if(a._d && b._d) return b._d - a._d;
+    if(a._d) return -1;
+    if(b._d) return 1;
+    return 0;
+  });
+}
+function ctFiltrar(linhas){
+  return ctOrdenar(linhas.filter(l =>
+    (!CT_FILTRO_AREA || l.area === CT_FILTRO_AREA) &&
+    (!CT_FILTRO_TIPO || ctNorm(l.tipo) === ctNorm(CT_FILTRO_TIPO))
+  ));
+}
+function ctTrs(linhas){
+  return linhas.map(l => {
+    const st = CT_FONTE.status[l.status] || "de";
+    const ferr = String(l.ferramentas||"").split(/[,;]/).map(s=>s.trim()).filter(Boolean);
+    return `<tr>
+      <td class="dt">${ctEsc(ctDataTxt(l.data))}</td>
+      <td class="qm"><span class="av" style="--av:${ctCor(l.quem)}">${ctEsc(ctIniciais(l.quem))}</span>${ctEsc(l.quem)}</td>
+      <td class="ty"><span class="tp">${ctEsc(l.tipo||"—")}</span></td>
+      <td class="ti">${ctEsc(l.titulo||"—")}</td>
+      <td class="ds">${ctEsc(l.descricao||"—")}</td>
+      <td class="fe">${ferr.length ? ferr.map(f=>`<span class="tool">${ctEsc(f)}</span>`).join(" ") : "—"}</td>
+      <td class="sk"><span class="cst ${st}">${ctEsc(l.status||"—")}</span></td>
+      <td class="lk">${ctLink(l.link) || "—"}</td>
+    </tr>`;
+  }).join("");
+}
+function ctTabela(linhas){
+  return `<div class="tblwrap"><table class="ct"><thead><tr><th>Data</th><th>Quem</th><th>Tipo</th><th>Título</th><th>O que é / descrição</th><th>Ferramentas</th><th>Status</th><th>Link / evidência</th></tr></thead><tbody>${ctTrs(linhas)}</tbody></table></div>`;
+}
+
+function ctRender(){
+  if(!CT_CARREGADO) return;
+  const status = document.getElementById("ct-status");
+  const wrap  = document.getElementById("ct-table-wrap");
+  const upd   = document.getElementById("ct-updated");
+
+  if(CT_FALHOU){
+    status.innerHTML = `<div class="ct-warn"><b>Ainda não foi possível carregar as contribuições.</b> A planilha pública ainda não está disponível para leitura externa. Enquanto isso, registre a sua direto na planilha — a página passa a mostrar assim que o link publicado estiver no ar. <a href="https://docs.google.com/spreadsheets/d/${CT_FONTE.planilhaId}/edit" target="_blank" rel="noopener">Abrir a planilha</a></div>`;
+    wrap.style.display = "none";
+    if(upd) upd.textContent = "";
+  } else {
+    status.innerHTML = "";
+    wrap.style.display = "";
+    const linhas = ctFiltrar(CT_LINHAS);
+    if(!linhas.length){
+      wrap.innerHTML = `<div class="panel ct-empty"><b>Nenhuma contribuição ainda</b><p>Seja a primeira pessoa a registrar o que você automatizou com o Claude.</p><a class="btn" href="https://docs.google.com/spreadsheets/d/${CT_FONTE.planilhaId}/edit" target="_blank" rel="noopener">Abrir a planilha</a></div>`;
+    } else {
+      wrap.innerHTML = ctTabela(linhas);
+    }
+    if(upd) upd.textContent = "Atualizado em " + CT_ATUALIZADO.toLocaleString("pt-BR");
+  }
+
+  CT_AREA_KEYS.forEach(k => {
+    const body = document.querySelector(`[data-ct-body="${k}"]`);
+    const cnt  = document.querySelector(`[data-ct-count="${k}"]`);
+    if(!body) return;
+    const todas = CT_LINHAS.filter(l => l.area === k);
+    const linhas = ctOrdenar(todas);
+    if(cnt) cnt.textContent = todas.length ? `${todas.length} ${todas.length>1?"contribuições":"contribuição"}` : "";
+    if(CT_FALHOU){ body.innerHTML = `<p class="hint">Ainda não foi possível carregar as contribuições desta área.</p>`; return; }
+    if(!linhas.length){
+      body.innerHTML = `<p class="hint">Nenhuma contribuição registrada nesta área ainda.</p>`;
+      return;
+    }
+    body.innerHTML = ctTabela(linhas);
+  });
+}
+
+function ctChip(rotulo, valor, grupo, ativo){
+  return `<button class="chip" type="button" data-ct-grupo="${grupo}" data-ct-valor="${valor}" aria-pressed="${ativo?"true":"false"}">${rotulo}</button>`;
+}
+function ctMontarFiltros(){
+  const fa = document.getElementById("ct-f-area");
+  const ft = document.getElementById("ct-f-tipo");
+  if(fa) fa.innerHTML = ctChip("Todas","", "area", !CT_FILTRO_AREA) + CT_AREA_KEYS.map(k => ctChip(CT_FONTE.abas[k].label, k, "area", CT_FILTRO_AREA===k)).join("");
+  if(ft) ft.innerHTML = ctChip("Todos","", "tipo", !CT_FILTRO_TIPO) + CT_FONTE.tipos.map(t => ctChip(t, t, "tipo", CT_FILTRO_TIPO===t)).join("");
+}
+function ctMontarQuem(){
+  const el = document.getElementById("ct-who");
+  if(!el) return;
+  el.innerHTML = CT_AREA_KEYS.map(k => {
+    const a = CT_FONTE.abas[k];
+    const url = `https://docs.google.com/spreadsheets/d/${CT_FONTE.planilhaId}/edit#gid=${a.gid}`;
+    return `<div class="ct-wrow"><span class="wa"><b>${ctEsc(a.area)}</b><span>${ctEsc(a.editors.join(" · "))}</span></span><a href="${url}" target="_blank" rel="noopener">Abrir aba ↗</a></div>`;
+  }).join("");
+}
+
+/* deep link: ?area=mn pré-seleciona o filtro; #contribuicoes abre a aba */
+function ctLerDeepLink(){
+  const params = new URLSearchParams(location.search);
+  const area = (params.get("area")||"").trim().toLowerCase();
+  const achou = CT_AREA_KEYS.find(k => k === area || ctNorm(CT_FONTE.abas[k].area) === ctNorm(area));
+  if(achou) CT_FILTRO_AREA = achou;
+  const tipo = (params.get("tipo")||"").trim();
+  if(tipo && CT_FONTE.tipos.some(t => ctNorm(t) === ctNorm(tipo))) CT_FILTRO_TIPO = tipo;
+  if(location.hash === "#contribuicoes" || area){
+    selectTab(document.getElementById("t-"+CT_TAB));
+    const alvo = document.getElementById("contribuicoes");
+    if(alvo && alvo.scrollIntoView) alvo.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+}
+window.addEventListener("hashchange", () => {
+  if(location.hash === "#contribuicoes") selectTab(document.getElementById("t-"+CT_TAB));
+});
+
+document.addEventListener("click", e => {
+  const chip = e.target.closest(".chip[data-ct-grupo]");
+  if(!chip) return;
+  const g = chip.dataset.ctGrupo, v = chip.dataset.ctValor;
+  if(g === "area") CT_FILTRO_AREA = v;
+  if(g === "tipo") CT_FILTRO_TIPO = v;
+  ctMontarFiltros();
+  ctRender();
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  ctMontarQuem();
+  ctMontarFiltros();
+  ctLerDeepLink();
+  ctCarregar();
 });
 </script>
 </body>
