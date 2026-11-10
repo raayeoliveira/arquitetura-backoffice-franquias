@@ -296,6 +296,157 @@ table.ct td.lk a:hover{text-decoration:underline}
 .cst.ro{color:var(--green);background:var(--greenbg)}
 .cst.va{color:var(--violet);background:var(--violetbg)}
 .cst.de{color:var(--ink3);background:var(--soft)}
+
+/* ── Painel de automação ─────────────────────────────────────────────── */
+.pa-panel{display:flex;flex-direction:column;gap:18px;padding:18px 20px}
+.pa-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px 24px;flex-wrap:wrap}
+.pa-h .tn{font:700 18px/1.2 var(--sans);color:var(--blue);display:block}
+.pa-h .to{font:400 13px/1.55 var(--serif);color:var(--ink2);max-width:82ch;margin:4px 0 0}
+.pa-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.pa-kpi{background:var(--soft);border-radius:8px;border-top:3px solid var(--kc,var(--line));padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.pa-kpi b{font:700 26px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink)}
+.pa-kpi span{font-size:12px;color:var(--ink2);line-height:1.3}
+.pa-kpi small{font-size:11px;color:var(--ink3);line-height:1.3}
+.pa-areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.pa-area{background:var(--soft);border-radius:8px;border-top:3px solid var(--ac,var(--line));padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.pa-area .an{font:700 14px/1.2 var(--sans);color:var(--ink)}
+.pa-area .al{font:700 10px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+.pa-area .arow{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--ink2)}
+.pa-area .arow b{color:var(--ink);font-variant-numeric:tabular-nums}
+.pa-bar{height:6px;border-radius:3px;background:var(--navybg);overflow:hidden}
+.pa-bar i{display:block;height:100%;background:var(--ac,var(--blue))}
+.pa-note{font-size:12px;line-height:1.5;color:var(--ink3);margin:0;max-width:100ch}
+.pa-block{border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.pa-block h3{font:700 15px/1.25 var(--sans);color:var(--ink);margin:0}
+.pa-block .bd{font:400 12.5px/1.55 var(--serif);color:var(--ink2);margin:0;max-width:95ch}
+.pa-filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pa-count{font-size:12px;color:var(--ink3);margin:0}
+table.pa{width:100%;min-width:980px;border-collapse:collapse;font-size:12.5px}
+table.pa th{font:700 10px/1.2 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink);white-space:nowrap}
+table.pa th.num,table.pa td.num{text-align:right}
+table.pa td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.pa tbody tr:hover td{background:#0F1742}
+table.pa td.num{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink2)}
+table.pa td.mn{font-weight:700;color:var(--ink);width:21%}
+table.pa td.op{font:400 12px/1.45 var(--serif);color:var(--ink2);width:31%}
+table.pa td.tr{font:400 12px/1.4 var(--serif);color:var(--ink3);width:15%}
+table.pa td.ar{font:700 10px/1.3 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
+table.pa td.nv{white-space:nowrap}
+.pa-none{font:400 12px/1.4 var(--serif);color:var(--ink3);font-style:italic}
+.pa-lvl{font:700 10px/1 var(--sans);letter-spacing:.05em;border-radius:4px;padding:3px 6px;white-space:nowrap;display:inline-block}
+.pa-lvl.n1{color:var(--amber);background:var(--amberbg)}
+.pa-lvl.n2{color:var(--coral);background:var(--redbg)}
+.pa-lvl.n3{color:var(--green);background:var(--greenbg)}
+.pa-lvl.teto{color:var(--ink3);background:var(--soft);border:1px solid var(--line)}
+
+/* ── Mapa de agentes ─────────────────────────────────────────────────── */
+.ma-panel{display:flex;flex-direction:column;gap:18px;padding:18px 20px}
+.ma-grid{display:grid;grid-template-columns:300px 360px minmax(0,1fr);gap:14px;align-items:start}
+.ma-col{display:flex;flex-direction:column;gap:12px}
+.ma-card{background:var(--soft);border-radius:10px;border:1px solid var(--line);padding:14px 15px;display:flex;flex-direction:column;gap:9px}
+.ma-card.accent{background:var(--greenbg);border-color:transparent}
+.ma-card h3{font:700 15px/1.25 var(--sans);color:var(--ink);margin:0}
+.ma-kick{font:700 10px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+.ma-role{display:flex;gap:11px;align-items:flex-start}
+.ma-role .av{width:42px;height:42px;border-radius:999px;background:var(--paper);border:1px solid var(--coral);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--coral)}
+.ma-role .av svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6}
+.ma-role .wn{font:700 14px/1.2 var(--sans);color:var(--ink)}
+.ma-role .wn small{display:block;font:400 11.5px/1.35 var(--sans);color:var(--ink3);font-weight:400}
+.ma-ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ma-ticks li{position:relative;padding-left:15px;font:400 12.5px/1.45 var(--serif);color:var(--ink2)}
+.ma-ticks li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:999px;background:var(--coral)}
+.ma-res{display:flex;flex-direction:column;gap:9px}
+.ma-res .rb{display:flex;flex-direction:column;gap:3px}
+.ma-res .tag{font:700 10px/1 var(--sans);letter-spacing:.09em;padding:4px 7px;border-radius:4px;width:fit-content}
+.ma-res .tag.keep{color:var(--green);background:var(--greenbg)}
+.ma-res .tag.dec{color:var(--coral);background:var(--redbg)}
+.ma-res .tag.esc{color:var(--amber);background:var(--amberbg)}
+.ma-res p{margin:0;font:400 12.5px/1.45 var(--serif);color:var(--ink2)}
+.ma-steps{list-style:none;counter-reset:ms;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.ma-steps li{counter-increment:ms;position:relative;padding-left:28px;font:400 12.5px/1.45 var(--serif);color:var(--ink2)}
+.ma-steps li::before{content:counter(ms);position:absolute;left:0;top:0;width:19px;height:19px;border-radius:999px;border:1px solid var(--coral);color:var(--coral);font:700 11px/18px var(--sans);text-align:center}
+.ma-steps li b{display:block;font:700 12.5px/1.3 var(--sans);color:var(--ink)}
+.ma-kv{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.ma-kv li{font:400 12.5px/1.45 var(--serif);color:var(--ink2);border-top:1px solid var(--line);padding-top:7px}
+.ma-kv li:first-child{border-top:0;padding-top:0}
+.ma-kv li b{color:var(--ink)}
+.ma-agent{background:var(--soft);border-radius:10px;border-left:3px solid var(--ac,var(--line));padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.ma-agent .ah{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.ma-agent .ah h3{font:700 14px/1.2 var(--sans);color:var(--ink)}
+.ma-agent .ah .wh{font-size:11.5px;color:var(--ink3)}
+.ma-pills{display:flex;gap:6px;flex-wrap:wrap}
+.ma-pill{font-size:11.5px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);border-radius:999px;padding:2px 9px}
+.ma-pill b{font-weight:700;color:var(--ink)}
+.ma-do{display:grid;grid-template-columns:auto 1fr;gap:3px 9px;margin:0}
+.ma-do dt{font:700 9.5px/1.5 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.ma-do dd{margin:0;font:400 12px/1.45 var(--serif);color:var(--ink2)}
+.ma-cands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-top:1px solid var(--line);padding-top:9px}
+.ma-cand{border:1px solid var(--line);border-radius:6px;padding:7px 9px;background:var(--paper);display:flex;flex-direction:column;gap:4px;min-width:0}
+.ma-cand .top{display:flex;gap:6px;align-items:center;justify-content:space-between}
+.ma-cand .cm{font:700 12px/1.3 var(--sans);color:var(--ink)}
+.ma-cand .co{font:400 11.5px/1.4 var(--serif);color:var(--ink2)}
+.ma-cand .cn{font-size:11px;color:var(--ink3)}
+.ma-legend{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:flex-start;padding-top:14px;border-top:1px solid var(--line)}
+.ma-lg{display:flex;gap:9px;align-items:flex-start;max-width:280px}
+.ma-lg .ic{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--sans);flex:0 0 auto}
+.ma-lg b{display:block;font:700 12px/1.3 var(--sans);color:var(--ink)}
+.ma-lg span{font:400 11.5px/1.4 var(--serif);color:var(--ink2);display:block}
+
+/* ── Programa de agentes ─────────────────────────────────────────────── */
+.pr-panel{display:flex;flex-direction:column;gap:20px;padding:18px 20px}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.pr-fase{background:var(--soft);border-radius:8px;border-top:3px solid var(--fc,var(--line));padding:12px 14px;display:flex;flex-direction:column;gap:7px}
+.pr-fase .fn{font:700 10px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--fc)}
+.pr-fase h3{font:700 15px/1.25 var(--sans);color:var(--ink);margin:0}
+.pr-fase p{margin:0;font:400 12.5px/1.5 var(--serif);color:var(--ink2)}
+.pr-fase .crit{font:400 12px/1.5 var(--serif);color:var(--ink3);border-top:1px solid var(--line);padding-top:7px}
+.pr-crit b{color:var(--ink2)}
+.pr-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.pr-piece{background:var(--soft);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:5px}
+.pr-piece b{font:700 13px/1.3 var(--sans);color:var(--ink)}
+.pr-piece code{font-family:var(--mono);font-size:12px;color:var(--teal)}
+.pr-piece span{font:400 12px/1.5 var(--serif);color:var(--ink2)}
+.pr-sec{border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.pr-sec h3{font:700 15px/1.25 var(--sans);color:var(--ink);margin:0}
+.pr-sec .bd{font:400 12.5px/1.55 var(--serif);color:var(--ink2);margin:0;max-width:95ch}
+.pr-sec .bd b{color:var(--ink)}
+pre.pr{font-family:var(--mono);font-size:12px;line-height:1.65;background:var(--navy);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow:auto;color:var(--ink2);white-space:pre;margin:0}
+pre.pr b{color:var(--teal);font-weight:700}
+pre.pr i{color:var(--amber);font-style:normal}
+table.pr{width:100%;min-width:720px;border-collapse:collapse;font-size:12.5px}
+table.pr th{font:700 10px/1.2 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink);white-space:nowrap}
+table.pr td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.pr tbody tr:hover td{background:#0F1742}
+table.pr td.lv{font:700 11px/1.3 var(--sans);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+table.pr td.lv.n1{color:var(--amber)}
+table.pr td.lv.n2{color:var(--coral)}
+table.pr td.lv.n3{color:var(--green)}
+table.pr td b{color:var(--ink)}
+table.pr td em{font-style:normal;color:var(--ink3)}
+.pr-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.pr-list li{position:relative;padding-left:16px;font:400 12.5px/1.55 var(--serif);color:var(--ink2)}
+.pr-list li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:999px;background:var(--coral)}
+.pr-list.num{counter-reset:pn}
+.pr-list.num li{padding-left:26px}
+.pr-list.num li::before{content:counter(pn);counter-increment:pn;width:18px;height:18px;top:2px;border-radius:999px;background:var(--soft);color:var(--ink);font:700 10px/18px var(--sans);text-align:center}
+.pr-list li b{color:var(--ink)}
+.pr-warn{background:var(--amberbg);border-radius:8px;padding:10px 12px;font:400 12.5px/1.55 var(--serif);color:var(--ink2)}
+.pr-warn b{color:var(--amber)}
+.pr-ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.pr-ficha div{border-top:1px solid var(--line);padding-top:8px;display:flex;flex-direction:column;gap:3px}
+.pr-ficha b{font:700 12.5px/1.3 var(--sans);color:var(--ink)}
+.pr-ficha span{font:400 12px/1.45 var(--serif);color:var(--ink2)}
+
+@media (max-width:1100px){
+ .ma-grid{grid-template-columns:1fr}
+ .ma-cands{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:700px){
+ .pa-panel,.ma-panel,.pr-panel{padding:14px 14px}
+ .ma-cands{grid-template-columns:1fr}
+ .pa-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style id="sz-tema">body,body *{font-family:"Figtree",system-ui,"Segoe UI",sans-serif!important}code,pre,kbd,samp,code *,pre *{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important}</style>
@@ -306,7 +457,7 @@ table.ct td.lk a:hover{text-decoration:underline}
  <div class="hero-inner">
   <div class="masthead">
    <div class="wordmark"><span class="sz-logo" role="img" aria-label="Seazone">sea<span class="sz-house"><svg viewBox="0 0 22 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="0" width="2.5" height="8" rx=".8" fill="#ff6b5c"/><path d="M1 11 L11 2 L21 11 L21 22 Q21 23 20 23 L2 23 Q1 23 1 22 Z" fill="#ff6b5c"/></svg></span>zone</span><span>· Franquias · BackOffice</span></div>
-   <span class="mast-date">v1.3 · 30/10/2026</span>
+   <span class="mast-date">v1.4 · 09/11/2026</span>
   </div>
   <span class="eyebrow">Arquitetura de processos</span>
   <h1>BackOffice Franquias</h1>
@@ -316,9 +467,12 @@ table.ct td.lk a:hover{text-decoration:underline}
    <button class="tab" role="tab" id="t-cv" aria-controls="p-cv" aria-selected="true" type="button">Cadeia de Valor</button>
    <button class="tab" role="tab" id="t-qu" aria-controls="p-qu" aria-selected="false" type="button">Qualidade · Vic</button>
    <button class="tab" role="tab" id="t-fo" aria-controls="p-fo" aria-selected="false" type="button">Fornecedores &amp; Compras · Henry</button>
-   <button class="tab" role="tab" id="t-af" aria-controls="p-af" aria-selected="false" type="button">Administrativo e Financeiro · David</button>
+   <button class="tab" role="tab" id="t-af" aria-controls="p-af" aria-selected="false" type="button">Administrativo e Financeiro · Fabri e Isa</button>
    <button class="tab" role="tab" id="t-mn" aria-controls="p-mn" aria-selected="false" type="button">Manutenção · Vinicius</button>
    <button class="tab" role="tab" id="t-pf" aria-controls="p-pf" aria-selected="false" type="button">Portfólio consolidado</button>
+   <button class="tab" role="tab" id="t-pa" aria-controls="p-pa" aria-selected="false" type="button">Painel de automação</button>
+   <button class="tab" role="tab" id="t-ma" aria-controls="p-ma" aria-selected="false" type="button">Mapa de agentes</button>
+   <button class="tab" role="tab" id="t-pr" aria-controls="p-pr" aria-selected="false" type="button">Programa de agentes</button>
    <button class="tab" role="tab" id="t-ct" aria-controls="p-ct" aria-selected="false" type="button">Contribuições do time</button>
   </div>
  </div>
@@ -438,7 +592,7 @@ table.ct td.lk a:hover{text-decoration:underline}
 
  <section id="p-qu" role="tabpanel" aria-labelledby="t-qu" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="qu"></div><p class="hint">Passe o mouse ou clique em qualquer processo para ver objetivo, entrega, como funciona, auditoria, interface, automação planejada e ferramentas. Caixa tracejada = processo novo nesta versão.</p><div class="scroll"><div class="flow" data-area="qu"></div></div><details class="ctdet" data-ct-area="qu" open><summary>Contribuições desta área<span class="n" data-ct-count="qu"></span></summary><div class="body" data-ct-body="qu"></div></details></section>
  <section id="p-fo" role="tabpanel" aria-labelledby="t-fo" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="fo"></div><p class="hint">Arquitetura de Fornecedores &amp; Compras (Henry · rascunho v2.1 · 16/10/2026).</p><div class="scroll"><div class="flow" data-area="fo"></div></div><details class="ctdet" data-ct-area="fo" open><summary>Contribuições desta área<span class="n" data-ct-count="fo"></span></summary><div class="body" data-ct-body="fo"></div></details></section>
- <section id="p-af" role="tabpanel" aria-labelledby="t-af" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="af"></div><p class="hint">Arquitetura de Administrativo e Financeiro (David · rascunho v2 · 23/10/2026).</p><div class="scroll"><div class="flow" data-area="af"></div></div><details class="ctdet" data-ct-area="af" open><summary>Contribuições desta área<span class="n" data-ct-count="af"></span></summary><div class="body" data-ct-body="af"></div></details></section>
+ <section id="p-af" role="tabpanel" aria-labelledby="t-af" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="af"></div><p class="hint">Arquitetura de Administrativo e Financeiro (rascunho v2 · 23/10/2026 · <b>documento do David, em revalidação com Fabíola e Isabella</b>).</p><div class="scroll"><div class="flow" data-area="af"></div></div><details class="ctdet" data-ct-area="af" open><summary>Contribuições desta área<span class="n" data-ct-count="af"></span></summary><div class="body" data-ct-body="af"></div></details></section>
  <section id="p-mn" role="tabpanel" aria-labelledby="t-mn" hidden style="flex-direction:column;gap:18px"><div class="panel summary" data-area="mn"></div><p class="hint">Arquitetura de Manutenção (Vinicius · rascunho v9 · 26/10/2026).</p><div class="scroll"><div class="flow" data-area="mn"></div></div><details class="ctdet" data-ct-area="mn" open><summary>Contribuições desta área<span class="n" data-ct-count="mn"></span></summary><div class="body" data-ct-body="mn"></div></details></section>
  <section id="p-pf" role="tabpanel" aria-labelledby="t-pf" hidden style="flex-direction:column;gap:18px">
   <div class="panel pfhead">
@@ -446,6 +600,285 @@ table.ct td.lk a:hover{text-decoration:underline}
    <div class="kpis" id="pfsum"></div>
   </div>
   <div class="tblwrap"><table class="pf"><thead><tr><th>Agente ou automação</th><th>O que faz</th><th>Quando roda</th><th>Área</th><th>Status</th></tr></thead><tbody id="pftb"></tbody></table></div>
+ </section>
+
+
+ <section id="p-pa" role="tabpanel" aria-labelledby="t-pa" hidden style="flex-direction:column;gap:18px">
+  <div class="panel pa-panel">
+   <div class="pa-h">
+    <div>
+     <span class="tn">Painel de automação · o que já roda e onde ainda falta</span>
+     <p class="to">Catálogo de automação das quatro áreas do BackOffice: 68 macro-processos, 146 passos documentados e 39 automatizados. Todos os números abaixo são derivados das mesmas fontes das abas de área — nada foi reescrito nem duplicado aqui.</p>
+    </div>
+   </div>
+   <div class="pa-kpis" id="pa-kpis"></div>
+   <div class="pa-areas" id="pa-areas"></div>
+   <p class="pa-note" id="pa-nota"></p>
+  </div>
+
+  <div class="panel pa-panel">
+   <div class="pa-block">
+    <h3>Onde a automação falta</h3>
+    <p class="bd">Todos os macros das quatro áreas, ordenados pelo número de passos que ainda dependem de pessoa ou de auditoria. A última coluna traz a oportunidade declarada pelo próprio líder da área — quando existe; quando não, a ausência é do documento de origem.</p>
+    <div class="tblwrap"><table class="pa"><thead><tr><th>Área</th><th>Macro</th><th>Trilha</th><th class="num">Passos</th><th class="num">Auto</th><th class="num">Misto</th><th class="num">Manual</th><th>Oportunidade declarada</th></tr></thead><tbody id="pa-lacunas"></tbody></table></div>
+   </div>
+  </div>
+
+  <div class="panel pa-panel">
+   <div class="pa-block">
+    <h3>Backlog de candidatos a agente</h3>
+    <p class="bd">Os macros com pelo menos um passo manual ou misto — os que podem virar agente. A ordem é reproduzível: primeiro os macros com declaração do líder da área; dentro de cada grupo, os que têm mais passos manuais. Onde não há declaração, o candidato entra como “sem declaração de prioridade”.</p>
+    <div class="pa-filters" id="pa-filtros"></div>
+    <div class="tblwrap"><table class="pa"><thead><tr><th>Área</th><th>Macro</th><th>Trilha</th><th class="num">Manual</th><th class="num">Misto</th><th>Nível</th><th>Teto</th><th>Oportunidade declarada</th></tr></thead><tbody id="pa-backlog"></tbody></table></div>
+    <p class="pa-count" id="pa-bkcount"></p>
+   </div>
+  </div>
+ </section>
+
+ <section id="p-ma" role="tabpanel" aria-labelledby="t-ma" hidden style="flex-direction:column;gap:18px">
+  <div class="panel ma-panel">
+   <div class="pa-h">
+    <div>
+     <span class="tn">Mapa de agentes · Backoffice Franquias</span>
+     <p class="to">Como a automação se organiza quando deixa de ser tarefa solta: um orquestrador que recebe a solicitação, aciona o agente da área certa e consolida o relatório. O contrato é a trava — nenhuma ação acontece fora do que foi declarado.</p>
+    </div>
+   </div>
+   <div class="pa-kpis" id="ma-kpis"></div>
+   <div class="ma-grid">
+    <div class="ma-col" id="ma-col-left"></div>
+    <div class="ma-col" id="ma-col-mid"></div>
+    <div class="ma-col" id="ma-col-right"></div>
+   </div>
+   <div class="ma-legend" id="ma-legenda"></div>
+  </div>
+
+  <div class="panel pa-panel">
+   <div class="pa-block">
+    <h3>Backlog de candidatos com nível de autonomia</h3>
+    <p class="bd">Os mesmos candidatos do painel de automação, agora com o nível de autonomia candidato e o teto autorizado. Nível e teto vêm do catálogo do programa de agentes — canal público ou ação irreversível tem teto N2, sempre.</p>
+    <div class="tblwrap"><table class="pa"><thead><tr><th>Área</th><th>Macro</th><th>Trilha</th><th class="num">Manual</th><th class="num">Misto</th><th>Nível</th><th>Teto</th></tr></thead><tbody id="ma-bk"></tbody></table></div>
+   </div>
+  </div>
+ </section>
+
+ <section id="p-pr" role="tabpanel" aria-labelledby="t-pr" hidden style="flex-direction:column;gap:18px">
+  <div class="panel pr-panel">
+   <div class="pa-h">
+    <div>
+     <span class="tn">Programa de agentes · Backoffice Franquias Seazone</span>
+     <p class="to">Escopo para aprovação · 09/11/2026 · repositório <code>~/dev/raayeoliveira/backoffice-agentes/</code>. Três fases, um contrato por agente e uma trava em duas camadas: automatizar o máximo possível sem que nenhum agente ajá fora do que foi aprovado — e sem que a gerência continue sendo o motor da operação.</p>
+    </div>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Três problemas concretos</h3>
+    <ul class="pr-list">
+     <li><b>Não há governança de agente.</b> Cada skill carrega suas próprias regras de posts e limites. Não existe uma declaração de “o que este agente pode fazer” que possa ser conferida por máquina.</li>
+     <li><b>O conhecimento do processo não é reaproveitado.</b> As oportunidades de automação estão declaradas dentro do documento de arquitetura (campo <code>oportunidade</code>), mas não viram fila de trabalho.</li>
+     <li><b>A área mais manual é a de gestão da própria gerência.</b> Com David Barbosa Soares fora do time (09/11/2026), o Administrativo e Financeiro voltou para a gestão direta da Rayanne, com <b>Fabíola e Isabella</b> na execução — 3 das 4 áreas agora são dela.</li>
+    </ul>
+   </div>
+
+   <div class="pr-sec">
+    <h3>As três fases</h3>
+    <p class="bd">A fase 3 é a que entrega o maior ganho estrutural — é a camada de eventos que faz o Backoffice reagir sozinho, em vez de gerar relatório para alguém reagir. Fora do escopo do programa: substituir o Olimpo, comprar ferramenta nova, reescrever o documento de arquitetura das 4 áreas (só a de Adm/Fin, e só na parte que precisar) e qualquer autonomia N3 em canal público.</p>
+    <div class="pr-fases">
+     <div class="pr-fase" style="--fc:var(--teal)">
+      <span class="fn">Fase 1</span>
+      <h3>Esqueleto</h3>
+      <p>Contrato de agente, catálogo que cruza arquitetura × máquina e <b>1 agente real</b> rodando como prova.</p>
+      <span class="crit"><b>Prontas quando:</b> o agente roda por 2 semanas seguidas sem ninguém corrigir a régua.</span>
+     </div>
+     <div class="pr-fase" style="--fc:var(--blue)">
+      <span class="fn">Fase 2</span>
+      <h3>Cobertura</h3>
+      <p>Os 64 candidatos do backlog viram agentes, área por área. Entra a trava de execução (<code>runner/</code>).</p>
+      <span class="crit"><b>Pronta quando:</b> cada área com ≥1 agente em autonomia N1 e a cobertura de passos sobe de 27% para 45%+.</span>
+     </div>
+     <div class="pr-fase" style="--fc:var(--coral)">
+      <span class="fn">Fase 3</span>
+      <h3>Camada de SLA</h3>
+      <p>Um agente transversal monitora prazo, dono e pendência de tudo que entra no BackOffice e escala sozinho.</p>
+      <span class="crit"><b>Pronta quando:</b> SLA estourado chega no canal certo em até 2h, sem passar pela gerência.</span>
+     </div>
+    </div>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Arquitetura do programa</h3>
+    <p class="bd">Quatro peças. <code>skills/</code> continua em <code>~/.claude/skills/</code> (é o padrão da máquina) — o contrato aponta para elas.</p>
+    <div class="pr-grid2">
+     <div class="pr-piece"><b><code>agentes/</code></b><span>Contratos — um YAML por agente. É a unidade de repetição do programa: qualquer área nova copia este formato.</span></div>
+     <div class="pr-piece"><b><code>catalogo/</code></b><span>Fonte A (arquitetura de processo) + Fonte B (inventário da máquina) + o backlog classificado dos 64 candidatos.</span></div>
+     <div class="pr-piece"><b><code>runner/</code></b><span>Trava de execução — lê o contrato e aplica o limite. Entra na fase 2.</span></div>
+     <div class="pr-piece"><b><code>scripts/</code></b><span>Pipeline de extração re-executável e <code>verificar-contrato.py</code>, a trava de reconciliação da fase 1.</span></div>
+    </div>
+<pre class="pr">backoffice-agentes/
+├── README.md                     <i># o programa em uma página</i>
+├── AGENTES.md                    <i># índice vivo: quem é o quê, de quem é a área, em que fase está</i>
+├── agentes/                      <b># CONTRATOS — um YAML por agente</b>
+│   └── agente-danos-prazo.yaml
+├── catalogo/                     <b># Fonte A (arquitetura) + Fonte B (máquina) + painel</b>
+├── runner/                       <b># TRAVA DE EXECUÇÃO — lê o contrato, aplica o limite (fase 2)</b>
+├── scripts/
+│   ├── extract.js, build.py      <i># pipeline de extração (re-executável)</i>
+│   └── verificar-contrato.py     <i># TRAVA DE RECONCILIAÇÃO (fase 1)</i>
+└── docs/superpowers/specs/</pre>
+   </div>
+
+   <div class="pr-sec">
+    <h3>O contrato de agente</h3>
+    <p class="bd">Um YAML por agente. É a unidade de repetição do programa: qualquer área nova copia este formato. O contrato <b>não muda</b> na promoção de ambiente — por isso ele é versionado em git desde o dia 1.</p>
+<pre class="pr">id: agente-danos-prazo
+nome: Vigilante de prazo de dano
+area: adm_financeiro
+trilha: Danos de hóspede
+macros: [MP1, MP2]
+executores: [fabiola, isabella]
+status: incubacao          <i># incubacao | piloto | autonomo | pausado</i>
+
+gatilho:
+  tipo: cron
+  expressao: "0 8 * * 1-5"
+
+fontes:
+  - id: sapron_guest_damage
+    tipo: mcp
+    alvo: sapron
+    descricao: Danos de hóspede com data de checkout e data de lançamento
+
+raciocinio:
+  skill: agente-danos-prazo
+  regras:
+    - "Régua D+1 a D+14 a partir do checkout (documento oficial do processo)"
+
+acoes:
+  - id: montar_pacote
+    descricao: Monta o pacote de cada dano dentro da janela
+    nivel: N1                <i># informação</i>
+    destino: dm_rayanne
+  - id: comentar_taskdex
+    descricao: Comenta a task do caso
+    nivel: N2                <i># decisão</i>
+    destino: taskdex
+    exige_aprovacao: true
+    bloqueada_em: [fase-1]
+
+nivel_maximo_autorizado: N2
+aprendizagem:
+  registro: lessons.md
+  avaliacao: validador-carol</pre>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Os três níveis de autonomia</h3>
+    <div class="tblwrap"><table class="pr"><thead><tr><th>Nível</th><th>O que faz</th><th>Regra</th></tr></thead><tbody>
+     <tr><td class="lv n1">N1 — Informação</td><td>Lê, detecta, relata. Sem efeito em sistema.</td><td>Posta direto no destino declarado (DM). Sem aprovação.</td></tr>
+     <tr><td class="lv n2">N2 — Decisão</td><td>Prepara a ação e a submete para aprovação humana.</td><td>Sempre rascunho. <b>Nunca</b> executa sozinho.</td></tr>
+     <tr><td class="lv n3">N3 — Execução</td><td>Age sozinho, em ação reversível e de baixo impacto, com registro.</td><td>Liberado por ação no contrato, nunca por omissão.</td></tr>
+    </tbody></table></div>
+    <p class="bd"><b>Padrão por risco:</b> canal público ou ação irreversível → no máximo N2, sempre. DM privada ou sistema interno reversível (escrever uma task, comentar) → pode ir a N3 quando o contrato autorizar explicitamente. Qualquer ação de N3 que não esteja listada no contrato é <b>proibida</b> — o agente não decide sozinho que pode.</p>
+   </div>
+
+   <div class="pr-sec">
+    <h3>A trava, em duas camadas</h3>
+    <div class="pr-grid2">
+     <div class="pr-piece">
+      <b>Camada 1 — reconciliação <em>(fase 1, custo ~40 linhas)</em></b>
+      <span><code>scripts/verificar-contrato.py</code> roda em CI e falha se: um passo <code>manual</code>/<code>misto</code> do macro não tiver ao menos uma ação correspondente no contrato; uma ação do contrato não tiver <code>nivel</code> válido, <code>destino</code> declarado e nível ≤ <code>nivel_maximo_autorizado</code>; o <code>area</code> do contrato não existir no catálogo; o <code>responsavel</code> de um passo continuar vazio — o que bloqueia a promoção do agente a <code>piloto</code>.</span>
+     </div>
+     <div class="pr-piece">
+      <b>Camada 2 — execução <em>(fase 2)</em></b>
+      <span>O <code>runner/</code> lê o contrato e <b>recusa fisicamente</b> executar ação acima do nível autorizado, ou em destino não declarado. É o que segura quando houver 10 agentes rodando sem ninguém por perto.</span>
+     </div>
+    </div>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Runtime híbrido</h3>
+    <p class="bd"><b>Decisão:</b> o que precisa de julgamento (ler uma call, montar um rascunho, priorizar) roda no Claude local / Hermes. O que roda 24/7 em produção e escreve em sistema compartilhado sobe para o Olimpo, com gatilho no Sonar quando o gatilho for determinístico.</p>
+    <p class="bd"><b>Caminho de promoção:</b> <code>incubacao</code> (Claude local, manual) → <code>piloto</code> (cron Hermes, com reconciliação) → <code>autonomo</code> (runner, N3 liberado por ação) → <code>prod</code> (Olimpo/EKS, versionado, CI lab→prd).</p>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Quem decide o quê</h3>
+    <p class="bd">A gerência do Backoffice é aprovadora natural de <b>3 das 4 áreas</b>; só Fornecedores tem aprovador próprio (Henry). A arquitetura de Adm/Fin foi escrita pelo David (v2, 23/10/2026) e <b>precisa ser revalidada com Fabíola e Isabella</b> antes de virar contrato — é o gate de entrada da fase 1. O documento de arquitetura não traz o <code>responsavel</code> normalizado nos passos: o contrato vai ter que preenchê-lo — é lacuna do documento, não da extração.</p>
+    <div class="tblwrap"><table class="pr"><thead><tr><th>Pessoa</th><th>Cargo</th><th>Área</th><th>Gestão</th></tr></thead><tbody>
+     <tr><td><b>Rayanne Oliveira</b></td><td>Gerente de Franquias Backoffice</td><td>Backoffice</td><td>—</td></tr>
+     <tr><td>Fabíola Azevedo Santos</td><td>Analista Financeiro Franquias</td><td>Administrativo e Financeiro</td><td>Rayanne</td></tr>
+     <tr><td>Isabella Bino da Silva</td><td>Analista Financeiro Franquias</td><td>Administrativo e Financeiro</td><td>Rayanne</td></tr>
+     <tr><td>Henry Yudi Matsumoto</td><td>Coordenador(a) de Fornecedores e Compras</td><td>Fornecedores e Compras</td><td>Henry</td></tr>
+     <tr><td>Wania Helena Lageano Espíndola</td><td>Analista de Fornecedores e Compras Franquias</td><td>Fornecedores e Compras</td><td>Henry</td></tr>
+     <tr><td>Victória Magri Moreira de Carvalho</td><td>AI Builder Qualidade</td><td>Qualidade</td><td>Rayanne</td></tr>
+     <tr><td>Vinicius Gabriel Gouvea Satores</td><td>Analista de Manutenção Franquias</td><td>Manutenção</td><td>Rayanne</td></tr>
+    </tbody></table></div>
+   </div>
+
+   <div class="pr-sec">
+    <h3>O 1º agente — <em>decisão provisória</em></h3>
+    <p class="bd"><b>Vigilante de prazo de dano</b> (<code>agente-danos-prazo</code>). <b>Por que esse:</b> a trilha “Danos de hóspede” (Adm/Fin) tem MP2 como única coluna 100% manual do setor; MP1 carrega oportunidade declarada pelo líder; a régua D+1→D+14 e as tabelas já existem. E é área de gestão direta da Rayanne — o ciclo de aprovação mais curto do programa.</p>
+    <div class="pr-warn"><b>Escolha provisória</b>, reversível em uma linha do YAML. Quatro candidatos igualmente qualificados foram avaliados; a Rayanne define na revisão desta spec.</div>
+    <div class="tblwrap"><table class="pr"><thead><tr><th>Passo</th><th>Hoje</th><th>Oportunidade declarada</th></tr></thead><tbody>
+     <tr><td><b>1.1</b> Constatar e documentar o dano</td><td>manual · pessoa</td><td>“Aviso automático de prazo na tela do Host e guia reduziriam os chamados.”</td></tr>
+     <tr><td><b>1.2</b> Lançar no Sapron ou no Host</td><td>manual · pessoa</td><td>—</td></tr>
+     <tr><td><b>1.4</b> Orientar a franquia no lançamento</td><td>manual · pessoa</td><td>—</td></tr>
+     <tr><td><b>2.1</b> Conferir evidências, NF e cotação</td><td>misto · IA assiste</td><td>“É a única coluna 100% manual — próxima candidata a extensão ou IA assistindo.”</td></tr>
+     <tr><td><b>2.2</b> Tratar dano esdrúxulo</td><td>manual · pessoa</td><td>—</td></tr>
+    </tbody></table></div>
+    <div class="pr-ficha">
+     <div><b>Dispara</b><span>seg–sex 08h (antes do bloco de KPI) + varredura de meio-dia nos casos em janela.</span></div>
+     <div><b>Lê</b><span><code>sapron_public_guest_damage</code>, <code>lancamentos_de_danos_fora_do_prazo</code> e as tasks correspondentes no Taskdex.</span></div>
+     <div><b>Razona</b><span>Classifica cada caso em dentro do prazo, a ≤3 dias de estourar ou já estourado. Para os dois últimos, monta o pacote: o que falta, quem é o responsável, o que a franquia precisa fazer, com link do registro.</span></div>
+     <div><b>Entrega</b><span>Rascunho na DM da Rayanne (<code>D0BED843ZC1</code>), no formato ENCAMINHAMENTOS. Silêncio quando não há nada em janela — não polui.</span></div>
+     <div><b>Nível</b><span>N1 (montar pacote) e N2 (comentar Taskdex, bloqueado na fase 1).</span></div>
+     <div><b>Não faz</b><span>Não escreve no Sapron, não cobra ninguém, não posta em canal público, não contesta dano esdrúxulo. Tudo isso é fase 2, depois que a régua estiver calibrada.</span></div>
+    </div>
+    <p class="bd"><b>Critério de sucesso da fase 1:</b> o agente roda por 10 dias úteis consecutivos; os casos descartados como falso positivo ficam abaixo de 20% do total; o tempo entre o estourar do prazo e a entrega do rascunho cai de “descobriu no relatório mensal” para “no dia seguinte”.</p>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Erro, retry e idempotência</h3>
+    <ul class="pr-list">
+     <li><b>Falha de fonte</b> (MCP fora, tabela vazia): o agente <b>não posta nada</b> e registra o erro na DM. Fail-closed — agente quebrado não é agente silencioso.</li>
+     <li><b>Saída vazia:</b> silêncio. Segue o princípio já valado do <code>monitorar-aguardando-link</code>.</li>
+     <li><b>Idempotência:</b> chave de execução <code>(agent_id, data, gatilho)</code>. Reexecutar o mesmo gatilho no mesmo dia não duplica entrega.</li>
+     <li><b>Timeout:</b> 5 min por execução; acima disso, registra e segue.</li>
+     <li><b>Falso positivo:</b> cada rascunho descartado é registrado; a taxa de descarte é a métrica de calibração do agente.</li>
+    </ul>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Mensuração</h3>
+    <div class="tblwrap"><table class="pr"><thead><tr><th>Métrica</th><th>Base (09/11/2026)</th><th>Alvo da fase 2</th></tr></thead><tbody>
+     <tr><td>Passos automatizados</td><td><b>39/146 (27%)</b></td><td><b>≥ 45%</b></td></tr>
+     <tr><td>Macros com agente</td><td>0</td><td>≥ 1 por área</td></tr>
+     <tr><td>Candidatos classificados no catálogo</td><td>0</td><td>64/64</td></tr>
+     <tr><td>Taxa de descarte de rascunhos</td><td>—</td><td>&lt; 20%</td></tr>
+     <tr><td>Tempo entre estourar do prazo e entrega</td><td>mensal</td><td>no dia seguinte</td></tr>
+    </tbody></table></div>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Riscos</h3>
+    <div class="tblwrap"><table class="pr"><thead><tr><th>Risco</th><th>Mitigação</th></tr></thead><tbody>
+     <tr><td><b>Documento de Adm/Fin desatualizado</b> (David fora)</td><td>Gate de revalidação com Fabíola e Isabella antes do contrato virar <code>piloto</code></td></tr>
+     <tr><td><b>Duas fontes de verdade divergindo</b> (arquitetura vs. máquina)</td><td>Todo item do catálogo guarda <code>provenance</code> — de qual macro/passo veio</td></tr>
+     <tr><td><b>Agente postando errado em canal da empresa</b></td><td>N2 como teto para canal público; trava de reconciliação na fase 1; runner na fase 2</td></tr>
+     <tr><td><b>Automação que ninguém lê</b></td><td>A taxa de descarte e o tempo de retorno entram como métrica do programa</td></tr>
+     <tr><td><b>Escopo inflando para 3 fases</b></td><td>Cada fase tem critério de “pronto” próprio; a fase 2 não começa com a 1 inacabada</td></tr>
+    </tbody></table></div>
+   </div>
+
+   <div class="pr-sec">
+    <h3>Decisões pendentes da Rayanne</h3>
+    <ol class="pr-list num">
+     <li><b>O 1º agente</b> é o de Danos de hóspede (recomendado) ou uma das três alternativas — Multas e contestação (Qualidade, MP6), Ciclo de manutenção (Manutenção, MP10) ou Cadastro e warnings (Adm/Fin)?</li>
+     <li><b>Onde o repositório vive</b> — <code>~/dev/raayeoliveira/backoffice-agentes/</code> (pessoal) ou repositório da empresa no GitHub, já preparado para a promoção ao Olimpo?</li>
+     <li><b>O painel vai para o GitHub Pages</b> para Fabíola e Isabella revisarem a revalidação de Adm/Fin?</li>
+     <li><b>Runner em Python ou TypeScript</b> — Python casa com os scripts existentes (<code>~/scripts/</code>); TypeScript casa com o resto dos repos de app.</li>
+    </ol>
+   </div>
+  </div>
  </section>
 
  <section id="p-ct" role="tabpanel" aria-labelledby="t-ct" hidden style="flex-direction:column;gap:18px">
@@ -490,7 +923,7 @@ table.ct td.lk a:hover{text-decoration:underline}
 
  <footer class="instfoot">
   <div class="wm"><span class="sz-logo" role="img" aria-label="Seazone">sea<span class="sz-house"><svg viewBox="0 0 22 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="0" width="2.5" height="8" rx=".8" fill="#ff6b5c"/><path d="M1 11 L11 2 L21 11 L21 22 Q21 23 20 23 L2 23 Q1 23 1 22 Z" fill="#ff6b5c"/></svg></span>zone</span><span>Franquias · BackOffice</span></div>
-  <div class="who"><b>Rayanne Oliveira · gerente do setor</b>rayanne.oliveira@seazone.com.br<br>Consolidado das arquiteturas de Vic, Henry, David e Vinicius · 30/10/2026</div>
+  <div class="who"><b>Rayanne Oliveira · gerente do setor</b>rayanne.oliveira@seazone.com.br<br>Consolidado das arquiteturas de Vic, Henry, David e Vinicius (Adm/Fin em revalidação com Fabíola e Isabella) · painel de automação, mapa de agentes e programa de agentes · 09/11/2026</div>
  </footer>
 </div>
 
@@ -1627,6 +2060,8 @@ function selectTab(t){
   const area = t.id.replace("t-","");
   if(["qu","fo","af","mn"].includes(area)) { renderArea(area); bindBoxes(document.querySelector(`.flow[data-area="${area}"]`)); }
   if(area === "pf") renderPortfolio();
+  if(area === "pa" && typeof renderPainel === "function") renderPainel();
+  if(area === "ma" && typeof renderMapa === "function") renderMapa();
   if(area === "ct" && typeof ctRender === "function") ctRender();
 }
 tabs.forEach(t=>t.addEventListener("click",()=>selectTab(t)));
@@ -1664,6 +2099,239 @@ window.addEventListener("DOMContentLoaded", () => {
   (document.fonts?document.fonts.ready:Promise.resolve()).then(eqHeads);
 });
 </script>
+
+<script id="dados-ma" type="application/json">{"meta":{"gestora":{"nome":"Rayanne Oliveira","cargo":"Gerente de Franquias Backoffice","papeis":["Mantém o programa: contrato do agente (YAML), catálogo das 4 áreas e o backlog de candidatos.","Revisa a régua de cada agente: o que ele lê, o que escreve e em qual destino.","Decide o que sobe para N3 — execução só entra por ação listada no contrato.","Aprova a revalidação da arquitetura de Adm/Fin com Fabíola e Isabella (gate da fase 1).","Cobre as reuniões que os agentes não cobrem: Weekly, Comitê, 1:1 e feedback."]},"resultado":[{"tag":"MANTER","cls":"keep","texto":"O que foi entregue e monitorado no prazo, com o SLA de cada um."},{"tag":"DECIDIR","cls":"dec","texto":"O que precisa da sua decisão, com a informação completa do caso."},{"tag":"ESCALAR","cls":"esc","texto":"O que o time precisa resolver: SLA estourado, dono e pendência — no canal certo, em até 2h."}],"orquestrador":[{"titulo":"Entra a solicitação","texto":"cron, evento de sistema ou pedido humano — o gatilho vem do contrato do agente."},{"titulo":"Define o que fazer e para quem","texto":"lê o contrato: nível, destino e dono. A trava recusa o que passar do teto."},{"titulo":"Aciona os agentes certos","texto":"despacha para o agente da área do macro — Manutenção, Adm/Fin, Fornecedores ou Qualidade."},{"titulo":"Consolida o relatório","texto":"junta as entregas em um pacote só, no formato ENCAMINHAMENTOS."}],"coordenacao":[{"k":"SLA","v":"estourodado chega no canal certo em até 2h, sem passar por você."},{"k":"Silêncio","v":"sem nada em janela, o agente não entrega nada e não polui o canal."},{"k":"Idempotência","v":"chave (agente, data, gatilho): o mesmo gatilho no mesmo dia não duplica entrega."},{"k":"Falha de fonte","v":"MCP fora ou tabela vazia: registra o erro na DM e não posta nada (fail-closed)."}],"trava":[{"k":"Camada 1 · reconciliação","v":"a CI falha se um passo manual não tem ação no contrato, se a ação passa do nível autorizado ou se o responsável fica vazio."},{"k":"Camada 2 · execução","v":"o runner recusa fisicamente a ação acima do nível ou em destino não declarado."}],"legenda":[{"sigla":"N1","bg":"#fbf0d9","fg":"#8a5a10","titulo":"N1 · Informação","texto":"Lê, detecta e relata. Sem efeito em sistema."},{"sigla":"N2","bg":"#fbeae8","fg":"#a83531","titulo":"N2 · Decisão","texto":"Prepara a ação e submete para sua aprovação."},{"sigla":"N3","bg":"#e7f0e7","fg":"#2f6b3f","titulo":"N3 · Execução","texto":"Age sozinho em ação reversível e autorizada no contrato."},{"sigla":"✓","bg":"#efece5","fg":"#5b6472","titulo":"Processo mais automático — com garantia do que tá","texto":"Canal público ou ação irreversível tem teto N2."}],"totais":{"areas":4,"trilhas":20,"macros":68,"passos":146,"auto":39,"pct":27}},"areas":[{"chave":"qu","nome":"Qualidade","lider":"Victória Magri","agente":"Agente de Qualidade","gestor":"Rayanne Oliveira","executa":"Victória Magri Moreira","o_que_faz":"Captar a falha, dar à franquia o direito de defesa e decidir com critério.","como_faz":"Fontes: consultores, realocação e cancelamento, check-in, danos, CS Proprietários, comentários e Implantação. · Ferramentas: Lovable de ocorrências e multas · Sapron · Central de Atividades","candidatos":[{"id":"MP5","nome":"Captar, triar, julgar e aplicar ocorrências","trilha":"Fiscalização","opp":"A cobrança da defesa e o encerramento ainda são manuais. Lembrete automático e encerramento pelo bot liberariam mais tempo.","manual":1,"misto":3,"nivel":"N2","teto":"N2","ferramentas":"Lovable de ocorrências e multas · Sapron · Central de Atividades · Claude Code"},{"id":"MP6","nome":"Identificar, validar, comunicar e descontar multas","trilha":"Fiscalização","opp":"A identificação já é automática; o comunicado e o lançamento do desconto ainda são manuais.","manual":4,"misto":0,"nivel":"N2","teto":"N2","ferramentas":"Slack · Lovable de ocorrências e multas · Sapron · Central de Atividades · Gmail · Sapron · Central de Despesas · Nekt · data lake · Claude Code"},{"id":"MP15","nome":"Google, mídia e redes sociais","trilha":"Reputação externa","opp":"Juntar os quatro canais num só termômetro de reputação externa.","manual":2,"misto":1,"nivel":"N2","teto":"N2","ferramentas":"Google Business Profile · Apps Script · Claude Code"}]},{"chave":"fo","nome":"Fornecedores & Compras","lider":"Henry Yudi","agente":"Agente de Fornecedores e Compras","gestor":"Henry Yudi Matsumoto","executa":"Wania Helena Lageano","o_que_faz":"Encontrar e abordar prestadores nas cidades onde a Seazone atua e ainda não tem cobertura.","como_faz":"Skill cruza imóveis (Sapron) com polígonos, Hub e base de fotógrafos. · Ferramentas: Sapron · Hub de Serviços · Pipedrive funil 61 · Claude Code","candidatos":[{"id":"MP1","nome":"Prospectar prestadores","trilha":"Fornecedores prestadores de serviço","opp":"A analista só pede a prospecção e o resto roda; vira operadora dos agentes.","manual":1,"misto":2,"nivel":"N2","teto":"N2","ferramentas":"Sapron · Hub de Serviços · Pipedrive funil 61 · Claude Code · Base CNPJ · Receita · Google e Maps · Instagram · SIA · WhatsApp · Copiloto da SIA · Pipedrive funil 60"},{"id":"MP6","nome":"Relacionamento com fornecedores","trilha":"Fornecedores homologados","opp":"Com score, melhores parceiros viram diamante no evento, dão palestra, recebem oportunidades.","manual":1,"misto":1,"nivel":"N2","teto":"N2","ferramentas":"Loja · kanban de pedidos · Jornada Completa Enxoval · Claude Code · Loja Seazone · Google Drive"},{"id":"MP3","nome":"Homologar e contratar fotógrafos","trilha":"Fornecedores prestadores de serviço","opp":null,"manual":3,"misto":0,"nivel":"N2","teto":"N2","ferramentas":"SIA · WhatsApp · Copiloto da SIA · Pipedrive funil 60 · Clicksign · contratos · App de fotógrafos · Google Meet"}]},{"chave":"af","nome":"Administrativo e Financeiro","lider":"Fabíola e Isabella","agente":"Agente de Administrativo e Financeiro","gestor":"Rayanne Oliveira","executa":"Fabíola Azevedo e Isabella Bino","o_que_faz":"Dano lançado com fotos, valor, orçamento ou NF e descrição no template.","como_faz":"Franquia documenta. · Ferramentas: Seazone Host · Sapron","candidatos":[{"id":"MP1","nome":"Lançamento pela franquia","trilha":"Danos de hóspede","opp":"Aviso automático de prazo na tela do Host e guia reduziriam os chamados.","manual":3,"misto":0,"nivel":"N2","teto":"N2","ferramentas":"Seazone Host · Sapron · Newbyte"},{"id":"MP2","nome":"Validar o dano","trilha":"Danos de hóspede","opp":"É a única coluna 100% manual — próxima candidata a extensão ou IA assistindo.","manual":1,"misto":1,"nivel":"N2","teto":"N2","ferramentas":"Sapron · Claude Code · Slack"},{"id":"MP22","nome":"Medir resultados","trilha":"Gestão","opp":null,"manual":0,"misto":3,"nivel":"N2","teto":"N2","ferramentas":"Sapron · KPI System · ScorePulse · Claude Code"}]},{"chave":"mn","nome":"Manutenção","lider":"Vinicius Satores","agente":"Agente de Manutenção","gestor":"Rayanne Oliveira","executa":"Vinicius Satores","o_que_faz":"Ter item feito e provado no prazo.","como_faz":"Foto, nota ou recibo. · Ferramentas: Portal da Franquia","candidatos":[{"id":"MP10","nome":"Executar e comprovar","trilha":"Manutenção recorrente","opp":"Ciclo ar-condicionado: 627/1147 concluídos com evidência; 317 sem resposta (22/10).","manual":1,"misto":0,"nivel":"N2","teto":"N2","ferramentas":"Portal da Franquia"},{"id":"MP11","nome":"Fechar o ciclo","trilha":"Manutenção recorrente","opp":null,"manual":1,"misto":1,"nivel":"N2","teto":"N3","ferramentas":"Sapron · Central de Manutenção · Claude Code · Google Meet"},{"id":"MP12","nome":"Manter as ferramentas","trilha":"Ferramentas, agentes e auditorias","opp":null,"manual":1,"misto":1,"nivel":"N2","teto":"N2","ferramentas":"Sapron · Central de Manutenção · GitHub · Claude Code · Suporte Unificado · Central da UTI"}]}],"niveis":{"mn:MP10":["N2","N2"],"mn:MP11":["N2","N3"],"mn:MP12":["N2","N2"],"mn:MP14":["N2","N3"],"mn:MP16":["N2","N2"],"mn:MP18":["N2","N3"],"mn:MP7":["N2","N3"],"mn:MP1":["N2","N2"],"mn:MP13":["N2","N3"],"mn:MP15":["N2","N2"],"mn:MP17":["N2","N2"],"mn:MP19":["N2","N2"],"mn:MP2":["N2","N2"],"mn:MP20":["N2","N2"],"mn:MP21":["N2","N2"],"mn:MP3":["N2","N2"],"mn:MP4":["N2","N2"],"mn:MP5":["N2","N2"],"mn:MP8":["N2","N2"],"mn:MP9":["N2","N2"],"af:MP1":["N2","N2"],"af:MP2":["N2","N2"],"af:MP22":["N2","N2"],"af:MP9":["N2","N2"],"af:MP19":["N2","N2"],"af:MP21":["N2","N3"],"af:MP10":["N2","N2"],"af:MP13":["N3","N3"],"af:MP16":["N2","N3"],"af:MP23":["N3","N3"],"af:MP3":["N2","N2"],"af:MP4":["N2","N2"],"af:MP5":["N2","N2"],"af:MP7":["N2","N2"],"fo:MP1":["N2","N2"],"fo:MP6":["N2","N2"],"fo:MP3":["N2","N2"],"fo:MP10":["N2","N2"],"fo:MP11":["N2","N2"],"fo:MP4":["N2","N2"],"fo:MP5":["N2","N2"],"fo:MP7":["N2","N2"],"fo:MP12":["N2","N3"],"fo:MP13":["N2","N2"],"fo:MP14":["N3","N3"],"fo:MP17":["N2","N2"],"fo:MP18":["N2","N2"],"fo:MP2":["N2","N2"],"fo:MP8":["N2","N2"],"fo:MP9":["N2","N2"],"qu:MP5":["N2","N2"],"qu:MP6":["N2","N2"],"qu:MP15":["N2","N2"],"qu:MP3":["N2","N2"],"qu:MP4":["N2","N2"],"qu:MP9":["N2","N2"],"qu:MP1":["N2","N2"],"qu:MP2":["N2","N2"],"qu:MP8":["N2","N2"],"qu:MP10":["N2","N2"],"qu:MP12":["N2","N2"],"qu:MP13":["N2","N2"],"qu:MP14":["N2","N2"],"qu:MP11":["N2","N2"]}}</script>
+<script>
+/* ── Painel de automação · Mapa de agentes ───────────────────────────
+   Dados: PA = derivado de DATA.qu|fo|af|mn (mesma fonte das abas de
+   área) + AUTOS. MA = catálogo do programa de agentes (dados-ma).
+   ──────────────────────────────────────────────────────────────────── */
+const MA_DADOS = JSON.parse(document.getElementById("dados-ma").textContent);
+const PA_AREAS = ["qu","fo","af","mn"];
+const PA_COR = {qu:"var(--violet)",fo:"var(--teal)",af:"var(--blue)",mn:"var(--rust)"};
+const PA_NOME = {qu:"Qualidade",fo:"Fornecedores & Compras",af:"Administrativo e Financeiro",mn:"Manutenção"};
+const PA_LABEL = {qu:"Qualidade",fo:"Fornecedores",af:"Adm/Fin",mn:"Manutenção"};
+const MA_ICON = {
+  pessoa:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-4.1 3.4-6.6 7.5-6.6s7.5 2.5 7.5 6.6"/></svg>',
+  robo:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="2.5"/><path d="M12 4.5V8M8.5 13v1.5M15.5 13v1.5"/><circle cx="12" cy="4" r="1.1"/></svg>',
+  chave:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3.6"/><path d="M10.6 10.6L19 19M16.4 16.4l-1.8 1.8M18.6 18.6l-1.6 1.6"/></svg>',
+  escudo:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 2.6v5.1c0 4.4-2.9 8-7 9.3-4.1-1.3-7-4.9-7-9.3V5.6L12 3z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg>',
+  grafico:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V4M4 20h16"/><rect x="7" y="12" width="3.2" height="5"/><rect x="12.4" y="8" width="3.2" height="9"/><rect x="17.4" y="13" width="3.2" height="4"/></svg>',
+  moeda:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="3" width="15" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg>'
+};
+const MA_ICONE_AREA = {qu:"escudo",fo:"grafico",af:"moeda",mn:"chave"};
+
+/* —Derivação do painel a partir das abas de área — */
+function paMacros(){
+  const out=[];
+  PA_AREAS.forEach(k=>{
+    (DATA[k]||[]).forEach(b=>(b.trails||[]).forEach(tr=>{
+      (tr.mps||[]).forEach(m=>{
+        const p=m.p||[];
+        const au=p.filter(x=>x.m==="auto").length;
+        const mi=p.filter(x=>x.m==="misto").length;
+        const ma=p.filter(x=>x.m==="manual").length;
+        out.push({a:k,tr:tr.n,id:m.id,n:m.n,opp:m.opp||null,nw:!!m.nw,p:p.length,au:au,mi:mi,ma:ma,nao:p.length-au});
+      });
+    }));
+  });
+  return out;
+}
+function paStats(ms){
+  const st={};
+  PA_AREAS.forEach(k=>{st[k]={macros:0,passos:0,au:0,mi:0,ma:0,opp:0,trilhas:0};});
+  ms.forEach(m=>{const s=st[m.a];s.macros++;s.passos+=m.p;s.au+=m.au;s.mi+=m.mi;s.ma+=m.ma;if(m.opp)s.opp++;});
+  PA_AREAS.forEach(k=>{
+    const set=new Set();
+    (DATA[k]||[]).forEach(b=>(b.trails||[]).forEach(tr=>set.add(tr.n)));
+    st[k].trilhas=set.size;
+  });
+  return st;
+}
+function paInfo(k){
+  const a=(MA_DADOS.areas||[]).find(x=>x.chave===k);
+  return a||{lider:"—",agente:"—",gestor:"—",executa:"—"};
+}
+function paNivel(a,id){
+  const lv=(MA_DADOS.niveis||{})[a+":"+id];
+  return lv||["—","—"];
+}
+function paPct(s){ return s.passos ? Math.round(s.au/s.passos*1000)/10 : 0; }
+function paKpi(v,l,s,c){
+  return `<div class="pa-kpi" style="--kc:${c}"><b>${v}</b><span>${l}</span>${s?`<small>${s}</small>`:""}</div>`;
+}
+
+/* —Backlog ordenado (mesma regra do catálogo do programa) — */
+function paBacklog(ms){
+  const bk=ms.filter(m=>m.ma+m.mi>0);
+  return bk.sort((a,b)=>{
+    if(!!a.opp!==!!b.opp) return a.opp?-1:1;
+    if(b.ma!==a.ma) return b.ma-a.ma;
+    if(b.nao!==a.nao) return b.nao-a.nao;
+    const ia=PA_AREAS.indexOf(a.a), ib=PA_AREAS.indexOf(b.a);
+    if(ia!==ib) return ia-ib;
+    return a.id.localeCompare(b.id);
+  });
+}
+function paOpp(o,empty){
+  return o ? o : `<span class="pa-none">${empty||"não declarado"}</span>`;
+}
+
+/* —Aba: Painel de automação — */
+let PA_FILTRO = "";
+function renderPainel(){
+  const ms=paMacros(), st=paStats(ms), bk=paBacklog(ms.slice());
+  let T={areas:PA_AREAS.length,trilhas:0,macros:ms.length,passos:0,au:0};
+  PA_AREAS.forEach(k=>{T.trilhas+=st[k].trilhas;T.passos+=st[k].passos;T.au+=st[k].au;});
+  const pct=T.passos?Math.round(T.au/T.passos*1000)/10:0;
+
+  document.getElementById("pa-kpis").innerHTML =
+    paKpi(T.areas,"áreas","Qualidade · Fornecedores · Adm/Fin · Manutenção","var(--ink3)") +
+    paKpi(T.trilhas,"trilhas","grupos de processo por área","var(--ink3)") +
+    paKpi(T.macros,"macro-processos","com entrega e valor declarado","var(--violet)") +
+    paKpi(T.passos,"passos","da trilha à ação","var(--blue)") +
+    paKpi(T.au,"automatizados",pct+"% dos passos","var(--green)") +
+    paKpi(AUTOS.length,"no portfólio","agentes · skills · rotinas · bots · extensões","var(--teal)") +
+    paKpi(bk.length,"candidatos a agente","com passo manual ou misto","var(--coral)");
+
+  document.getElementById("pa-areas").innerHTML = PA_AREAS.map(k=>{
+    const s=st[k], info=paInfo(k), p=paPct(s);
+    return `<div class="pa-area" style="--ac:${PA_COR[k]}">
+      <div><span class="al">${PA_LABEL[k]}</span><div class="an">${PA_NOME[k]}</div></div>
+      <div class="pa-bar"><i style="width:${p}%"></i></div>
+      <div class="arow"><span>Passos automatizados</span><b>${p}%</b></div>
+      <div class="arow"><span>Macros · passos · trilhas</span><b>${s.macros} · ${s.passos} · ${s.trilhas}</b></div>
+      <div class="arow"><span>Automático · misto · manual</span><b>${s.au} · ${s.mi} · ${s.ma}</b></div>
+      <div class="arow"><span>Macros com oportunidade declarada</span><b>${s.opp}</b></div>
+      <div class="arow"><span>Lider do documento</span><b>${info.lider}</b></div>
+      <div class="arow"><span>Executa</span><b>${info.executa}</b></div>
+    </div>`;
+  }).join("");
+
+  const lac=ms.slice().sort((a,b)=> b.nao-a.nao || b.ma-a.ma || PA_AREAS.indexOf(a.a)-PA_AREAS.indexOf(b.a) || a.id.localeCompare(b.id));
+  document.getElementById("pa-lacunas").innerHTML = lac.map(m=>`<tr>
+    <td class="ar">${PA_LABEL[m.a]}</td>
+    <td class="mn">${m.id} · ${m.n}${m.nw?' <span class="new">Novo</span>':""}</td>
+    <td class="tr">${m.tr}</td>
+    <td class="num">${m.p}</td><td class="num">${m.au}</td><td class="num">${m.mi}</td><td class="num">${m.ma}</td>
+    <td class="op">${paOpp(m.opp)}</td></tr>`).join("");
+
+  const filtros=[["","Todas"]].concat(PA_AREAS.map(k=>[k,PA_LABEL[k]]));
+  document.getElementById("pa-filtros").innerHTML = filtros.map(f=>
+    `<button class="chip" type="button" data-pa-area="${f[0]}" aria-pressed="${PA_FILTRO===f[0]?"true":"false"}">${f[1]}</button>`).join("");
+
+  const rows=bk.filter(m=>!PA_FILTRO||m.a===PA_FILTRO);
+  document.getElementById("pa-backlog").innerHTML = rows.map(m=>{
+    const lv=paNivel(m.a,m.id);
+    return `<tr>
+      <td class="ar">${PA_LABEL[m.a]}</td>
+      <td class="mn">${m.id} · ${m.n}</td>
+      <td class="tr">${m.tr}</td>
+      <td class="num">${m.ma}</td><td class="num">${m.mi}</td>
+      <td class="nv"><span class="pa-lvl ${lv[0]==="—"?"teto":lv[0].toLowerCase()}">${lv[0]}</span></td>
+      <td class="nv"><span class="pa-lvl teto">teto ${lv[1]}</span></td>
+      <td class="op">${paOpp(m.opp,"sem declaração de prioridade")}</td></tr>`;
+  }).join("");
+  document.getElementById("pa-bkcount").textContent = rows.length+" de "+bk.length+" candidatos exibidos";
+  document.getElementById("pa-nota").textContent =
+    "Fonte: as mesmas quatro áreas documentadas nas abas de Qualidade, Fornecedores & Compras, Administrativo e Financeiro e Manutenção. "+
+    "Um macro entra no backlog quando tem ao menos um passo manual ou misto. A oportunidade é a declaração do líder da área — 14 de "+T.macros+
+    " macros têm (9 Qualidade · 2 Fornecedores · 2 Adm/Fin · 1 Manutenção); onde não existe, a ausência é do documento de origem, não uma baixa prioridade.";
+}
+document.addEventListener("click", e=>{
+  const c=e.target.closest(".chip[data-pa-area]");
+  if(!c) return;
+  PA_FILTRO=c.dataset.paArea;
+  renderPainel();
+});
+
+/* —Aba: Mapa de agentes — */
+function renderMapa(){
+  const m=MA_DADOS.meta;
+  const ms=paMacros(), st=paStats(ms), bk=paBacklog(ms.slice());
+
+  document.getElementById("ma-kpis").innerHTML =
+    paKpi(m.totais.areas,"áreas","uma por frente de trabalho","var(--ink3)") +
+    paKpi(m.totais.trilhas,"trilhas","de processo mapeadas","var(--ink3)") +
+    paKpi(m.totais.macros,"macros","candidatos a agente","var(--violet)") +
+    paKpi(m.totais.passos,"passos","da trilha à ação","var(--blue)") +
+    paKpi(m.totais.auto,"automatizados",m.totais.pct+"% dos passos","var(--green)") +
+    paKpi(bk.length,"candidatos a agente","com passo manual ou misto","var(--coral)");
+
+  document.getElementById("ma-col-left").innerHTML =
+   `<div class="ma-card">
+     <span class="ma-kick">Meu papel</span>
+     <div class="ma-role"><div class="av">${MA_ICON.pessoa}</div>
+       <div class="wn">${m.gestora.nome}<small>${m.gestora.cargo}</small></div></div>
+     <ul class="ma-ticks">${m.gestora.papeis.map(p=>`<li>${p}</li>`).join("")}</ul>
+   </div>
+   <div class="ma-card accent">
+     <span class="ma-kick">Resultado para você</span>
+     <div class="ma-res">${m.resultado.map(r=>`<div class="rb"><span class="tag ${r.cls}">${r.tag}</span><p>${r.texto}</p></div>`).join("")}</div>
+   </div>`;
+
+  document.getElementById("ma-col-mid").innerHTML =
+   `<div class="ma-card" style="border-color:var(--coral)">
+     <span class="ma-kick">Orquestrador de Agentes</span>
+     <div class="ma-role"><div class="av">${MA_ICON.robo}</div>
+       <div class="wn">Planeja, decide e coordena os agentes</div></div>
+     <ol class="ma-steps">${m.orquestrador.map(b=>`<li><b>${b.titulo}</b>${b.texto}</li>`).join("")}</ol>
+   </div>
+   <div class="ma-card">
+     <span class="ma-kick">Coordenação e trabalho</span>
+     <h3>Coordena os agentes</h3>
+     <ul class="ma-kv">${m.coordenacao.map(k=>`<li><b>${k.k}</b> ${k.v}</li>`).join("")}</ul>
+   </div>
+   <div class="ma-card">
+     <span class="ma-kick">Trava do programa</span>
+     <h3>Duas camadas</h3>
+     <ul class="ma-kv">${m.trava.map(k=>`<li><b>${k.k}</b> ${k.v}</li>`).join("")}</ul>
+   </div>`;
+
+  document.getElementById("ma-col-right").innerHTML = PA_AREAS.map(k=>{
+    const a=paInfo(k), s=st[k], p=paPct(s);
+    const cands=(a.candidatos||[]).map(c=>{
+      const lv=paNivel(k,c.id);
+      const nivel=c.nivel||lv[0], teto=c.teto||lv[1];
+      return `<div class="ma-cand">
+        <div class="top"><span class="pa-lvl ${nivel==="—"?"teto":nivel.toLowerCase()}">${nivel}</span>
+          <span class="pa-lvl teto">teto ${teto}</span></div>
+        <div class="cm">${c.id} · ${c.nome}</div>
+        <div class="co">${c.opp?c.opp:"sem declaração de prioridade"}</div>
+        <div class="cn">${c.trilha} · ${c.manual} passo manual · ${c.misto} misto</div>
+      </div>`;
+    }).join("");
+    return `<div class="ma-agent" style="--ac:${PA_COR[k]}">
+      <div class="ah"><h3>${a.agente}</h3><span class="wh">gestor: ${a.gestor} · executa: ${a.executa}</span></div>
+      <div class="ma-pills">
+        <span class="ma-pill"><b>${s.macros}</b> macros</span>
+        <span class="ma-pill"><b>${s.passos}</b> passos</span>
+        <span class="ma-pill"><b>${p}%</b> auto</span>
+        <span class="ma-pill"><b>${s.opp}</b> com opp.</span>
+        <span class="ma-pill"><b>${s.trilhas}</b> trilhas</span>
+      </div>
+      <dl class="ma-do"><dt>O que faz</dt><dd>${a.o_que_faz}</dd><dt>Como faz</dt><dd>${a.como_faz}</dd></dl>
+      <div class="ma-cands">${cands}</div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("ma-legenda").innerHTML = m.legenda.map(l=>
+    `<div class="ma-lg"><span class="ic" style="background:${l.bg};color:${l.fg}">${l.sigla}</span>
+      <div><b>${l.titulo}</b><span>${l.texto}</span></div></div>`).join("");
+
+  document.getElementById("ma-bk").innerHTML = bk.map(m2=>{
+    const lv=paNivel(m2.a,m2.id);
+    return `<tr>
+      <td class="ar">${PA_LABEL[m2.a]}</td>
+      <td class="mn">${m2.id} · ${m2.n}</td>
+      <td class="tr">${m2.tr}</td>
+      <td class="num">${m2.ma}</td><td class="num">${m2.mi}</td>
+      <td class="nv"><span class="pa-lvl ${lv[0]==="—"?"teto":lv[0].toLowerCase()}">${lv[0]}</span></td>
+      <td class="nv"><span class="pa-lvl teto">teto ${lv[1]}</span></td></tr>`;
+  }).join("");
+}
+</script>
+
 <script>
 /* ── Contribuições do time ─────────────────────────────────────────────
    Fonte de dados: planilha "Arquitetura de Processos BackOffice ·
